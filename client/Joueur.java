@@ -1,6 +1,6 @@
-package main;
+package client;
 
-public class Personnage {
+public class Joueur {
 	
 	private String nom;
 	private float x = 300, y = 300;
@@ -8,13 +8,13 @@ public class Personnage {
 	private int direction = 0;
 	private boolean moving = false;
 	
-	public Personnage() {
+	public Joueur() {
 		x = 300;
 		y = 300;
 		nom = "test23";
 	}
 	
-	public Personnage(String nom, float x, float y) {
+	public Joueur(String nom, float x, float y) {
 		this.nom = nom;
 		this.x = x;
 		this.y = y;

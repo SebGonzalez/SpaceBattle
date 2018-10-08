@@ -1,4 +1,4 @@
-package main;
+package client;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
@@ -17,9 +17,12 @@ public class WindowGame extends BasicGame {
 	private GameContainer container;
 	private TiledMap map;
 
-	private Personnage p;
+	private Joueur joueur;
+	private GestionnaireAdversaire gestionnaireAdversaire;
+	
+	private ConnectionClient connexionClient;
 
-	private Animation[] animations = new Animation[8];
+	public static Animation[] animations = new Animation[8];
 	
 	public WindowGame() {
 		super("SpaceBattle");
@@ -40,20 +43,27 @@ public class WindowGame extends BasicGame {
 		this.animations[6] = loadAnimation(spriteSheet, 1, 9, 2);
 		this.animations[7] = loadAnimation(spriteSheet, 1, 9, 3);
 
-		p = new Personnage();
+		joueur = new Joueur();
+		gestionnaireAdversaire = new GestionnaireAdversaire();
+		
+		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire);
+		connexionClient.connect();
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.translate(container.getWidth() / 2 - (int) p.getxCamera(), container.getHeight() / 2 - (int)p.getyCamera());
+		g.translate(container.getWidth() / 2 - (int) joueur.getxCamera(), container.getHeight() / 2 - (int)joueur.getyCamera());
 
 		this.map.render(0, 0, 0);
 		this.map.render(0, 0, 1);
 		this.map.render(0, 0, 2);
 		
 		g.setColor(new Color(0, 0, 0, .5f));
-		g.fillOval(p.getX() - 16, p.getY() - 8, 32, 16);
-		g.drawAnimation(animations[p.getDirection() + (p.isMoving() ? 4 : 0)], p.getX() - 32, p.getY() - 60);
+		g.fillOval(joueur.getX() - 16, joueur.getY() - 8, 32, 16);
+		g.drawAnimation(animations[joueur.getDirection() + (joueur.isMoving() ? 4 : 0)], joueur.getX() - 32, joueur.getY() - 60);
+		
+		gestionnaireAdversaire.render(g);
+		
 		
 		this.map.render(0, 0, 3);
 	    this.map.render(0, 0, 4);
@@ -61,21 +71,21 @@ public class WindowGame extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		if (p.isMoving()) {
-			float futurX = p.getX();
-			float futurY = p.getY();
-			switch (p.getDirection()) {
+		if (joueur.isMoving()) {
+			float futurX = joueur.getX();
+			float futurY = joueur.getY();
+			switch (joueur.getDirection()) {
 			case 0:
-				futurY = p.getY() - .1f * delta;
+				futurY = joueur.getY() - .1f * delta;
 				break;
 			case 1:
-				futurX = p.getX() - .1f * delta;
+				futurX = joueur.getX() - .1f * delta;
 				break;
 			case 2:
-				futurY = p.getY() + .1f * delta;
+				futurY = joueur.getY() + .1f * delta;
 				break;
 			case 3:
-				futurX = p.getX() + .1f * delta;
+				futurX = joueur.getX() + .1f * delta;
 				break;
 			}
 			Image tile = this.map.getTileImage((int) futurX / this.map.getTileWidth(),
@@ -89,31 +99,33 @@ public class WindowGame extends BasicGame {
 			}
 
 			if (collision) {
-				p.setMoving(false);
+				joueur.setMoving(false);
 			} else {
-				p.setX(futurX);
-				p.setY(futurY);
+				joueur.setX(futurX);
+				joueur.setY(futurY);
 			}
 
 		}
 
 		int w = container.getWidth() / 4;
-		if (p.getX() > p.getxCamera() + w)
-			p.setxCamera(p.getX() - w);
-		if (p.getX() < p.getxCamera() - w)
-			p.setxCamera(p.getX() + w);
+		if (joueur.getX() > joueur.getxCamera() + w)
+			joueur.setxCamera(joueur.getX() - w);
+		if (joueur.getX() < joueur.getxCamera() - w)
+			joueur.setxCamera(joueur.getX() + w);
 		int h = container.getHeight() / 4;
-		if (p.getY() >p.getyCamera() + h)
-			p.setyCamera(p.getY() - h);
-		if (p.getY() < p.getyCamera() - h)
-			p.setyCamera(p.getY() + h);
+		if (joueur.getY() >joueur.getyCamera() + h)
+			joueur.setyCamera(joueur.getY() - h);
+		if (joueur.getY() < joueur.getyCamera() - h)
+			joueur.setyCamera(joueur.getY() + h);
+		
+		gestionnaireAdversaire.update();
+		connexionClient.sendInformation(joueur);
 
 	}
 
 	@Override
 	public void keyReleased(int key, char c) {
-		p.setMoving(false);
-		;
+		joueur.setMoving(false);
 		if (Input.KEY_ESCAPE == key) {
 			container.exit();
 		}
@@ -123,20 +135,20 @@ public class WindowGame extends BasicGame {
 	public void keyPressed(int key, char c) {
 		switch (key) {
 		case Input.KEY_UP:
-			p.setDirection(0);
-			p.setMoving(true);
+			joueur.setDirection(0);
+			joueur.setMoving(true);
 			break;
 		case Input.KEY_LEFT:
-			p.setDirection(1);
-			p.setMoving(true);
+			joueur.setDirection(1);
+			joueur.setMoving(true);
 			break;
 		case Input.KEY_DOWN:
-			p.setDirection(2);
-			p.setMoving(true);
+			joueur.setDirection(2);
+			joueur.setMoving(true);
 			break;
 		case Input.KEY_RIGHT:
-			p.setDirection(3);
-			p.setMoving(true);
+			joueur.setDirection(3);
+			joueur.setMoving(true);
 			break;
 		}
 	}
