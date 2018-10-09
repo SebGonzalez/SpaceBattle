@@ -1,13 +1,11 @@
 package client;
 
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -36,7 +34,6 @@ public class WindowMainMenu extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
-		Font font = new UnicodeFont(new java.awt.Font("Arial", java.awt.Font.ITALIC, 26));
 		this.container = container;		
 		container.setAlwaysRender(true);
 		
@@ -57,6 +54,12 @@ public class WindowMainMenu extends BasicGameState {
 		if((xpos > 400 && xpos  < 500) && (ypos > 155 && ypos < 200)) {
 			if(input.isMouseButtonDown(0)) {
 				container.exit();
+			}
+		}
+		
+		if((xpos > 250 && xpos  < 500) && (ypos > 225 && ypos < 300)) {
+			if(input.isMouseButtonDown(0)) {
+				sbg.enterState(2);
 			}
 		}
 	}

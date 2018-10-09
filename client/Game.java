@@ -17,13 +17,14 @@ public class Game extends StateBasedGame{
 		super("SpaceBattle");
 		this.addState(new WindowMainMenu(menu));
 		this.addState(new WindowGame(jeu));
-
+		this.addState(new WindowLobby(lobby));
 	}
 	
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 		this.getState(menu).init(container, this);
 		this.getState(jeu).init(container, this);
+		this.getState(lobby).init(container, this);
 		this.enterState(menu);
 	}
 	
