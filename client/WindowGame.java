@@ -1,8 +1,7 @@
 package client;
 
+
 import org.newdawn.slick.Animation;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,9 +9,11 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-public class WindowGame extends BasicGame {
+public class WindowGame extends BasicGameState {
 
 	private GameContainer container;
 	private TiledMap map;
@@ -24,12 +25,10 @@ public class WindowGame extends BasicGame {
 
 	public static Animation[] animations = new Animation[8];
 	
-	public WindowGame() {
-		super("SpaceBattle");
+	public WindowGame(int state) {
 	}
 
-	@Override
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container, StateBasedGame sgb) throws SlickException {
 		this.container = container;
 		container.setAlwaysRender(true);
 		this.map = new TiledMap("ressources/map/exemple-collision.tmx");
@@ -50,8 +49,7 @@ public class WindowGame extends BasicGame {
 		connexionClient.connect();
 	}
 
-	@Override
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	public void render(GameContainer container, StateBasedGame sgb, Graphics g) throws SlickException {
 		g.translate(container.getWidth() / 2 - (int) joueur.getxCamera(), container.getHeight() / 2 - (int)joueur.getyCamera());
 
 		this.map.render(0, 0, 0);
@@ -69,8 +67,7 @@ public class WindowGame extends BasicGame {
 	    this.map.render(0, 0, 4);
 	}
 
-	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, StateBasedGame sgb, int delta) throws SlickException {
 		if (joueur.isMoving()) {
 			float futurX = joueur.getX();
 			float futurY = joueur.getY();
@@ -123,7 +120,6 @@ public class WindowGame extends BasicGame {
 
 	}
 
-	@Override
 	public void keyReleased(int key, char c) {
 		joueur.setMoving(false);
 		if (Input.KEY_ESCAPE == key) {
@@ -131,7 +127,6 @@ public class WindowGame extends BasicGame {
 		}
 	}
 
-	@Override
 	public void keyPressed(int key, char c) {
 		switch (key) {
 		case Input.KEY_UP:
@@ -161,8 +156,8 @@ public class WindowGame extends BasicGame {
 		return animation;
 	}
 
-	public static void main(String[] args) throws SlickException {
-		new AppGameContainer(new WindowGame(), 800, 600, false).start();
+	@Override
+	public int getID() {
+		return 1;
 	}
-
 }
