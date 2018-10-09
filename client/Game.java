@@ -1,7 +1,5 @@
 package client;
 
-import java.io.File;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -29,16 +27,6 @@ public class Game extends StateBasedGame{
 	}
 	
 	public static void main(String[] args) {
-		/*
-		 * Pour eclipse sur Windows
-		 */
-		
-		System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
-		System.setProperty("java.library.path", new File("natives").getAbsolutePath());
-
-		/*
-		 * 
-		 */
 		
 		AppGameContainer appgc;
 		try {
