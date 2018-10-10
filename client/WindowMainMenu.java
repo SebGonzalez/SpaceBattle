@@ -24,7 +24,8 @@ public class WindowMainMenu extends BasicGameState {
 		Image buttonQuit = new Image("ressources/menu/mainmenu/buttonQuit.jpg");
 		Image buttonOptions = new Image("ressources/menu/mainmenu/buttonOptions.jpg");
 
-		background.draw(0,0);
+		//background.draw(0,0);
+		background.draw(0, 0, container.getWidth(), container.getHeight());
 		g.drawString("Spacebattle: Alpha -1", 300, 50);
 		buttonPlay.draw(250, 200);
 		buttonHost.draw(250, 300);
