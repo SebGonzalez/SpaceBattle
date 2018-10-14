@@ -1,4 +1,4 @@
-package client;
+package client.IHM;
 
 
 import org.newdawn.slick.Animation;
@@ -13,6 +13,11 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
+import client.ConnectionClient;
+import client.GestionnaireAdversaire;
+import client.GestionnaireMissile;
+import client.Model.Joueur;
+
 public class WindowGame extends BasicGameState {
 
 	private GameContainer container;
@@ -20,8 +25,11 @@ public class WindowGame extends BasicGameState {
 
 	private Joueur joueur;
 	public static Image ship;
+	public static Image missileJoueur;
+	public static Image missileEnnemies;
 	
 	private GestionnaireAdversaire gestionnaireAdversaire;
+	private GestionnaireMissile gestionnaireMissile;
 	
 	private ConnectionClient connexionClient;
 	
@@ -35,6 +43,8 @@ public class WindowGame extends BasicGameState {
 		
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");
+			missileJoueur = new Image("ressources/sprites/missile.png");
+			missileEnnemies = new Image("ressources/sprites/missile2.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,6 +53,7 @@ public class WindowGame extends BasicGameState {
 		joueur = new Joueur();
 		joueur.loadImage();
 		gestionnaireAdversaire = new GestionnaireAdversaire();
+		gestionnaireMissile = new GestionnaireMissile(joueur);
 		
 		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire);
 		connexionClient.connect();
@@ -55,8 +66,9 @@ public class WindowGame extends BasicGameState {
 		//this.map.render(0, 0, 1);
 		//this.map.render(0, 0, 2);
 		
-		joueur.render(g);
+		gestionnaireMissile.render(g);
 		gestionnaireAdversaire.render(g);
+		joueur.render(g);
 		
 		
 		//this.map.render(0, 0, 3);
@@ -68,6 +80,7 @@ public class WindowGame extends BasicGameState {
 		joueur.update(container,delta, map);
 		
 		gestionnaireAdversaire.update();
+		gestionnaireMissile.update(delta);
 		connexionClient.sendInformation(joueur);
 
 	}
@@ -91,6 +104,8 @@ public class WindowGame extends BasicGameState {
 			joueur.keys_pressed[1] = true;
 		if(key == Input.KEY_RIGHT || key == Input.KEY_D)
 			joueur.keys_pressed[2] = true;
+		if(key == Input.KEY_SPACE)
+			gestionnaireMissile.addMissile();
 	}
 
 	private Animation loadAnimation(SpriteSheet spriteSheet, int startX, int endX, int y) {

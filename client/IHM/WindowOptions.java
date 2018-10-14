@@ -1,4 +1,4 @@
-package client;
+package client.IHM;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
@@ -9,6 +9,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import client.Game;
+import client.Resolution;
 
 public class WindowOptions extends BasicGameState{
 
@@ -36,7 +39,7 @@ public class WindowOptions extends BasicGameState{
 		Image buttonHighRes = new Image("ressources/menu/options/button_HIGHRES.jpg");
 		Image buttonRetour = new Image("ressources/menu/options/buttonRetour.jpg");
 		
-		g.drawString("Selectionnez une résolution: ", resX/12, resY/12);
+		g.drawString("Selectionnez une rï¿½solution: ", resX/12, resY/12);
 
 		buttonLowRes.draw(resX/12 + 25, resY/12 + 25);
 		buttonMedRes.draw(resX/12 + 150, resY/12 + 25);

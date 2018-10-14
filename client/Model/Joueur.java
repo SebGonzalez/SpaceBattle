@@ -1,4 +1,4 @@
-package client;
+package client.Model;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -94,23 +94,23 @@ public class Joueur {
 
 	public void rotationGauche() {
 		this.rotation -= 0.005;
+		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
 	public void rotationDroite() {
 		this.rotation += 0.005;
+		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(new Color(0, 0, 0, .5f));
-		g.fillOval(getX() - 16,getY()+70, 32, 16);
+		g.fillOval(getX() - 16,getY() + 37, 32, 16);
 		ship.draw(getX() - 56, getY() - 37);
 	}
 	
 	public void update(GameContainer container, int delta, TiledMap map) {
 		updatePosition(delta, map);
 		updateCamera(container);
-		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
-
 	}
 	
 	public void updatePosition(int delta, TiledMap map) {

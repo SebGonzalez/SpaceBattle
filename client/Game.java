@@ -5,6 +5,11 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import client.IHM.WindowGame;
+import client.IHM.WindowLobby;
+import client.IHM.WindowMainMenu;
+import client.IHM.WindowOptions;
+
 public class Game extends StateBasedGame{
 	
 	public static final int menu = 0;

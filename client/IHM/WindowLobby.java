@@ -1,4 +1,4 @@
-package client;
+package client.IHM;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,9 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import client.Game;
+import client.Model.Joueur;
 
 public class WindowLobby extends BasicGameState{
 

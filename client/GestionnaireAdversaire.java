@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
+import client.IHM.WindowGame;
 import server.ServeurJoueur;
 
 /**
