@@ -37,6 +37,7 @@ public class GestionnaireJoueur {
 		    		ServeurJoueur player = entry.getValue();
 		    		player.setX(datagram.x);
 		    		player.setY(datagram.y);
+		    		player.setR(datagram.r);
 		    }
 		    else {
 		    		datagramReponse.listeAdversaire.add(entry.getValue());

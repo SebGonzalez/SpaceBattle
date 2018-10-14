@@ -58,6 +58,8 @@ public class GestionnaireAdversaire {
 		for(ServeurJoueur adversaire : listeAdversaire) {
 			g.fillOval((float)adversaire.getX() - 16, (float)adversaire.getY() - 8, 32, 16);
 			WindowGame.ship.draw((float)adversaire.getX() - 32, (float)adversaire.getY() - 60);
+			System.out.println(adversaire.getR());
+			WindowGame.ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
 		}
 	}
 }

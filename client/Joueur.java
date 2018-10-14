@@ -122,6 +122,7 @@ public class Joueur {
 			
 			float futurX = getX() - .1f * delta * directionX * 2;
 			float futurY = getY() - .1f * delta * directionY * 2;
+			ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 			
 			
 			/*Image tile = map.getTileImage((int) futurX / map.getTileWidth(),

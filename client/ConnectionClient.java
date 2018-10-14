@@ -67,6 +67,7 @@ public class ConnectionClient extends Listener{
 		DatagramUpdateClient datagram = new DatagramUpdateClient();
 		datagram.x = joueur.getX();
 		datagram.y = joueur.getY();
+		datagram.r = joueur.getRotation();
 		
 		client.sendUDP(datagram);
 	}

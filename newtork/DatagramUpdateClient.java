@@ -8,4 +8,5 @@ package newtork;
 public class DatagramUpdateClient {
 	public double x;
 	public double y;
+	public float r;
 }
