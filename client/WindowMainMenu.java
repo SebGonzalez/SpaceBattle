@@ -12,12 +12,15 @@ import org.newdawn.slick.state.StateBasedGame;
 public class WindowMainMenu extends BasicGameState {
 
 	private GameContainer container;
+	private int resX = Game.res.getX(), resY = Game.res.getY();
+
 	
 	public WindowMainMenu(int state) {
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
+		
 		Image background = new Image("ressources/menu/space_background.jpg");
 		Image buttonPlay = new Image("ressources/menu/mainmenu/buttonPlay.jpg");
 		Image buttonHost = new Image("ressources/menu/mainmenu/buttonHost.jpg");
@@ -26,11 +29,11 @@ public class WindowMainMenu extends BasicGameState {
 
 		//background.draw(0,0);
 		background.draw(0, 0, container.getWidth(), container.getHeight());
-		g.drawString("Spacebattle: Alpha -1", 300, 50);
-		buttonPlay.draw(250, 200);
-		buttonHost.draw(250, 300);
-		buttonOptions.draw(250, 400);
-		buttonQuit.draw(400, 400);
+		g.drawString("Spacebattle: Alpha", resX/2 - 100, resY/12);
+		buttonPlay.draw((resX/2) - 125, resY/3);
+		buttonHost.draw((resX/2) - 125, resY/3 + 125);
+		buttonOptions.draw((resX/2) - 125, resY/3 + 250);
+		buttonQuit.draw(resX/2 + 25, resY/3 + 250);
 	}
 
 	@Override
@@ -45,20 +48,22 @@ public class WindowMainMenu extends BasicGameState {
 		Input input = container.getInput();
 		int xpos = Mouse.getX();
 		int ypos = Mouse.getY();
+		//System.out.println("x: " + xpos + " y: " + ypos);
 		
-		if((xpos > 250 && xpos  < 500) && (ypos > 325 && ypos < 400)) {
+		//Bouton Jouer
+		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-75 && ypos < resY - (resY/3))) {
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(1);
 			}
 		}
-		
-		if((xpos > 400 && xpos  < 500) && (ypos > 155 && ypos < 200)) {
+		//Bouton Quitter
+		if((xpos > resX/2+25 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-325 && ypos < resY - (resY/3)-250)) {
 			if(input.isMouseButtonDown(0)) {
 				container.exit();
 			}
 		}
-		
-		if((xpos > 250 && xpos  < 500) && (ypos > 225 && ypos < 300)) {
+		//Bouton Host
+		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-200 && ypos < resY - (resY/3)-125)) {
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(2);
 			}
