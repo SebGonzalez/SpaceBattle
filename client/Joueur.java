@@ -103,7 +103,7 @@ public class Joueur {
 	public void render(Graphics g) {
 		g.setColor(new Color(0, 0, 0, .5f));
 		g.fillOval(getX() - 16,getY()+70, 32, 16);
-		ship.draw(getX() - 56, getY());
+		ship.draw(getX() - 56, getY() - 37);
 	}
 	
 	public void update(GameContainer container, int delta, TiledMap map) {

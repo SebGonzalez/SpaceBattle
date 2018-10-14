@@ -74,33 +74,23 @@ public class WindowGame extends BasicGameState {
 
 	public void keyReleased(int key, char c) {
 		
-		switch(key) {
-		case Input.KEY_UP:
-		joueur.keys_pressed[0] = false;
-		break;
-		case Input.KEY_LEFT:
-		joueur.keys_pressed[1] = false;
-		break;
-		case Input.KEY_RIGHT:
-		joueur.keys_pressed[2] = false;
-		break;
-		case Input.KEY_ESCAPE: 
+		if(key == Input.KEY_UP || key == Input.KEY_W)
+			joueur.keys_pressed[0] = false;
+		if(key == Input.KEY_LEFT || key == Input.KEY_A)
+			joueur.keys_pressed[1] = false;
+		if(key == Input.KEY_RIGHT || key == Input.KEY_D)
+			joueur.keys_pressed[2] = false;
+		if(key == Input.KEY_ESCAPE)
 			container.exit();
-		}
 	}
 
 	public void keyPressed(int key, char c) {
-		switch (key) {
-		case Input.KEY_UP:
+		if(key == Input.KEY_UP || key == Input.KEY_W)
 			joueur.keys_pressed[0] = true;
-			break;
-		case Input.KEY_LEFT:
+		if(key == Input.KEY_LEFT || key == Input.KEY_A)
 			joueur.keys_pressed[1] = true;
-			break;
-		case Input.KEY_RIGHT:
+		if(key == Input.KEY_RIGHT || key == Input.KEY_D)
 			joueur.keys_pressed[2] = true;
-			break;
-		}
 	}
 
 	private Animation loadAnimation(SpriteSheet spriteSheet, int startX, int endX, int y) {

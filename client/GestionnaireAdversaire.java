@@ -8,7 +8,7 @@ import org.newdawn.slick.Graphics;
 import server.ServeurJoueur;
 
 /**
- * Classe qui gère les adversaires
+ * Classe qui gï¿½re les adversaires
  * @author gonzo
  *
  */
@@ -57,7 +57,7 @@ public class GestionnaireAdversaire {
 	public void render(Graphics g) {
 		for(ServeurJoueur adversaire : listeAdversaire) {
 			g.fillOval((float)adversaire.getX() - 16, (float)adversaire.getY() - 8, 32, 16);
-			WindowGame.ship.draw((float)adversaire.getX() - 32, (float)adversaire.getY() - 60);
+			WindowGame.ship.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			WindowGame.ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
 		}
 	}
