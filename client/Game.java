@@ -10,6 +10,7 @@ public class Game extends StateBasedGame{
 	public static final int menu = 0;
 	public static final int jeu = 1;
 	public static final int lobby = 2;
+	public static final int options = 3;
 	public static Resolution res = Resolution.LOW;
 	
 	
@@ -18,9 +19,10 @@ public class Game extends StateBasedGame{
 		this.addState(new WindowMainMenu(menu));
 		this.addState(new WindowGame(jeu));
 		this.addState(new WindowLobby(lobby));
+		this.addState(new WindowOptions(options));
 	}
 	
-	public void setResolution(Resolution r) {
+	public static void setResolution(Resolution r) {
 		res = r;
 	}
 	

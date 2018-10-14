@@ -56,18 +56,31 @@ public class WindowMainMenu extends BasicGameState {
 				sbg.enterState(1);
 			}
 		}
-		//Bouton Quitter
-		if((xpos > resX/2+25 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-325 && ypos < resY - (resY/3)-250)) {
-			if(input.isMouseButtonDown(0)) {
-				container.exit();
-			}
-		}
+		
 		//Bouton Host
 		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-200 && ypos < resY - (resY/3)-125)) {
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(2);
 			}
 		}
+		
+		//Bouton Options
+		if((xpos > resX/2-150 && xpos  < (resX/2)-25) && (ypos > resY - (resY/3)-325 && ypos < resY - (resY/3)-250)) {
+			if(input.isMouseButtonDown(0)) {
+				sbg.enterState(3);
+			}
+		}
+		
+		//Bouton Quitter
+		if((xpos > resX/2+25 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-325 && ypos < resY - (resY/3)-250)) {
+			if(input.isMouseButtonDown(0)) {
+				container.exit();
+			}
+		}
+		
+		
+		
+		
 	}
 	
 	@Override
