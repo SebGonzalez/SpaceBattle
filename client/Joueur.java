@@ -109,6 +109,8 @@ public class Joueur {
 	public void update(GameContainer container, int delta, TiledMap map) {
 		updatePosition(delta, map);
 		updateCamera(container);
+		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+
 	}
 	
 	public void updatePosition(int delta, TiledMap map) {
@@ -121,9 +123,7 @@ public class Joueur {
 			float directionY = (float) Math.sin(getRotation());
 			
 			float futurX = getX() - .1f * delta * directionX * 2;
-			float futurY = getY() - .1f * delta * directionY * 2;
-			ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
-			
+			float futurY = getY() - .1f * delta * directionY * 2;			
 			
 			/*Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
 					(int) futurY / map.getTileHeight(),map.getLayerIndex("logic"));
