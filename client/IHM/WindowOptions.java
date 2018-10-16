@@ -59,7 +59,6 @@ public class WindowOptions extends BasicGameState{
 			if(input.isMouseButtonDown(0)) {
 				Game.setResolution(Resolution.LOW);
 				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
-				this.init(container, sbg);
 				resX = Game.res.getX();
 				resY = Game.res.getY();
 			}
@@ -69,7 +68,6 @@ public class WindowOptions extends BasicGameState{
 			if(input.isMouseButtonDown(0)) {
 				Game.setResolution(Resolution.MED);
 				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
-				this.init(container, sbg);
 				resX = Game.res.getX();
 				resY = Game.res.getY();
 			}
@@ -79,7 +77,6 @@ public class WindowOptions extends BasicGameState{
 			if(input.isMouseButtonDown(0)) {
 				Game.setResolution(Resolution.HIGH);
 				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
-				this.init(container, sbg);
 				resX = Game.res.getX();
 				resY = Game.res.getY();
 			}
