@@ -38,6 +38,7 @@ public class GestionnaireJoueur {
 		    		player.setX(datagram.x);
 		    		player.setY(datagram.y);
 		    		player.setR(datagram.r);
+		    		player.setListeMissile(datagram.listeMissile);
 		    }
 		    else {
 		    		datagramReponse.listeAdversaire.add(entry.getValue());

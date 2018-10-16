@@ -2,10 +2,10 @@ package client;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 import client.IHM.WindowGame;
+import client.Model.Missile;
 import server.ServeurJoueur;
 
 /**
@@ -51,7 +51,7 @@ public class GestionnaireAdversaire {
 	}
 	
 	/**
-	 * Affichage de tous les adversaire
+	 * Affichage de tous les adversaire et de leur missile
 	 * Note : A optimiser (voir trello)
 	 * @param g
 	 */
@@ -60,6 +60,10 @@ public class GestionnaireAdversaire {
 			g.fillOval((float)adversaire.getX() - 16, (float)adversaire.getY() - 8, 32, 16);
 			WindowGame.ship.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			WindowGame.ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
+			
+			for(Missile m : adversaire.getListeMissile()) {
+				m.render(g);
+			}
 		}
 	}
 }

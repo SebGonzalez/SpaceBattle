@@ -58,18 +58,30 @@ public class WindowOptions extends BasicGameState{
 		if((xpos > resX/12 + 25 && xpos < resX/12 +125) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
 			if(input.isMouseButtonDown(0)) {
 				Game.setResolution(Resolution.LOW);
+				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
+				this.init(container, sbg);
+				resX = Game.res.getX();
+				resY = Game.res.getY();
 			}
 		
 		//MEDRES
 		if((xpos > resX/12 + 150 && xpos < resX/12 +250) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
 			if(input.isMouseButtonDown(0)) {
 				Game.setResolution(Resolution.MED);
+				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
+				this.init(container, sbg);
+				resX = Game.res.getX();
+				resY = Game.res.getY();
 			}
 		
 		//HIGHRES
 		if((xpos > resX/12 + 275 && xpos < resX/12 +375) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
 			if(input.isMouseButtonDown(0)) {
 				Game.setResolution(Resolution.HIGH);
+				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
+				this.init(container, sbg);
+				resX = Game.res.getX();
+				resY = Game.res.getY();
 			}
 		
 		//Bouton Retour

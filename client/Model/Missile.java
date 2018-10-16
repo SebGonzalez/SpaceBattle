@@ -22,8 +22,15 @@ public class Missile {
 		directionY = (float) Math.sin(rotation);
 		time = System.currentTimeMillis();
 	}
+	
+	public Missile(float x, float y, float directionX, float directionY) {
+		this.x = x;
+		this.y = y;
+		this.directionX = directionX;
+		this.directionY = directionY;
+	}
 
-	public double getX() {
+	public float getX() {
 		return x;
 	}
 
@@ -31,7 +38,7 @@ public class Missile {
 		this.x = x;
 	}
 
-	public double getY() {
+	public float getY() {
 		return y;
 	}
 

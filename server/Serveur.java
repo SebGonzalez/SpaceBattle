@@ -8,8 +8,10 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 
+import client.Model.Missile;
 import newtork.DatagramUpdateClient;
 import newtork.DatagramUpdateServer;
+import newtork.MissileSerializer;
 import newtork.PacketAddPlayer;
 
 /**
@@ -26,10 +28,9 @@ public class Serveur extends Listener {
 	public static GestionnaireJoueur gestionnaireJoueur;
 
 	public static void main(String[] args) throws IOException {
-		Log.set(1);
-		
 		server = new Server();
 		server.getKryo().register(java.util.ArrayList.class);
+		server.getKryo().register(Missile.class, new MissileSerializer());
 		server.getKryo().register(ServeurJoueur.class);
 		server.getKryo().register(PacketAddPlayer.class);
 		server.getKryo().register(DatagramUpdateClient.class);
@@ -65,9 +66,10 @@ public class Serveur extends Listener {
 		if(o instanceof DatagramUpdateClient) {
 			//System.out.println("Update client reçu");
 			DatagramUpdateClient datagram = (DatagramUpdateClient)o;
+
 			DatagramUpdateServer datagramReponse = gestionnaireJoueur.updateJoueur(c.getID(), datagram);
 			
-			server.sendToUDP(c.getID(), datagramReponse);
+			server.sendToTCP(c.getID(), datagramReponse);
 			
 		}
 	}
