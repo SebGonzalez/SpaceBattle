@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/ibxm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/jinput.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/jnlp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/kryonet-2.21-all.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/natives-linux.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/natives-mac.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/slick.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/slick-examples.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Axel/Desktop/SpaceBattle-master/lib/tinylinepp.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
