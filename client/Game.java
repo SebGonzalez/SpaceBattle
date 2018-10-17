@@ -5,6 +5,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.esotericsoftware.minlog.Log;
+
 import client.IHM.WindowGame;
 import client.IHM.WindowLobby;
 import client.IHM.WindowMainMenu;
@@ -16,7 +18,7 @@ public class Game extends StateBasedGame{
 	public static final int jeu = 1;
 	public static final int lobby = 2;
 	public static final int options = 3;
-	public static Resolution res = Resolution.LOW;
+	public static Resolution res = Resolution.HIGH;
 	
 	
 	public Game() {
@@ -40,6 +42,8 @@ public class Game extends StateBasedGame{
 	}
 	
 	public static void main(String[] args) {
+		
+		Log.set(Log.LEVEL_DEBUG);
 		
 		AppGameContainer appgc;
 		try {

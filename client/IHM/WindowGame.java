@@ -55,7 +55,7 @@ public class WindowGame extends BasicGameState {
 		gestionnaireAdversaire = new GestionnaireAdversaire();
 		gestionnaireMissile = new GestionnaireMissile(joueur);
 		
-		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire);
+		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire, gestionnaireMissile);
 		connexionClient.connect();
 	}
 
@@ -105,15 +105,7 @@ public class WindowGame extends BasicGameState {
 		if(key == Input.KEY_RIGHT || key == Input.KEY_D)
 			joueur.keys_pressed[2] = true;
 		if(key == Input.KEY_SPACE)
-			gestionnaireMissile.addMissile();
-	}
-
-	private Animation loadAnimation(SpriteSheet spriteSheet, int startX, int endX, int y) {
-		Animation animation = new Animation();
-		for (int x = startX; x < endX; x++) {
-			animation.addFrame(spriteSheet.getSprite(x, y), 100);
-		}
-		return animation;
+			gestionnaireMissile.addMissileClient();
 	}
 
 	@Override

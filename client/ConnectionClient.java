@@ -7,8 +7,10 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 import client.Model.Joueur;
+import client.Model.Missile;
 import newtork.DatagramUpdateClient;
 import newtork.DatagramUpdateServer;
+import newtork.MissileSerializer;
 import newtork.PacketAddPlayer;
 import server.ServeurJoueur;
 
@@ -21,15 +23,17 @@ public class ConnectionClient extends Listener{
 
 	Joueur joueur;
 	GestionnaireAdversaire gestionnaireAdversaire;
+	GestionnaireMissile gestionnaireMissile;
 	
 	String ip = "localhost";
 	final int portTCP = 18000;
 	final int portUDP = 19000;
 	Client client;
 	
-	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire) {
+	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire, GestionnaireMissile gestionnaireMissile) {
 		this.joueur = joueur;
 		this.gestionnaireAdversaire = gestionnaireAdversaire;
+		this.gestionnaireMissile = gestionnaireMissile;
 	}
 	
 	/**
@@ -38,6 +42,7 @@ public class ConnectionClient extends Listener{
 	public void connect(){
 		client = new Client();
 		client.getKryo().register(java.util.ArrayList.class);
+		client.getKryo().register(Missile.class, new MissileSerializer());
 		client.getKryo().register(ServeurJoueur.class);
 		client.getKryo().register(PacketAddPlayer.class);
 		client.getKryo().register(DatagramUpdateClient.class);
@@ -69,6 +74,9 @@ public class ConnectionClient extends Listener{
 		datagram.x = joueur.getX();
 		datagram.y = joueur.getY();
 		datagram.r = joueur.getRotation();
+		
+		datagram.listeMissile = gestionnaireMissile.getListeMissileClient();
+		//if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyé : " + datagram.listeMissile.size() + " " + gestionnaireMissile.getListeMissileClient().size());
 		
 		client.sendUDP(datagram);
 	}
