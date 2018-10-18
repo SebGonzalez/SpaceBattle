@@ -23,6 +23,8 @@ public class WindowMainMenu extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
 		
+		resX = Game.res.getX();
+		resY = Game.res.getY();
 		Image background = new Image("ressources/menu/space_background.jpg");
 		Image buttonPlay = new Image("ressources/menu/mainmenu/buttonPlay.jpg");
 		Image buttonHost = new Image("ressources/menu/mainmenu/buttonHost.jpg");

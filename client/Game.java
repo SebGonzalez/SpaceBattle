@@ -18,7 +18,7 @@ public class Game extends StateBasedGame{
 	public static final int jeu = 1;
 	public static final int lobby = 2;
 	public static final int options = 3;
-	public static Resolution res = Resolution.HIGH;
+	public static Resolution res = Resolution.LOW;
 	
 	
 	public Game() {

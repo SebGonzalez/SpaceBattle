@@ -4,6 +4,7 @@ import org.lwjgl.Sys;
 import org.newdawn.slick.Graphics;
 
 import client.IHM.WindowGame;
+import server.ServeurJoueur;
 
 public class Missile {
 	private float x;
@@ -53,6 +54,11 @@ public class Missile {
 		
 		x += - .1f * delta * directionX * 4;
 		y += - .1f * delta * directionY * 4;			
+	}
+	
+	public boolean collision(ServeurJoueur joueur) {
+		if(x > joueur.getX()-56 && x < joueur.getX()+56 && y > joueur.getY()-37 && y < joueur.getY()+37) return true;
+		return false;
 	}
 	
 	public void render(Graphics g) {
