@@ -1,9 +1,12 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import client.Model.Missile;
 import newtork.DatagramUpdateClient;
 import newtork.DatagramUpdateServer;
 
@@ -31,6 +34,8 @@ public class GestionnaireJoueur {
 		
 		DatagramUpdateServer datagramReponse = new DatagramUpdateServer();
 		
+		checkCollision(datagram.listeMissile, idJoueur);
+		
 		for(Entry<Integer, ServeurJoueur> entry : listePlayers.entrySet()) {
 		    int cle = entry.getKey();
 		    if(cle == idJoueur) {
@@ -46,6 +51,27 @@ public class GestionnaireJoueur {
 		}
 		
 		return datagramReponse;
+	}
+	
+	public void checkCollision(ArrayList<Missile> listeMissile, int idC) {
+		if(listeMissile.size() > 0) {
+			Iterator<Entry<Integer, ServeurJoueur>> entryIt2 = listePlayers.entrySet().iterator();
+			while (entryIt2.hasNext()) {
+				Entry<Integer, ServeurJoueur> entry2 = entryIt2.next();
+				ServeurJoueur joueur = entry2.getValue();
+				
+				if(idC != joueur.getId()) {
+					
+					for(Missile m : listeMissile) {
+						if(m.collision(joueur)) { 
+							System.out.println("MORT");
+							Serveur.server.sendToTCP(joueur.getId(), "ko");
+							entryIt2.remove();
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	/**

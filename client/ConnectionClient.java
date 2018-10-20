@@ -95,6 +95,13 @@ public class ConnectionClient extends Listener{
 						
 			gestionnaireAdversaire.setReception( datagram.listeAdversaire );
 		}
+		else if(o instanceof String) {
+			if(o.equals("ko")) {
+				System.out.println("Je suis touché");
+				client.close();
+				System.exit(0);
+			}
+		}
 	}
 }
 

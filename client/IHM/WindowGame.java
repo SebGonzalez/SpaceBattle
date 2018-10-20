@@ -90,6 +90,7 @@ public class WindowGame extends BasicGameState {
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
 		connexionClient.sendInformation(joueur);
+		//gestionnaireMissile.addMissileClient();
 
 	}
 
