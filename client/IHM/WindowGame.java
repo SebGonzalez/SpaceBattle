@@ -12,6 +12,7 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.Music;
 
 import client.ConnectionClient;
 import client.GestionnaireAdversaire;
@@ -41,6 +42,9 @@ public class WindowGame extends BasicGameState {
 		container.setAlwaysRender(true);
 		this.map = new TiledMap("ressources/map/SpaceBattle.tmx");
 		
+		Music ambiance = new Music ("ressources/sounds/ambiance.ogg");
+		ambiance.play();
+		
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");
 			missileJoueur = new Image("ressources/sprites/missile.png");
@@ -62,17 +66,21 @@ public class WindowGame extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame sgb, Graphics g) throws SlickException {
 		g.translate(container.getWidth() / 2 - (int) joueur.getxCamera(), container.getHeight() / 2 - (int)joueur.getyCamera());
 
-		this.map.render(0, 0);
-		//this.map.render(0, 0, 1);
-		//this.map.render(0, 0, 2);
+		//Background
+		this.map.render(0, 0, 0);
+		//Foreground
+		this.map.render(0, 0, 1);
+		//Logic
+		this.map.render(0, 0, 2);
+		//Fore-Foreground
+		//this.map.render(0, 0, 3);
+		//this.map.render(0, 0, 4);
 		
 		gestionnaireMissile.render(g);
 		gestionnaireAdversaire.render(g);
 		joueur.render(g);
-		
-		
-		//this.map.render(0, 0, 3);
-	    //this.map.render(0, 0, 4);
+	
+	    
 	}
 
 	public void update(GameContainer container, StateBasedGame sgb, int delta) throws SlickException {

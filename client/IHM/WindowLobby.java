@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+
 import client.Game;
 import client.Model.Joueur;
 
@@ -43,8 +44,8 @@ public class WindowLobby extends BasicGameState{
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
 		Image background = new Image("ressources/menu/space_background.jpg");
-		Image buttonPret = new Image("ressources/menu/lobby/buttonPret.jpg");
-		Image buttonRetour = new Image("ressources/menu/lobby/buttonRetour.jpg");
+		Image buttonPret = new Image("ressources/menu/lobby/buttonReady.png");
+		Image buttonRetour = new Image("ressources/menu/lobby/buttonBack.png");
 		background.draw(0, 0, container.getWidth(), container.getHeight());
 		
 		buttonRetour.draw((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/1.15));

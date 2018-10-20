@@ -10,8 +10,8 @@ import org.newdawn.slick.tiled.TiledMap;
 public class Joueur {
 	
 	private String nom;
-	private float x = 300, y = 300;
-	private float xCamera = 300, yCamera = 300;
+	private float x = 900, y = 900;
+	private float xCamera = 900, yCamera = 900;
 	public boolean keys_pressed[] = new boolean[3]; 
 	private float rotation = (float) (Math.PI/2);
 	
@@ -21,8 +21,8 @@ public class Joueur {
 	private boolean moving = false;
 	
 	public Joueur() {
-		x = 300;
-		y = 300;
+		x = 900;
+		y = 900;
 		nom = "test23";
 		for(int i=0;i<3;i++) {
 			keys_pressed[i] = false;

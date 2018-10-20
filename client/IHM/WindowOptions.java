@@ -34,10 +34,10 @@ public class WindowOptions extends BasicGameState{
 		Image background = new Image("ressources/menu/space_background.jpg");
 		background.draw(0, 0, container.getWidth(), container.getHeight());
 		
-		Image buttonLowRes = new Image("ressources/menu/options/button_LOWRES.jpg");
-		Image buttonMedRes = new Image("ressources/menu/options/button_MEDRES.jpg");
-		Image buttonHighRes = new Image("ressources/menu/options/button_HIGHRES.jpg");
-		Image buttonRetour = new Image("ressources/menu/options/buttonRetour.jpg");
+		Image buttonLowRes = new Image("ressources/menu/options/button_LOWRES.png");
+		Image buttonMedRes = new Image("ressources/menu/options/button_MIDRES.png");
+		Image buttonHighRes = new Image("ressources/menu/options/button_HIGHRES.png");
+		Image buttonRetour = new Image("ressources/menu/options/buttonBack.png");
 		
 		g.drawString("Selectionnez une r�solution: ", resX/12, resY/12);
 

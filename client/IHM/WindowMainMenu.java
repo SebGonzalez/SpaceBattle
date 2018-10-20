@@ -24,14 +24,15 @@ public class WindowMainMenu extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
 		
 		Image background = new Image("ressources/menu/space_background.jpg");
-		Image buttonPlay = new Image("ressources/menu/mainmenu/buttonPlay.jpg");
-		Image buttonHost = new Image("ressources/menu/mainmenu/buttonHost.jpg");
-		Image buttonQuit = new Image("ressources/menu/mainmenu/buttonQuit.jpg");
-		Image buttonOptions = new Image("ressources/menu/mainmenu/buttonOptions.jpg");
+		Image title = new Image ("ressources/menu/mainmenu/spaceBattle.png");
+		Image buttonPlay = new Image("ressources/menu/mainmenu/buttonPlay.png");
+		Image buttonHost = new Image("ressources/menu/mainmenu/buttonHost.png");
+		Image buttonQuit = new Image("ressources/menu/mainmenu/buttonQuit.png");
+		Image buttonOptions = new Image("ressources/menu/mainmenu/buttonOptions.png");
 
 		//background.draw(0,0);
 		background.draw(0, 0, container.getWidth(), container.getHeight());
-		g.drawString("Spacebattle: Alpha", resX/2 - 100, resY/12);
+		title.draw((resX/2 - 375), (resY/12));
 		buttonPlay.draw((resX/2) - 125, resY/3);
 		buttonHost.draw((resX/2) - 125, resY/3 + 125);
 		buttonOptions.draw((resX/2) - 125, resY/3 + 250);
