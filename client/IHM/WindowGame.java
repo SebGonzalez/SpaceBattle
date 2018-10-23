@@ -15,6 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.Music;
 
 import client.ConnectionClient;
+import client.Game;
 import client.GestionnaireAdversaire;
 import client.GestionnaireMissile;
 import client.Model.Joueur;
@@ -42,8 +43,7 @@ public class WindowGame extends BasicGameState {
 		container.setAlwaysRender(true);
 		this.map = new TiledMap("ressources/map/SpaceBattle.tmx");
 		
-		Music ambiance = new Music ("ressources/sounds/ambiance.ogg");
-		ambiance.play();
+		Game.playMusic();
 		
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");

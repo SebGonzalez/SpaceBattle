@@ -18,6 +18,7 @@ public class WindowOptions extends BasicGameState{
 	GameContainer container;
 	
 	private int resX = Game.res.getX(), resY = Game.res.getY();
+	private int t = 0;
 	
 	public WindowOptions(int state) {
 		
@@ -39,12 +40,22 @@ public class WindowOptions extends BasicGameState{
 		Image buttonHighRes = new Image("ressources/menu/options/button_HIGHRES.png");
 		Image buttonRetour = new Image("ressources/menu/options/buttonBack.png");
 		
-		g.drawString("Selectionnez une rï¿½solution: ", resX/12, resY/12);
+		Image buttonVolUp = new Image("ressources/menu/options/button_VOLUP.png");
+		Image buttonVolDown = new Image("ressources/menu/options/button_VOLDOWN.png");
+
+		
+		g.drawString("Selectionnez une resolution: ", resX/12, resY/12);
 
 		buttonLowRes.draw(resX/12 + 25, resY/12 + 25);
 		buttonMedRes.draw(resX/12 + 150, resY/12 + 25);
 		buttonHighRes.draw(resX/12 + 275, resY/12 + 25);		
 		buttonRetour.draw((float) (resX/1.2),(float) (resY/1.2));
+		g.drawString("Volume de la musique: ", resX/1.5f, resY/12);
+		g.drawString("" + Game.getMusicVolume(), resX/1.5f + 80, resY/12+40);
+		buttonVolUp.draw(resX/1.5f, resY/12 + 25);
+		buttonVolDown.draw(resX/1.5f+140, resY/12 + 25);
+
+		
 	}
 
 	@Override
@@ -53,6 +64,8 @@ public class WindowOptions extends BasicGameState{
 		int xpos = Mouse.getX();
 		int ypos = Mouse.getY();
 		AppGameContainer gc = (AppGameContainer) container;
+		
+		t += delta; // Pour ne pas qu'un click incrémente le volume trop vite
 		
 		//LOWRES
 		if((xpos > resX/12 + 25 && xpos < resX/12 +125) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
@@ -85,6 +98,26 @@ public class WindowOptions extends BasicGameState{
 		if((xpos > resX/1.2 && xpos < resX/1.2 +100) && (ypos > resY - resY/1.2 -45 && ypos < resY - resY/1.2 ))
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0);
+			}
+		
+		//Bouton Volume UP
+		if((xpos > resX/1.5 && xpos < resX/1.5 +50) && (ypos > resY - (resY/12 + 25) - 50 && ypos < resY - (resY/12 + 25) ))
+			if(input.isMouseButtonDown(0)) {
+				if(t > 75) {
+					Game.UPVolume();
+					t = 0;
+				}
+			}
+		
+		
+		//Bouton Volume DOWN
+		
+		if((xpos > resX/1.5 + 140 && xpos < resX/1.5 +190) && (ypos > resY - (resY/12 + 25) - 50 && ypos < resY - (resY/12 + 25) ))
+			if(input.isMouseButtonDown(0)) {
+				if(t > 75) {
+					Game.DOWNVolume();
+					t = 0;
+				}
 			}
 	}
 
