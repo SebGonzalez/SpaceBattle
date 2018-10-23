@@ -71,7 +71,7 @@ public class WindowGame extends BasicGameState {
 		//Foreground
 		this.map.render(0, 0, 1);
 		//Logic
-		this.map.render(0, 0, 2);
+	//	this.map.render(0, 0, 2);
 		//Fore-Foreground
 		//this.map.render(0, 0, 3);
 		//this.map.render(0, 0, 4);

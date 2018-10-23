@@ -195,8 +195,11 @@ public class Joueur {
 				setY(futurY);
 			}
 			else {
-				accelerationX *= -1;
-				accelerationY *= -1;
+				System.out.println(futurX + " " + futurY);
+				if(x < 900 || x > 2600)
+					accelerationX *= -1;
+				if(y < 650 || y > 2300)
+					accelerationY *= -1;
 			}
 
 
