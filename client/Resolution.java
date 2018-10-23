@@ -3,7 +3,8 @@ package client;
 public enum Resolution{
 		LOW(960, 540),
 		MED(1280, 720),
-		HIGH(1600, 900);
+		HIGH(1600, 900),
+		EXTRAHIGH(1920, 1080);
 		
 		
 		private final int x;

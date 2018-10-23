@@ -147,14 +147,14 @@ public class Joueur {
 	}
 
 	public void rotationGauche() {
-		this.rotation -= 0.005;
+		this.rotation -= 0.02;
 		setdirectionX(getRotation());
 		setdirectionY(getRotation());
 		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
 	public void rotationDroite() {
-		this.rotation += 0.005;
+		this.rotation += 0.02;
 		setdirectionX(getRotation());
 		setdirectionY(getRotation());
 		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
@@ -186,18 +186,18 @@ public class Joueur {
 			setX(futurX);
 			setY(futurY);
 			
-			/*Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
+			Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
 					(int) futurY / map.getTileHeight(),map.getLayerIndex("logic"));
-			// il y a colision si la tuile "tuture" existe
+			// il y a colision si la tuile existe
 			boolean collision = tile != null;
-			if (collision) {
-				Color color = tile.getColor((int) futurX % map.getTileWidth(),(int) futurY % map.getTileHeight());
-				collision = color.getAlpha() > 0;
-			}*/
-
-			//if (!collision) {
-			
-			//}
+			if (!collision) {
+				setX(futurX);
+				setY(futurY);
+			}
+			else {
+				accelerationX *= -1;
+				accelerationY *= -1;
+			}
 
 
 	}

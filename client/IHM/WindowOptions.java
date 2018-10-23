@@ -38,6 +38,7 @@ public class WindowOptions extends BasicGameState{
 		Image buttonLowRes = new Image("ressources/menu/options/button_LOWRES.png");
 		Image buttonMedRes = new Image("ressources/menu/options/button_MIDRES.png");
 		Image buttonHighRes = new Image("ressources/menu/options/button_HIGHRES.png");
+		Image buttonExtraHighRes = new Image("ressources/menu/options/button_HIGHRES.png");
 		Image buttonRetour = new Image("ressources/menu/options/buttonBack.png");
 		
 		Image buttonVolUp = new Image("ressources/menu/options/button_VOLUP.png");
@@ -48,7 +49,8 @@ public class WindowOptions extends BasicGameState{
 
 		buttonLowRes.draw(resX/12 + 25, resY/12 + 25);
 		buttonMedRes.draw(resX/12 + 150, resY/12 + 25);
-		buttonHighRes.draw(resX/12 + 275, resY/12 + 25);		
+		buttonHighRes.draw(resX/12 + 275, resY/12 + 25);	
+		buttonExtraHighRes.draw(resX/12 + 400, resY/12 + 25);	
 		buttonRetour.draw((float) (resX/1.2),(float) (resY/1.2));
 		g.drawString("Volume de la musique: ", resX/1.5f, resY/12);
 		g.drawString("" + Game.getMusicVolume(), resX/1.5f + 80, resY/12+40);
@@ -93,6 +95,15 @@ public class WindowOptions extends BasicGameState{
 				resX = Game.res.getX();
 				resY = Game.res.getY();
 			}
+		
+		//EXTRAHIGHRES
+				if((xpos > resX/12 + 400 && xpos < resX/12 +500) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
+					if(input.isMouseButtonDown(0)) {
+						Game.setResolution(Resolution.EXTRAHIGH);
+						gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
+						resX = Game.res.getX();
+						resY = Game.res.getY();
+					}
 		
 		//Bouton Retour
 		if((xpos > resX/1.2 && xpos < resX/1.2 +100) && (ypos > resY - resY/1.2 -45 && ypos < resY - resY/1.2 ))
