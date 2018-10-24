@@ -43,6 +43,8 @@ public class WindowLobby extends BasicGameState{
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
+		resX = Game.res.getX();
+		resY = Game.res.getY();
 		Image background = new Image("ressources/menu/space_background.jpg");
 		Image buttonPret = new Image("ressources/menu/lobby/buttonReady.png");
 		Image buttonRetour = new Image("ressources/menu/lobby/buttonBack.png");
