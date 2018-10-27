@@ -39,6 +39,7 @@ public class GestionnaireJoueur {
 		for(Entry<Integer, ServeurJoueur> entry : listePlayers.entrySet()) {
 		    int cle = entry.getKey();
 		    if(cle == idJoueur) {
+		    	
 		    		ServeurJoueur player = entry.getValue();
 		    		player.setX(datagram.x);
 		    		player.setY(datagram.y);
@@ -52,6 +53,7 @@ public class GestionnaireJoueur {
 		
 		return datagramReponse;
 	}
+	
 	
 	public void checkCollision(ArrayList<Missile> listeMissile, int idC) {
 		if(listeMissile.size() > 0) {
@@ -69,6 +71,8 @@ public class GestionnaireJoueur {
 							entryIt2.remove();
 						}
 					}
+					
+					//for bonus
 				}
 			}
 		}

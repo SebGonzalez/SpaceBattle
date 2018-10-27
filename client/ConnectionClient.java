@@ -13,6 +13,7 @@ import newtork.DatagramUpdateServer;
 import newtork.MissileSerializer;
 import newtork.PacketAddPlayer;
 import server.ServeurJoueur;
+import server.Bonus;
 
 /**
  * Classe qui gère la connexion et les échanges avec le serveur
@@ -24,16 +25,19 @@ public class ConnectionClient extends Listener{
 	Joueur joueur;
 	GestionnaireAdversaire gestionnaireAdversaire;
 	GestionnaireMissile gestionnaireMissile;
+	GestionnaireBonusClient gestionnaireBonus;
 	
 	String ip = "localhost";
 	final int portTCP = 18000;
 	final int portUDP = 19000;
 	Client client;
 	
-	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire, GestionnaireMissile gestionnaireMissile) {
+	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire, GestionnaireMissile gestionnaireMissile,GestionnaireBonusClient gestionnaireBonus) {
 		this.joueur = joueur;
 		this.gestionnaireAdversaire = gestionnaireAdversaire;
 		this.gestionnaireMissile = gestionnaireMissile;
+		this.gestionnaireBonus = gestionnaireBonus;
+	
 	}
 	
 	/**
@@ -47,6 +51,8 @@ public class ConnectionClient extends Listener{
 		client.getKryo().register(PacketAddPlayer.class);
 		client.getKryo().register(DatagramUpdateClient.class);
 		client.getKryo().register(DatagramUpdateServer.class);
+		client.getKryo().register(Bonus.class);
+		
 		client.addListener(this);
 		
 		client.start();
@@ -94,6 +100,7 @@ public class ConnectionClient extends Listener{
 			DatagramUpdateServer datagram = (DatagramUpdateServer)o;
 						
 			gestionnaireAdversaire.setReception( datagram.listeAdversaire );
+			gestionnaireBonus.setReception( datagram.listeBonus, datagram.vitesseBonus );
 		}
 		else if(o instanceof String) {
 			if(o.equals("ko")) {

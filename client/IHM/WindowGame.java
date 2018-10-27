@@ -1,6 +1,8 @@
 package client.IHM;
 
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -17,8 +19,12 @@ import org.newdawn.slick.Music;
 import client.ConnectionClient;
 import client.Game;
 import client.GestionnaireAdversaire;
+import client.GestionnaireBonusClient;
 import client.GestionnaireMissile;
+
 import client.Model.Joueur;
+import client.Model.Missile;
+import server.Bonus;
 
 public class WindowGame extends BasicGameState {
 
@@ -29,9 +35,15 @@ public class WindowGame extends BasicGameState {
 	public static Image ship;
 	public static Image missileJoueur;
 	public static Image missileEnnemies;
+	public static Image bonus1;
+	public static Image bonus2;
+	public static Image bonus3;
+	public static Image bonus4;
 	
 	private GestionnaireAdversaire gestionnaireAdversaire;
 	private GestionnaireMissile gestionnaireMissile;
+	private GestionnaireBonusClient gestionnaireBonus;
+
 	
 	private ConnectionClient connexionClient;
 	
@@ -49,20 +61,28 @@ public class WindowGame extends BasicGameState {
 			ship = new Image("ressources/sprites/sprite2.png");
 			missileJoueur = new Image("ressources/sprites/missile.png");
 			missileEnnemies = new Image("ressources/sprites/missile2.png");
+			bonus1 = new Image("ressources/sprites/PW/bolt_gold.png");
+			bonus2 = new Image("ressources/sprites/PW/powerupGreen_star.png");
+			bonus3 = new Image("ressources/sprites/PW/shield_gold.png");
+			bonus4 = new Image("ressources/sprites/PW/star_gold.png");
+			
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+			
+		
 		joueur = new Joueur();
 		joueur.loadImage();
 		gestionnaireAdversaire = new GestionnaireAdversaire();
 		gestionnaireMissile = new GestionnaireMissile(joueur);
+		gestionnaireBonus = new GestionnaireBonusClient();
 		
-		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire, gestionnaireMissile);
+		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire, gestionnaireMissile,gestionnaireBonus);
 		connexionClient.connect();
 	}
-
+	
 	public void render(GameContainer container, StateBasedGame sgb, Graphics g) throws SlickException {
 		g.translate(container.getWidth() / 2 - (int) joueur.getxCamera(), container.getHeight() / 2 - (int)joueur.getyCamera());
 
@@ -71,14 +91,17 @@ public class WindowGame extends BasicGameState {
 		//Foreground
 		this.map.render(0, 0, 1);
 		//Logic
-	//	this.map.render(0, 0, 2);
+	 //	this.map.render(0, 0, 2);
 		//Fore-Foreground
 		//this.map.render(0, 0, 3);
 		//this.map.render(0, 0, 4);
 		
 		gestionnaireMissile.render(g);
 		gestionnaireAdversaire.render(g);
+		gestionnaireBonus.render(g);
 		joueur.render(g);
+		
+		
 	
 	    
 	}
@@ -89,7 +112,9 @@ public class WindowGame extends BasicGameState {
 		
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
+		gestionnaireBonus.update();
 		connexionClient.sendInformation(joueur);
+		
 		//gestionnaireMissile.addMissileClient();
 
 	}

@@ -1,7 +1,7 @@
 package newtork;
 
 import java.util.ArrayList;
-
+import server.Bonus;
 import server.ServeurJoueur;
 
 /**
@@ -11,4 +11,6 @@ import server.ServeurJoueur;
  */
 public class DatagramUpdateServer {
 	public ArrayList<ServeurJoueur> listeAdversaire = new ArrayList<>();
+	public ArrayList<Bonus> listeBonus = new ArrayList<>();
+	public boolean vitesseBonus;
 }

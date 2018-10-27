@@ -6,6 +6,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import java.util.ArrayList;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
+import client.GestionnaireBonusClient;
 
 public class Joueur {
 	
@@ -19,6 +23,9 @@ public class Joueur {
 	private float directionX = (float) Math.cos(rotation);
 	private float directionY = (float) Math.sin(rotation);
 	private Image ship;
+	public boolean ameliorations[] = new boolean[4];
+	public static boolean vitesseBoost = false;
+	public int boost = 1;
 	
 	
 	private boolean moving = false;
@@ -29,6 +36,9 @@ public class Joueur {
 		nom = "test23";
 		for(int i=0;i<3;i++) {
 			keys_pressed[i] = false;
+		}
+		for(int i=0;i<4;i++) {
+			ameliorations[i] = false;
 		}
 	}
 	
@@ -169,40 +179,58 @@ public class Joueur {
 	public void update(GameContainer container, int delta, TiledMap map) {
 		updatePosition(delta, map);
 		updateCamera(container);
+		
+	}
+	
+	public void collide(float futurX,float futurY,TiledMap map) {
+		
+		Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
+				(int) futurY / map.getTileHeight(),map.getLayerIndex("logic"));
+		// il y a colision si la tuile existe
+		boolean collision = tile != null;
+		if (!collision) {
+			setX(futurX);
+			setY(futurY);
+		}
+		else {
+			
+			if(x < 900 || x > 2600) {
+				accelerationX *= -1;
+				System.out.println("x: "+x);
+			}
+			if(y < 650 || y > 2300)
+				accelerationY *= -1;
+			
+			if(accelerationX < -2 || accelerationX > 2)
+				accelerationX /= 2;
+			
+			if(accelerationY < -2 || accelerationY > 2)
+				accelerationX /= 2;
+			
+			
+		}
+		
 	}
 	
 	
+	
+	
 	public void updatePosition(int delta, TiledMap map) {
-		
-		
-		if(keys_pressed[0] == true) accelerate();
-		if(keys_pressed[1] == true) rotationGauche();
-		if(keys_pressed[2] == true) rotationDroite();
+			
+			if(vitesseBoost) boost = 2;
+			if(keys_pressed[0] == true) accelerate();
+			if(keys_pressed[1] == true) rotationGauche();
+			if(keys_pressed[2] == true) rotationDroite();
 		
 			
-			float futurX = getX() - .1f * delta * accelerationX;
-			float futurY = getY() - .1f * delta * accelerationY;	
+			float futurX = getX() - .1f * delta * accelerationX * boost;
+			float futurY = getY() - .1f * delta * accelerationY * boost;	
 			
 			setX(futurX);
 			setY(futurY);
+			collide(futurX,futurY,map);
+		
 			
-			Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
-					(int) futurY / map.getTileHeight(),map.getLayerIndex("logic"));
-			// il y a colision si la tuile existe
-			boolean collision = tile != null;
-			if (!collision) {
-				setX(futurX);
-				setY(futurY);
-			}
-			else {
-				System.out.println(futurX + " " + futurY);
-				if(x < 900 || x > 2600)
-					accelerationX *= -1;
-				if(y < 650 || y > 2300)
-					accelerationY *= -1;
-			}
-
-
 	}
 	
 	public void updateCamera(GameContainer container) {

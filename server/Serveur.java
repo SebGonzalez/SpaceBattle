@@ -26,6 +26,7 @@ public class Serveur extends Listener {
 	static final int portUDP = 19000;
 	
 	public static GestionnaireJoueur gestionnaireJoueur;
+	public static GestionnaireBonusServeur gestionnaireBonus;
 
 	public static void main(String[] args) throws IOException {
 		server = new Server();
@@ -35,11 +36,13 @@ public class Serveur extends Listener {
 		server.getKryo().register(PacketAddPlayer.class);
 		server.getKryo().register(DatagramUpdateClient.class);
 		server.getKryo().register(DatagramUpdateServer.class);
+		server.getKryo().register(Bonus.class);
 		server.bind(portTCP, portUDP);
 		server.start();
 		server.addListener(new Serveur());
 		
 		gestionnaireJoueur = new GestionnaireJoueur();
+		gestionnaireBonus = new GestionnaireBonusServeur();
 		
 		System.out.println("The server is ready");
 	}
@@ -64,12 +67,16 @@ public class Serveur extends Listener {
 	 */
 	public void received(Connection c, Object o) {
 		if(o instanceof DatagramUpdateClient) {
+			
+		//	System.out.println("datagramme recu par le serveur");
 			//System.out.println("Update client reçu");
 			DatagramUpdateClient datagram = (DatagramUpdateClient)o;
 
 			DatagramUpdateServer datagramReponse = gestionnaireJoueur.updateJoueur(c.getID(), datagram);
-			
+			gestionnaireBonus.updateBonus(datagramReponse,c.getID());
+	
 			server.sendToTCP(c.getID(), datagramReponse);
+			
 			
 		}
 	}

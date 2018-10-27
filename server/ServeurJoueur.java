@@ -3,6 +3,7 @@ package server;
 import java.util.ArrayList;
 
 import client.Model.Missile;
+import newtork.DatagramUpdateServer;
 
 /**
  * Instance d'un joueur niveau serveur
@@ -14,8 +15,11 @@ public class ServeurJoueur {
 	private int id;
 	private double x;
 	private double y;
+	private double accelerationX;
+	private double accelerationY;
 	private float r;
 	private ArrayList<Missile> listeMissile;
+	public boolean bonus[] = new boolean[4];
 	
 	public ServeurJoueur() {
 		this.id = -1;
@@ -23,6 +27,9 @@ public class ServeurJoueur {
 		y = 0;
 		r = (float) Math.PI/2;
 		listeMissile = new ArrayList<>();
+		for(int i=0;i<4;i++) {
+			bonus[i] = false;
+		}
 	}
 	
 	public ServeurJoueur(int id) {
@@ -41,7 +48,28 @@ public class ServeurJoueur {
 		this.r = r;
 		this.listeMissile = listeMissile;
 	}
+	
+	public void bonusVitesseUP(DatagramUpdateServer datagram) {
+			datagram.vitesseBonus = true;
+			}
 
+	public void bonusExpired(DatagramUpdateServer datagram) {
+		
+		
+		datagram.vitesseBonus = false;
+	}
+	
+	public void bonusTripleMissile() {
+		
+	}
+	
+	public void bonusTeteChercheuseMissile() {
+		
+	}
+	
+	public void bonusShield() {
+		
+	}
 	public int getId() {
 		return id;
 	}
