@@ -25,27 +25,21 @@ public class WindowMainMenu extends BasicGameState {
 		
 		resX = Game.res.getX();
 		resY = Game.res.getY();
-		Image background = new Image("ressources/menu/space_background.jpg");
-		Image title = new Image ("ressources/menu/mainmenu/spaceBattle.png");
-		Image buttonPlay = new Image("ressources/menu/mainmenu/buttonPlay.png");
-		Image buttonHost = new Image("ressources/menu/mainmenu/buttonHost.png");
-		Image buttonQuit = new Image("ressources/menu/mainmenu/buttonQuit.png");
-		Image buttonOptions = new Image("ressources/menu/mainmenu/buttonOptions.png");
 
 		//background.draw(0,0);
-		background.draw(0, 0, container.getWidth(), container.getHeight());
-		title.draw((resX/2 - 375), (resY/12));
-		buttonPlay.draw((resX/2) - 125, resY/3);
-		buttonHost.draw((resX/2) - 125, resY/3 + 125);
-		buttonOptions.draw((resX/2) - 125, resY/3 + 250);
-		buttonQuit.draw(resX/2 + 25, resY/3 + 250);
+		GestionnaireImagesIHM.getRessource("background").draw(0, 0, container.getWidth(), container.getHeight());
+		GestionnaireImagesIHM.getRessource("title").draw((resX/2 - 375), (resY/12));
+		GestionnaireImagesIHM.getRessource("buttonPlay").draw((resX/2) - 125, resY/3);
+		GestionnaireImagesIHM.getRessource("buttonHost").draw((resX/2) - 125, resY/3 + 125);
+		GestionnaireImagesIHM.getRessource("buttonOptions").draw((resX/2) - 125, resY/3 + 250);
+		GestionnaireImagesIHM.getRessource("buttonQuit").draw(resX/2 + 25, resY/3 + 250);
 	}
 
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		this.container = container;		
 		container.setAlwaysRender(true);
-		
+		GestionnaireImagesIHM.loadMainMenu();
 	}
 
 	@Override

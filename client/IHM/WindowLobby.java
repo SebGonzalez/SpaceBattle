@@ -38,20 +38,18 @@ public class WindowLobby extends BasicGameState{
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		this.container = container;		
 		container.setAlwaysRender(true);
-
+		GestionnaireImagesIHM.loadLobby();
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
 		resX = Game.res.getX();
 		resY = Game.res.getY();
-		Image background = new Image("ressources/menu/space_background.jpg");
-		Image buttonPret = new Image("ressources/menu/lobby/buttonReady.png");
-		Image buttonRetour = new Image("ressources/menu/lobby/buttonBack.png");
-		background.draw(0, 0, container.getWidth(), container.getHeight());
+
+		GestionnaireImagesIHM.getRessource("background").draw(0, 0, container.getWidth(), container.getHeight());
 		
-		buttonRetour.draw((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/1.15));
-		buttonPret.draw((float) ((resX/18) + (resX/1.6) + (resX/3.6) - 75), (float) (resY/1.15));
+		GestionnaireImagesIHM.getRessource("buttonBack").draw((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/1.15));
+		GestionnaireImagesIHM.getRessource("buttonReady").draw((float) ((resX/18) + (resX/1.6) + (resX/3.6) - 75), (float) (resY/1.15));
 
 		g.drawRect((float) (resX/18.0),(float) (resY/6.0),(float) (resX/1.6),(float) (resY/1.3));
 		g.drawRect((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/6.0) + 25, (float) (resX/3.6), (float) (resY/1.6));

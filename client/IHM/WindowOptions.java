@@ -27,35 +27,25 @@ public class WindowOptions extends BasicGameState{
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		this.container = container;		
-		container.setAlwaysRender(true);		
+		container.setAlwaysRender(true);	
+		GestionnaireImagesIHM.loadOptions();
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
-		Image background = new Image("ressources/menu/space_background.jpg");
-		background.draw(0, 0, container.getWidth(), container.getHeight());
-		
-		Image buttonLowRes = new Image("ressources/menu/options/button_LOWRES.png");
-		Image buttonMedRes = new Image("ressources/menu/options/button_MIDRES.png");
-		Image buttonHighRes = new Image("ressources/menu/options/button_HIGHRES.png");
-		Image buttonExtraHighRes = new Image("ressources/menu/options/button_HIGHRES.png");
-		Image buttonRetour = new Image("ressources/menu/options/buttonBack.png");
-		
-		Image buttonVolUp = new Image("ressources/menu/options/button_VOLUP.png");
-		Image buttonVolDown = new Image("ressources/menu/options/button_VOLDOWN.png");
+		GestionnaireImagesIHM.getRessource("background").draw(0, 0, container.getWidth(), container.getHeight());
 
-		
 		g.drawString("Selectionnez une resolution: ", resX/12, resY/12);
 
-		buttonLowRes.draw(resX/12 + 25, resY/12 + 25);
-		buttonMedRes.draw(resX/12 + 150, resY/12 + 25);
-		buttonHighRes.draw(resX/12 + 275, resY/12 + 25);	
-		buttonExtraHighRes.draw(resX/12 + 400, resY/12 + 25);	
-		buttonRetour.draw((float) (resX/1.2),(float) (resY/1.2));
+		GestionnaireImagesIHM.getRessource("buttonLOWRES").draw(resX/12 + 25, resY/12 + 25);
+		GestionnaireImagesIHM.getRessource("buttonMIDRES").draw(resX/12 + 150, resY/12 + 25);
+		GestionnaireImagesIHM.getRessource("buttonHIGHRES").draw(resX/12 + 275, resY/12 + 25);	
+		GestionnaireImagesIHM.getRessource("buttonVERYHIGHRES").draw(resX/12 + 400, resY/12 + 25);	
+		GestionnaireImagesIHM.getRessource("buttonBack").draw((float) (resX/1.2),(float) (resY/1.2));
 		g.drawString("Volume de la musique: ", resX/1.5f, resY/12);
 		g.drawString("" + Game.getMusicVolume(), resX/1.5f + 80, resY/12+40);
-		buttonVolUp.draw(resX/1.5f, resY/12 + 25);
-		buttonVolDown.draw(resX/1.5f+140, resY/12 + 25);
+		GestionnaireImagesIHM.getRessource("buttonVOLUP").draw(resX/1.5f, resY/12 + 25);
+		GestionnaireImagesIHM.getRessource("buttonVOLDOWN").draw(resX/1.5f+140, resY/12 + 25);
 
 		
 	}

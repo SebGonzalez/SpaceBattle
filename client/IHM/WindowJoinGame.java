@@ -18,7 +18,6 @@ import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 
 import java.awt.Font;
-import java.util.Scanner;
 
 public class WindowJoinGame extends BasicGameState implements KeyListener{
 
@@ -49,18 +48,16 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		test.setTextColor(Color.white);
 		test.setText(input);
 		container.setAlwaysRender(true);
+		GestionnaireImagesIHM.loadJoinGame();
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
-		Image background = new Image("ressources/menu/space_background.jpg");
-		background.draw(0,0,container.getWidth(), container.getHeight());
+		GestionnaireImagesIHM.getRessource("background").draw(0,0,container.getWidth(), container.getHeight());
+		GestionnaireImagesIHM.getRessource("buttonJoin").draw(resX/2+100, resY/2 + 50);
+		GestionnaireImagesIHM.getRessource("buttonBack").draw(resX/2-200, resY/2+50);
 		g.drawString("Entrez l'ID de la partie: ", resX/2 - 200, resY/2 - 35);
 		test.render(container, g);
-		Image buttonJoin = new Image("ressources/menu/joinGame/buttonJoin.png");
-		buttonJoin.draw(resX/2+100, resY/2 + 50);
-		Image buttonRetour = new Image("ressources/menu/options/buttonBack.png");
-		buttonRetour.draw(resX/2-200, resY/2+50);
 	}
 		
 	public void keyReleased(int key, char c) {
@@ -83,8 +80,9 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 			if(input.isMouseButtonDown(0))
 				sendGameID();
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
-			if(input.isMouseButtonDown(0))
+			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0);
+			}
 	}
 	
 	public void sendGameID() {
