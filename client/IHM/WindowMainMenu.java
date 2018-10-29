@@ -58,7 +58,7 @@ public class WindowMainMenu extends BasicGameState {
 		//Bouton Jouer
 		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-75 && ypos < resY - (resY/3))) {
 			if(input.isMouseButtonDown(0)) {
-				sbg.enterState(1);
+				sbg.enterState(4);
 			}
 		}
 		

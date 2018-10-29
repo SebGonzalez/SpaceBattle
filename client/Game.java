@@ -9,6 +9,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import com.esotericsoftware.minlog.Log;
 
 import client.IHM.WindowGame;
+import client.IHM.WindowJoinGame;
 import client.IHM.WindowLobby;
 import client.IHM.WindowMainMenu;
 import client.IHM.WindowOptions;
@@ -19,6 +20,7 @@ public class Game extends StateBasedGame{
 	public static final int jeu = 1;
 	public static final int lobby = 2;
 	public static final int options = 3;
+	public static final int joinGame = 4;
 	public static Resolution res = Resolution.LOW;
 	public static Music ambiance;
 	
@@ -28,6 +30,7 @@ public class Game extends StateBasedGame{
 		this.addState(new WindowGame(jeu));
 		this.addState(new WindowLobby(lobby));
 		this.addState(new WindowOptions(options));
+		this.addState(new WindowJoinGame(joinGame));
 	}
 	
 	public static void setResolution(Resolution r) {
