@@ -77,8 +77,11 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		int xpos = Mouse.getX(); int ypos = Mouse.getY();
 		
 		if((xpos > resX/2 + 100 && xpos < resX/2 + 200) && ( ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
-			if(input.isMouseButtonDown(0))
-				sendGameID();
+			if(input.isMouseButtonDown(0)) {
+				//sendGameID();
+				//POUR TESTER
+				sbg.enterState(1);
+			}
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0);
