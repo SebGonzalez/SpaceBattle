@@ -1,7 +1,8 @@
 package newtork;
 
 import java.util.ArrayList;
-import server.Bonus;
+
+import client.Model.Bonus;
 import server.ServeurJoueur;
 
 /**

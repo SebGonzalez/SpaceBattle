@@ -21,10 +21,9 @@ import client.Game;
 import client.GestionnaireAdversaire;
 import client.GestionnaireBonusClient;
 import client.GestionnaireMissile;
-
+import client.Model.Bonus;
 import client.Model.Joueur;
 import client.Model.Missile;
-import server.Bonus;
 
 public class WindowGame extends BasicGameState {
 

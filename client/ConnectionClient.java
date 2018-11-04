@@ -6,14 +6,15 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import client.Model.Bonus;
 import client.Model.Joueur;
 import client.Model.Missile;
+import client.Model.TypeBonus;
 import newtork.DatagramUpdateClient;
 import newtork.DatagramUpdateServer;
 import newtork.MissileSerializer;
 import newtork.PacketAddPlayer;
 import server.ServeurJoueur;
-import server.Bonus;
 
 /**
  * Classe qui gère la connexion et les échanges avec le serveur
@@ -53,6 +54,7 @@ public class ConnectionClient extends Listener{
 		client.getKryo().register(DatagramUpdateServer.class);
 		client.getKryo().register(Bonus.class);
 		client.getKryo().register(Boolean[].class);
+		client.getKryo().register(TypeBonus.class);
 		
 		client.addListener(this);
 		

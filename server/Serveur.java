@@ -8,7 +8,9 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 
+import client.Model.Bonus;
 import client.Model.Missile;
+import client.Model.TypeBonus;
 import newtork.DatagramUpdateClient;
 import newtork.DatagramUpdateServer;
 import newtork.MissileSerializer;
@@ -38,6 +40,7 @@ public class Serveur extends Listener {
 		server.getKryo().register(DatagramUpdateServer.class);
 		server.getKryo().register(Bonus.class);
 		server.getKryo().register(Boolean[].class);
+		server.getKryo().register(TypeBonus.class);
 		server.bind(portTCP, portUDP);
 		server.start();
 		server.addListener(new Serveur());

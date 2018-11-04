@@ -27,9 +27,6 @@ public class Joueur {
 	public static boolean vitesseBoost = false;
 	public int boost = 1;
 	
-	
-	private boolean moving = false;
-	
 	public Joueur() {
 		x = 900;
 		y = 900;
@@ -82,16 +79,6 @@ public class Joueur {
 		this.y = y;
 	}
 	
-	
-	public boolean isMoving() {
-		return moving;
-	}
-	
-	public void setMoving(boolean moving) {
-		this.moving = moving;
-	}
-	
-
 	public float getxCamera() {
 		return xCamera;
 	}
@@ -179,7 +166,6 @@ public class Joueur {
 	public void update(GameContainer container, int delta, TiledMap map) {
 		updatePosition(delta, map);
 		updateCamera(container);
-		
 	}
 	
 	public void collide(float futurX,float futurY,TiledMap map) {
@@ -196,7 +182,6 @@ public class Joueur {
 			
 			if(x < 900 || x > 2600) {
 				accelerationX *= -1;
-				System.out.println("x: "+x);
 			}
 			if(y < 650 || y > 2300)
 				accelerationY *= -1;
@@ -207,13 +192,8 @@ public class Joueur {
 			if(accelerationY < -2 || accelerationY > 2)
 				accelerationX /= 2;
 			
-			
 		}
-		
 	}
-	
-	
-	
 	
 	public void updatePosition(int delta, TiledMap map) {
 			
@@ -226,11 +206,7 @@ public class Joueur {
 			float futurX = getX() - .1f * delta * accelerationX * boost;
 			float futurY = getY() - .1f * delta * accelerationY * boost;	
 			
-			setX(futurX);
-			setY(futurY);
 			collide(futurX,futurY,map);
-		
-			
 	}
 	
 	public void updateCamera(GameContainer container) {

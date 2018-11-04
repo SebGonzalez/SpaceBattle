@@ -2,7 +2,6 @@ package server;
 
 import java.util.ArrayList;
 
-import server.Bonus;
 import server.ServeurJoueur;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +9,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import client.Model.Bonus;
 import client.Model.Missile;
 import newtork.DatagramUpdateClient;
 import newtork.DatagramUpdateServer;
 
 public class GestionnaireBonusServeur {
 
+	private static final int NOMBRE_BONUS = 60;
+	
 	private ArrayList<Bonus> listeBonus;
 	private long bonusStarts[] = new long[4];
 
@@ -23,7 +25,7 @@ public class GestionnaireBonusServeur {
 
 		listeBonus = new ArrayList<>();
 
-		for (int i = 0; i < 60; i++) {
+		for (int i = 0; i < NOMBRE_BONUS; i++) {
 			listeBonus.add(new Bonus(5000));
 		}
 		
@@ -52,7 +54,7 @@ public class GestionnaireBonusServeur {
 				for (Bonus bonus : listeBonus) {
 					if ( bonus.getX() > player.getX()-25 && bonus.getX() < player.getX()+25 && bonus.getY() > player.getY()-25 && bonus.getY() < player.getY()+25) {
 						switch ( bonus.getType() ) {
-						case 0:
+						case TripleMissile:
 								if ( player.getBonusState(0) == false) {
 									bonusStarts[0] = System.currentTimeMillis();
 									player.enableBonus(0);
@@ -60,7 +62,7 @@ public class GestionnaireBonusServeur {
 								}
 								break;
 								
-							case 1:
+							case VitesseUp:
 								if ( player.getBonusState(1) == false) {
 									bonusStarts[1] = System.currentTimeMillis();
 									player.enableBonus(1);
@@ -68,7 +70,7 @@ public class GestionnaireBonusServeur {
 								}
 								break;
 								
-							case 2:
+							case TeteChercheuse:
 								if ( player.getBonusState(2) == false) {
 									bonusStarts[2] = System.currentTimeMillis();
 									player.enableBonus(2);
@@ -76,7 +78,7 @@ public class GestionnaireBonusServeur {
 								}
 								break;
 								
-							case 3:
+							case Bouclier:
 								if ( player.getBonusState(3) == false) {
 									bonusStarts[3] = System.currentTimeMillis();
 									player.enableBonus(3);
