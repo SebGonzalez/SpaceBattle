@@ -20,6 +20,7 @@ public class ServeurJoueur {
 	private float r;
 	private ArrayList<Missile> listeMissile;
 	private Boolean bonus[] = new Boolean[4];
+	private long bonusTimer[] = new long[4];
 	
 	public ServeurJoueur() {
 		this.id = -1;
@@ -39,6 +40,10 @@ public class ServeurJoueur {
 		for(int i=0;i<4;i++) {
 			bonus[i] = false;
 		}
+		
+		for( int i = 0; i < 4 ; i++)
+			bonusTimer[i] = 0;
+
 
 	}
 	
@@ -54,20 +59,30 @@ public class ServeurJoueur {
 			//datagram.vitesseBonus = true;
 	}
 
-	public void disableBonus(int indice) {
-		bonus[indice] = false;
-	}
 	public void enableBonus(int indice) {
 		bonus[indice] = true;
+		bonusTimer[indice] = System.currentTimeMillis();
 	}
+	
+	public void disableBonus(int indice) {
+		bonus[indice] = false;
+		bonusTimer[indice] = 0;
+	}
+	
 	
 	public boolean getBonusState(int indice) {
 		return bonus[indice];
 	}
 	
+
+	public long getTimerBonus(int indice) {
+		return bonusTimer[indice];
+	}
+	
 	public void bonusTeteChercheuseMissile() {
 		
 	}
+		
 	
 	public void bonusShield() {
 		

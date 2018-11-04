@@ -19,7 +19,7 @@ public class GestionnaireBonusServeur {
 	private static final int NOMBRE_BONUS = 60;
 	
 	private ArrayList<Bonus> listeBonus;
-	private long bonusStarts[] = new long[4];
+	
 
 	public GestionnaireBonusServeur() {
 
@@ -29,9 +29,7 @@ public class GestionnaireBonusServeur {
 			listeBonus.add(new Bonus(5000));
 		}
 		
-		for( int i = 0; i < 4 ; i++)
-			bonusStarts[i] = 0;
-
+		
 	}
 
 	public void updateBonus(DatagramUpdateServer datagram, int idjoueur) {
@@ -41,7 +39,7 @@ public class GestionnaireBonusServeur {
 		}
 
 		collideBonus(idjoueur,datagram);
-		isExpired(bonusStarts,idjoueur);
+		isExpired(idjoueur);
 	}
 
 	public void collideBonus(int id,DatagramUpdateServer datagram) {
@@ -56,7 +54,6 @@ public class GestionnaireBonusServeur {
 						switch ( bonus.getType() ) {
 						case TripleMissile:
 								if ( player.getBonusState(0) == false) {
-									bonusStarts[0] = System.currentTimeMillis();
 									player.enableBonus(0);
 									listeBonus.get( indice ).disappear();
 								}
@@ -64,7 +61,6 @@ public class GestionnaireBonusServeur {
 								
 							case VitesseUp:
 								if ( player.getBonusState(1) == false) {
-									bonusStarts[1] = System.currentTimeMillis();
 									player.enableBonus(1);
 									listeBonus.get( indice ).disappear();
 								}
@@ -72,7 +68,6 @@ public class GestionnaireBonusServeur {
 								
 							case TeteChercheuse:
 								if ( player.getBonusState(2) == false) {
-									bonusStarts[2] = System.currentTimeMillis();
 									player.enableBonus(2);
 									listeBonus.get( indice ).disappear();
 								}
@@ -80,7 +75,6 @@ public class GestionnaireBonusServeur {
 								
 							case Bouclier:
 								if ( player.getBonusState(3) == false) {
-									bonusStarts[3] = System.currentTimeMillis();
 									player.enableBonus(3);
 									listeBonus.get( indice ).disappear();
 								}
@@ -96,17 +90,19 @@ public class GestionnaireBonusServeur {
 		
 	}
 	
-	public void isExpired(long startTime[],int id) {
+	public void isExpired(int id) {
 			
 			for( int i = 0 ; i < 4 ; i ++) {
-				if( System.currentTimeMillis() - startTime[i] > 5000 && startTime[i] != 0 ) {
-					for ( Entry<Integer, ServeurJoueur> entry : Serveur.gestionnaireJoueur.listePlayers.entrySet() ) {	
-						int cle = entry.getKey();
+				for ( Entry<Integer, ServeurJoueur> entry : Serveur.gestionnaireJoueur.listePlayers.entrySet() ) {	
+					int cle = entry.getKey();
 							if ( cle == id ) { 
 								ServeurJoueur player = entry.getValue();
+								if( System.currentTimeMillis() - player.getTimerBonus(i) > 5000 && player.getTimerBonus(i) != 0 ) {
 								player.disableBonus(i);
-								startTime[i] = 0;
-								System.out.println("bonus" +i+ " a expiré");
+								System.out.println("bonus" +i+"du joueur :  "+id+" a expiré");
+								}
+								
+								
 							}
 						}
 					}
@@ -115,4 +111,4 @@ public class GestionnaireBonusServeur {
 	
 	
 	
-}
+
