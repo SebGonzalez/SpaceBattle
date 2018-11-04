@@ -112,12 +112,12 @@ public class Joueur {
 		return directionY;
 	}
 	
-	public void setdirectionX(float value) {
-		directionX = (float) Math.cos(value);
+	public void setdirectionX() {
+		directionX = (float) Math.cos(rotation);
 	}
 	
-	public void setdirectionY(float value) {
-		directionY = (float) Math.sin(value);
+	public void setdirectionY() {
+		directionY = (float) Math.sin(rotation);
 	}
 	
 	
@@ -143,17 +143,19 @@ public class Joueur {
 		return rotation;
 	}
 
-	public void rotationGauche() {
-		this.rotation -= 0.02;
-		setdirectionX(getRotation());
-		setdirectionY(getRotation());
+	public void rotationGauche(int delta) {
+		System.out.println();
+		this.rotation -= (float)delta/100;
+		setdirectionX();
+		setdirectionY();
 		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
-	public void rotationDroite() {
-		this.rotation += 0.02;
-		setdirectionX(getRotation());
-		setdirectionY(getRotation());
+	public void rotationDroite(int delta) {
+		System.out.println(delta);
+		this.rotation += (float)delta/100;
+		setdirectionX();
+		setdirectionY();
 		ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
@@ -199,8 +201,8 @@ public class Joueur {
 			
 			if(vitesseBoost) boost = 2;
 			if(keys_pressed[0] == true) accelerate();
-			if(keys_pressed[1] == true) rotationGauche();
-			if(keys_pressed[2] == true) rotationDroite();
+			if(keys_pressed[1] == true) rotationGauche(delta);
+			if(keys_pressed[2] == true) rotationDroite(delta);
 		
 			
 			float futurX = getX() - .1f * delta * accelerationX * boost;
