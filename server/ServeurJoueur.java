@@ -19,7 +19,7 @@ public class ServeurJoueur {
 	private double accelerationY;
 	private float r;
 	private ArrayList<Missile> listeMissile;
-	public boolean bonus[] = new boolean[4];
+	public Boolean bonus[] = new Boolean[4];
 	
 	public ServeurJoueur() {
 		this.id = -1;
@@ -50,13 +50,11 @@ public class ServeurJoueur {
 	}
 	
 	public void bonusVitesseUP(DatagramUpdateServer datagram) {
-			datagram.vitesseBonus = true;
-			}
+			//datagram.vitesseBonus = true;
+	}
 
 	public void bonusExpired(DatagramUpdateServer datagram) {
-		
-		
-		datagram.vitesseBonus = false;
+		//datagram.vitesseBonus = false;
 	}
 	
 	public void bonusTripleMissile() {

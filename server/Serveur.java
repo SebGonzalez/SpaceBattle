@@ -37,6 +37,7 @@ public class Serveur extends Listener {
 		server.getKryo().register(DatagramUpdateClient.class);
 		server.getKryo().register(DatagramUpdateServer.class);
 		server.getKryo().register(Bonus.class);
+		server.getKryo().register(Boolean[].class);
 		server.bind(portTCP, portUDP);
 		server.start();
 		server.addListener(new Serveur());
@@ -68,8 +69,7 @@ public class Serveur extends Listener {
 	public void received(Connection c, Object o) {
 		if(o instanceof DatagramUpdateClient) {
 			
-		//	System.out.println("datagramme recu par le serveur");
-			//System.out.println("Update client reçu");
+			//System.out.println("datagramme recu par le serveur");
 			DatagramUpdateClient datagram = (DatagramUpdateClient)o;
 
 			DatagramUpdateServer datagramReponse = gestionnaireJoueur.updateJoueur(c.getID(), datagram);

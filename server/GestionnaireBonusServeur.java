@@ -34,9 +34,7 @@ public class GestionnaireBonusServeur {
 			datagram.listeBonus.add(bonus);
 		}
 
-		collideBonus(idjoueur,datagram);
-	
-
+		//collideBonus(idjoueur,datagram);
 	}
 
 	public void collideBonus(int id,DatagramUpdateServer datagram) {

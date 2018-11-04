@@ -27,11 +27,11 @@ public class GestionnaireBonusClient {
 			}
 		}
 		
-		public void setReception(ArrayList<Bonus> reception,boolean vitesseBoost) {
+		public void setReception(ArrayList<Bonus> reception) {
 			this.reception = reception;
-			if(vitesseBoost == true) {
+			/*if(vitesseBoost == true) {
 					client.Model.Joueur.vitesseBoost = true;
-			}
+			}*/
 			
 		}
 

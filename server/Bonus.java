@@ -16,9 +16,6 @@ public class Bonus {
 	private int y;
 	private boolean taken = false;
 	
-	
-
-	
 	public Bonus() {
 		type = 1;
 		lifetime = 200;

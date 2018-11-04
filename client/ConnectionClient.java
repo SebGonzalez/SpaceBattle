@@ -52,6 +52,7 @@ public class ConnectionClient extends Listener{
 		client.getKryo().register(DatagramUpdateClient.class);
 		client.getKryo().register(DatagramUpdateServer.class);
 		client.getKryo().register(Bonus.class);
+		client.getKryo().register(Boolean[].class);
 		
 		client.addListener(this);
 		
@@ -84,7 +85,7 @@ public class ConnectionClient extends Listener{
 		datagram.listeMissile = gestionnaireMissile.getListeMissileClient();
 		//if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyÃ© : " + datagram.listeMissile.size() + " " + gestionnaireMissile.getListeMissileClient().size());
 		
-		client.sendUDP(datagram);
+		client.sendTCP(datagram);
 	}
 	
 	/**
@@ -100,11 +101,11 @@ public class ConnectionClient extends Listener{
 			DatagramUpdateServer datagram = (DatagramUpdateServer)o;
 						
 			gestionnaireAdversaire.setReception( datagram.listeAdversaire );
-			gestionnaireBonus.setReception( datagram.listeBonus, datagram.vitesseBonus );
+			gestionnaireBonus.setReception( datagram.listeBonus );
 		}
 		else if(o instanceof String) {
 			if(o.equals("ko")) {
-				System.out.println("Je suis touché");
+				System.out.println("Je suis touchï¿½");
 				client.close();
 				System.exit(0);
 			}
