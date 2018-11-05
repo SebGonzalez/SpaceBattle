@@ -28,8 +28,8 @@ public class Joueur {
 	public int boost = 1;
 	
 	public Joueur() {
-		x = 900;
-		y = 900;
+		x = 1200;
+		y = 1200;
 		nom = "test23";
 		for(int i=0;i<3;i++) {
 			keys_pressed[i] = false;
@@ -178,18 +178,20 @@ public class Joueur {
 			setY(futurY);
 		}
 		else {
-			
-			if(x < 900 || x > 2600) {
+			System.out.println(x + " " + y);
+			if(x < 950 || x > 2550) {
 				accelerationX *= -1;
+				if(accelerationX < -2 || accelerationX > 2) {
+					accelerationX /= 1.5;
+
+				}
 			}
-			if(y < 650 || y > 2300)
+			if(y < 650 || y > 2400) {
 				accelerationY *= -1;
-			
-			if(accelerationX < -2 || accelerationX > 2)
-				accelerationX /= 2;
-			
-			if(accelerationY < -2 || accelerationY > 2)
-				accelerationX /= 2;
+				if(accelerationY < -2 || accelerationY > 2) {
+					accelerationY /= 1.5;
+				}
+			}
 			
 		}
 	}
