@@ -102,12 +102,12 @@ public class WindowGame extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame sgb, int delta) throws SlickException {
 		joueur.update(container, delta, map);
 
-		try {
+		/*try {
 			Thread.sleep(20);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
 		gestionnaireBonus.update();

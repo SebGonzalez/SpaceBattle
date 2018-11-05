@@ -129,13 +129,13 @@ public class Joueur {
 		accelerationY += value;
 	}
 	
-	public void accelerate() {
+	public void accelerate(int delta) {
 		
-		if(getaccelerationX() + getdirectionX()/85 > -4 && getaccelerationX() + getdirectionX()/85 < 4)
-			addaccelerationX(getdirectionX()/85);
+		if(getaccelerationX() + (delta * (getdirectionX()/200)) > -4 && getaccelerationX() + (delta * (getdirectionX()/200)) < 4)
+			addaccelerationX(delta * (getdirectionX()/200) );
 		
-		if(getaccelerationY() + getdirectionY()/85 > -4 && getaccelerationY() + getdirectionY()/85 < 4)
-		addaccelerationY(getdirectionY()/85);
+		if(getaccelerationY() + (delta * (getdirectionY()/200)) > -4 && getaccelerationY() +  (delta * (getdirectionY()/200)) < 4)
+		addaccelerationY(delta * (getdirectionY()/200) );
 		
 	}
 
@@ -144,7 +144,6 @@ public class Joueur {
 	}
 
 	public void rotationGauche(int delta) {
-		System.out.println();
 		this.rotation -= (float)delta/100;
 		setdirectionX();
 		setdirectionY();
@@ -152,7 +151,6 @@ public class Joueur {
 	}
 	
 	public void rotationDroite(int delta) {
-		System.out.println(delta);
 		this.rotation += (float)delta/100;
 		setdirectionX();
 		setdirectionY();
@@ -200,7 +198,7 @@ public class Joueur {
 	public void updatePosition(int delta, TiledMap map) {
 			
 			if(vitesseBoost) boost = 2;
-			if(keys_pressed[0] == true) accelerate();
+			if(keys_pressed[0] == true) accelerate(delta);
 			if(keys_pressed[1] == true) rotationGauche(delta);
 			if(keys_pressed[2] == true) rotationDroite(delta);
 		
