@@ -79,15 +79,15 @@ public class WindowGame extends BasicGameState {
 	}
 
 	public void render(GameContainer container, StateBasedGame sgb, Graphics g) throws SlickException {
-		g.translate(container.getWidth() / 2 - (int) joueur.getxCamera(),
-				container.getHeight() / 2 - (int) joueur.getyCamera());
+		g.translate(container.getWidth() / 2 - (int) joueur.getX(),
+				container.getHeight() / 2 - (int) joueur.getY());
 
 		// Background
 		this.map.render(0, 0, 0);
 		// Foreground
 		this.map.render(0, 0, 1);
 		// Logic
-		// this.map.render(0, 0, 2);
+		this.map.render(0, 0, 2);
 		// Fore-Foreground
 		// this.map.render(0, 0, 3);
 		// this.map.render(0, 0, 4);
