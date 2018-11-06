@@ -11,18 +11,20 @@ import java.util.Map.Entry;
 
 import client.Model.Bonus;
 import client.Model.Missile;
-import newtork.DatagramUpdateClient;
-import newtork.DatagramUpdateServer;
+import network.DatagramUpdateClient;
+import network.DatagramUpdateServer;
 
 public class GestionnaireBonusServeur {
 
 	private static final int NOMBRE_BONUS = 60;
 	
+	private GestionnaireJoueur gestionnaireJoueur;
 	private ArrayList<Bonus> listeBonus;
 	
 
-	public GestionnaireBonusServeur() {
+	public GestionnaireBonusServeur(GestionnaireJoueur gestionnaireJoueur) {
 
+		this.gestionnaireJoueur = gestionnaireJoueur;
 		listeBonus = new ArrayList<>();
 
 		for (int i = 0; i < NOMBRE_BONUS; i++) {
@@ -32,7 +34,7 @@ public class GestionnaireBonusServeur {
 		
 	}
 
-	public void updateBonus(DatagramUpdateServer datagram, int idjoueur) {
+	public void updateBonus(int idjoueur, DatagramUpdateServer datagram) {
 
 		for (Bonus bonus : listeBonus) {
 			datagram.listeBonus.add(bonus);
@@ -45,7 +47,7 @@ public class GestionnaireBonusServeur {
 	public void collideBonus(int id,DatagramUpdateServer datagram) {
 		int indice = 0;
 	
-		for (Entry<Integer, ServeurJoueur> entry : Serveur.gestionnaireJoueur.listePlayers.entrySet()) {	
+		for (Entry<Integer, ServeurJoueur> entry : gestionnaireJoueur.listePlayers.entrySet()) {	
 			int cle = entry.getKey();
 			if (cle == id) { //(cle == id de connexion du client)
 				ServeurJoueur player = entry.getValue();
@@ -93,7 +95,7 @@ public class GestionnaireBonusServeur {
 	public void isExpired(int id) {
 			
 			for( int i = 0 ; i < 4 ; i ++) {
-				for ( Entry<Integer, ServeurJoueur> entry : Serveur.gestionnaireJoueur.listePlayers.entrySet() ) {	
+				for ( Entry<Integer, ServeurJoueur> entry : gestionnaireJoueur.listePlayers.entrySet() ) {	
 					int cle = entry.getKey();
 							if ( cle == id ) { 
 								ServeurJoueur player = entry.getValue();

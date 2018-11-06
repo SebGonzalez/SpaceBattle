@@ -42,8 +42,6 @@ public class WindowGame extends BasicGameState {
 	private GestionnaireMissile gestionnaireMissile;
 	private GestionnaireBonusClient gestionnaireBonus;
 
-	private ConnectionClient connexionClient;
-
 	public WindowGame(int state) {
 	}
 
@@ -73,9 +71,8 @@ public class WindowGame extends BasicGameState {
 		gestionnaireAdversaire = new GestionnaireAdversaire();
 		gestionnaireMissile = new GestionnaireMissile(joueur);
 		gestionnaireBonus = new GestionnaireBonusClient();
-
-		connexionClient = new ConnectionClient(joueur, gestionnaireAdversaire, gestionnaireMissile, gestionnaireBonus);
-		connexionClient.connect();
+		
+		Game.connexionClient.addData(joueur, gestionnaireAdversaire, gestionnaireMissile, gestionnaireBonus);
 	}
 
 	public void render(GameContainer container, StateBasedGame sgb, Graphics g) throws SlickException {
@@ -111,7 +108,7 @@ public class WindowGame extends BasicGameState {
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
 		gestionnaireBonus.update();
-		connexionClient.sendInformation(joueur);
+		Game.connexionClient.sendInformationGame(joueur);
 
 		// gestionnaireMissile.addMissileClient();
 

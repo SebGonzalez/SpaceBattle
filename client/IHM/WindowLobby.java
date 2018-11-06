@@ -76,6 +76,15 @@ public class WindowLobby extends BasicGameState{
 				sbg.enterState(0);
 			}
 		}
+		
+		if( xpos > (resX/18) + (resX/1.6) + (resX/3.6) - 75 && xpos <  (resX/18) + (resX/1.6) + (resX/3.6) - 75 + 125) {
+			if(input.isMouseButtonDown(0)) {
+				Game.connexionClient.createGame();
+				sbg.enterState(Game.jeu);
+			}
+		}
+
+		GestionnaireImagesIHM.getRessource("buttonReady").draw((float) ((resX/18) + (resX/1.6) + (resX/3.6) - 75), (float) (resY/1.15));
 	}
 
 	@Override

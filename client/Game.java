@@ -24,13 +24,13 @@ public class Game extends StateBasedGame{
 	public static Resolution res = Resolution.LOW;
 	public static Music ambiance;
 	
+	public static ConnectionClient connexionClient;
+	
 	public Game() {
 		super("SpaceBattle");
-		this.addState(new WindowMainMenu(menu));
-		this.addState(new WindowGame(jeu));
-		this.addState(new WindowLobby(lobby));
-		this.addState(new WindowOptions(options));
-		this.addState(new WindowJoinGame(joinGame));
+		
+		connexionClient = new ConnectionClient();
+		connexionClient.connect();
 	}
 	
 	public static void setResolution(Resolution r) {
@@ -39,7 +39,7 @@ public class Game extends StateBasedGame{
 	
 	public static void playMusic() throws SlickException {
 		ambiance = new Music ("ressources/sounds/ambiance.ogg");
-		ambiance.play(1, 0.2f);
+		//ambiance.play(1, 0.2f);
 	}
 	
 	public static int getMusicVolume() {
@@ -56,15 +56,14 @@ public class Game extends StateBasedGame{
 	
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-	/*	this.getState(menu).init(container, this);
-		this.getState(jeu).init(container, this);
-		this.getState(lobby).init(container, this);
-		this.enterState(menu);*/
+		this.addState(new WindowMainMenu(menu));
+		this.addState(new WindowGame(jeu));
+		this.addState(new WindowLobby(lobby));
+		this.addState(new WindowOptions(options));
+		this.addState(new WindowJoinGame(joinGame));
 	}
 	
 	public static void main(String[] args) {
-		
-		Log.set(Log.LEVEL_DEBUG);
 		
 		AppGameContainer appgc;
 		try {

@@ -1,4 +1,4 @@
-package newtork;
+package network;
 
 import java.util.ArrayList;
 

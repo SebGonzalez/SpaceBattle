@@ -1,4 +1,4 @@
-package newtork;
+package network;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ import client.Model.Missile;
  *
  */
 public class DatagramUpdateClient {
+	public int idPartie;
 	public double x;
 	public double y;
 	public float r;

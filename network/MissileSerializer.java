@@ -1,4 +1,4 @@
-package newtork;
+package network;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.Serializer;

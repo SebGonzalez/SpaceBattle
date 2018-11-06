@@ -11,10 +11,11 @@ import com.esotericsoftware.minlog.Log;
 import client.Model.Bonus;
 import client.Model.Missile;
 import client.Model.TypeBonus;
-import newtork.DatagramUpdateClient;
-import newtork.DatagramUpdateServer;
-import newtork.MissileSerializer;
-import newtork.PacketAddPlayer;
+import network.DatagramUpdateClient;
+import network.DatagramUpdateServer;
+import network.MissileSerializer;
+import network.PacketAddPlayer;
+import network.SegmentIDPartie;
 
 /**
  * Classe principale du serveur
@@ -27,8 +28,7 @@ public class Serveur extends Listener {
 	static final int portTCP = 18000;
 	static final int portUDP = 19000;
 	
-	public static GestionnaireJoueur gestionnaireJoueur;
-	public static GestionnaireBonusServeur gestionnaireBonus;
+	public static GestionnairePartie gestionnairePartie;
 
 	public static void main(String[] args) throws IOException {
 		server = new Server();
@@ -38,15 +38,16 @@ public class Serveur extends Listener {
 		server.getKryo().register(PacketAddPlayer.class);
 		server.getKryo().register(DatagramUpdateClient.class);
 		server.getKryo().register(DatagramUpdateServer.class);
+		server.getKryo().register(SegmentIDPartie.class);
 		server.getKryo().register(Bonus.class);
 		server.getKryo().register(Boolean[].class);
+		server.getKryo().register(long[].class);
 		server.getKryo().register(TypeBonus.class);
 		server.bind(portTCP, portUDP);
 		server.start();
 		server.addListener(new Serveur());
 		
-		gestionnaireJoueur = new GestionnaireJoueur();
-		gestionnaireBonus = new GestionnaireBonusServeur();
+		gestionnairePartie = new GestionnairePartie();
 		
 		System.out.println("The server is ready");
 	}
@@ -56,12 +57,12 @@ public class Serveur extends Listener {
 	 */
 	@Override
 	public void connected(Connection c) {
-		PacketAddPlayer packet = new PacketAddPlayer();
+		/*PacketAddPlayer packet = new PacketAddPlayer();
 		packet.id = c.getID();
 
 		server.sendToAllExceptTCP(c.getID(), packet);
 
-		gestionnaireJoueur.addJoueur(c.getID());
+		gestionnaireJoueur.addJoueur(c.getID());*/
 		
 		System.out.println("Connection received.");
 	}
@@ -74,13 +75,17 @@ public class Serveur extends Listener {
 			
 			//System.out.println("datagramme recu par le serveur");
 			DatagramUpdateClient datagram = (DatagramUpdateClient)o;
-
-			DatagramUpdateServer datagramReponse = gestionnaireJoueur.updateJoueur(c.getID(), datagram);
-			gestionnaireBonus.updateBonus(datagramReponse,c.getID());
+			DatagramUpdateServer datagramReponse = gestionnairePartie.updateClient(c.getID(), datagram);
 	
 			server.sendToTCP(c.getID(), datagramReponse);
-			
-			
+		}
+		else if(o instanceof String) {
+			System.out.println("reçu : " + o);
+			if(o.equals("create")) {
+				System.out.println("Création partie");
+				SegmentIDPartie segmentReponse = gestionnairePartie.creationPartie();
+				server.sendToTCP(c.getID(), segmentReponse);
+			}
 		}
 	}
 
@@ -89,7 +94,7 @@ public class Serveur extends Listener {
 	 */
 	@Override
 	public void disconnected(Connection c) {
-		gestionnaireJoueur.removeJoueur(c.getID());
+		gestionnairePartie.removeJoueur(c.getID());
 
 		System.out.println("Connection dropped.");
 	}

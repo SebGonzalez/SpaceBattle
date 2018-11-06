@@ -3,7 +3,7 @@ package server;
 import java.util.ArrayList;
 
 import client.Model.Missile;
-import newtork.DatagramUpdateServer;
+import network.DatagramUpdateServer;
 
 /**
  * Instance d'un joueur niveau serveur

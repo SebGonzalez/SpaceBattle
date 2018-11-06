@@ -15,7 +15,6 @@ public class Joueur {
 	
 	private String nom;
 	private float x = 900, y = 900;
-	private float xCamera = 900, yCamera = 900;
 	public boolean keys_pressed[] = new boolean[3]; 
 	private float accelerationX = 0;
 	private float accelerationY = 0;
@@ -78,23 +77,6 @@ public class Joueur {
 	public void setY(float y) {
 		this.y = y;
 	}
-	
-	public float getxCamera() {
-		return xCamera;
-	}
-
-	public void setxCamera(float xCamera) {
-		this.xCamera = xCamera;
-	}
-
-	public float getyCamera() {
-		return yCamera;
-	}
-
-	public void setyCamera(float yCamera) {
-		this.yCamera = yCamera;
-	}
-	
 	
 	public float getaccelerationX() {
 		return accelerationX;
@@ -164,7 +146,6 @@ public class Joueur {
 	
 	public void update(GameContainer container, int delta, TiledMap map) {
 		updatePosition(delta, map);
-		updateCamera(container);
 	}
 	
 	public void collide(float futurX,float futurY,TiledMap map) {
@@ -178,7 +159,6 @@ public class Joueur {
 			setY(futurY);
 		}
 		else {
-			System.out.println(x + " " + y);
 			if(x < 950 || x > 2550) {
 				accelerationX *= -1;
 				if(accelerationX < -2 || accelerationX > 2) {
@@ -209,19 +189,4 @@ public class Joueur {
 			
 			collide(futurX,futurY,map);
 	}
-	
-	public void updateCamera(GameContainer container) {
-		int w = container.getWidth() / 4;
-		if (getX() > getxCamera() + w)
-			setxCamera(getX() - w);
-		if (getX() < getxCamera() - w)
-			setxCamera(getX() + w);
-		int h = container.getHeight() / 4;
-		if (getY() > getyCamera() + h)
-			setyCamera(getY() - h);
-		if (getY() < getyCamera() - h)
-			setyCamera(getY() + h);
-	}
-	
-	
 }

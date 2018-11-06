@@ -10,41 +10,62 @@ import client.Model.Bonus;
 import client.Model.Joueur;
 import client.Model.Missile;
 import client.Model.TypeBonus;
-import newtork.DatagramUpdateClient;
-import newtork.DatagramUpdateServer;
-import newtork.MissileSerializer;
-import newtork.PacketAddPlayer;
+import network.DatagramUpdateClient;
+import network.DatagramUpdateServer;
+import network.MissileSerializer;
+import network.PacketAddPlayer;
+import network.SegmentIDPartie;
 import server.ServeurJoueur;
 
 /**
  * Classe qui gère la connexion et les échanges avec le serveur
+ * 
  * @author Sébastien Gonzalez
  *
  */
-public class ConnectionClient extends Listener{
+public class ConnectionClient extends Listener {
 
 	Joueur joueur;
 	GestionnaireAdversaire gestionnaireAdversaire;
 	GestionnaireMissile gestionnaireMissile;
 	GestionnaireBonusClient gestionnaireBonus;
-	
+
 	String ip = "localhost";
 	final int portTCP = 18000;
 	final int portUDP = 19000;
 	Client client;
-	
-	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire, GestionnaireMissile gestionnaireMissile,GestionnaireBonusClient gestionnaireBonus) {
+
+	int idPartie = -1;
+
+	public ConnectionClient() {
+
+	}
+
+	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire,
+			GestionnaireMissile gestionnaireMissile, GestionnaireBonusClient gestionnaireBonus) {
 		this.joueur = joueur;
 		this.gestionnaireAdversaire = gestionnaireAdversaire;
 		this.gestionnaireMissile = gestionnaireMissile;
 		this.gestionnaireBonus = gestionnaireBonus;
-	
 	}
-	
+
+	public void addData(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire,
+			GestionnaireMissile gestionnaireMissile, GestionnaireBonusClient gestionnaireBonus) {
+		this.joueur = joueur;
+		this.gestionnaireAdversaire = gestionnaireAdversaire;
+		this.gestionnaireMissile = gestionnaireMissile;
+		this.gestionnaireBonus = gestionnaireBonus;
+	}
+
+	public void setIdPartie(int idPartie) {
+		System.out.println("Le joueur rejoint la partie : " + idPartie);
+		this.idPartie = idPartie;
+	}
+
 	/**
 	 * Connexion avec le serveur
 	 */
-	public void connect(){
+	public void connect() {
 		client = new Client();
 		client.getKryo().register(java.util.ArrayList.class);
 		client.getKryo().register(Missile.class, new MissileSerializer());
@@ -52,61 +73,77 @@ public class ConnectionClient extends Listener{
 		client.getKryo().register(PacketAddPlayer.class);
 		client.getKryo().register(DatagramUpdateClient.class);
 		client.getKryo().register(DatagramUpdateServer.class);
+		client.getKryo().register(SegmentIDPartie.class);
 		client.getKryo().register(Bonus.class);
 		client.getKryo().register(Boolean[].class);
+		client.getKryo().register(long[].class);
 		client.getKryo().register(TypeBonus.class);
-		
+
 		client.addListener(this);
-		
+
 		client.start();
 		try {
 			client.connect(5000, ip, portTCP, portUDP);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("Connexion établie avec le serveur");
-		
-		//sendInformation(joueur);
+
+		System.out.println("Connexion etablie avec le serveur");
+
+		// sendInformation(joueur);
 	}
-	
+
 	public void sendInformationConnection() {
-		//peut être utile bientôt
+		// peut être utile bientôt
 	}
-	
+
 	/**
-	 * Création du datagram contenant les informations du joueur et envoie au serveur
+	 * Création du datagram contenant les informations du joueur et envoie au
+	 * serveur
+	 * 
 	 * @param joueur
 	 */
-	public void sendInformation(Joueur joueur) {
-		DatagramUpdateClient datagram = new DatagramUpdateClient();
-		datagram.x = joueur.getX();
-		datagram.y = joueur.getY();
-		datagram.r = joueur.getRotation();
-		
-		datagram.listeMissile = gestionnaireMissile.getListeMissileClient();
-		//if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyé : " + datagram.listeMissile.size() + " " + gestionnaireMissile.getListeMissileClient().size());
-		
-		client.sendTCP(datagram);
+	public void sendInformationGame(Joueur joueur) {
+		if (idPartie != -1) {
+			DatagramUpdateClient datagram = new DatagramUpdateClient();
+			datagram.idPartie = idPartie;
+			datagram.x = joueur.getX();
+			datagram.y = joueur.getY();
+			datagram.r = joueur.getRotation();
+
+			datagram.listeMissile = gestionnaireMissile.getListeMissileClient();
+			// if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyé :
+			// " + datagram.listeMissile.size() + " " +
+			// gestionnaireMissile.getListeMissileClient().size());
+
+			client.sendTCP(datagram);
+		}
+		else System.out.println("PArtie pas encore re�u");
 	}
-	
+
+	public void createGame() {
+		// � remplacer par SegmentCreationGame quand on aura les param�tre de partie
+		client.sendTCP("create");
+	}
+
 	/**
 	 * Fonction appelée dès qu'un packet ou un datagram est reçu
 	 */
-	public void received(Connection c, Object o){
-		if(o instanceof PacketAddPlayer){
+	public void received(Connection c, Object o) {
+		if (o instanceof PacketAddPlayer) {
 			PacketAddPlayer packet = (PacketAddPlayer) o;
 			System.out.println("Nouveau joueur : " + packet.id);
-		}
-		else if(o instanceof DatagramUpdateServer) {
-			//System.out.println("Update reçu");
-			DatagramUpdateServer datagram = (DatagramUpdateServer)o;
-						
-			gestionnaireAdversaire.setReception( datagram.listeAdversaire );
-			gestionnaireBonus.setReception( datagram.listeBonus );
-		}
-		else if(o instanceof String) {
-			if(o.equals("ko")) {
+		} else if (o instanceof DatagramUpdateServer) {
+			// System.out.println("Update reçu");
+			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
+
+			gestionnaireAdversaire.setReception(datagram.listeAdversaire);
+			gestionnaireBonus.setReception(datagram.listeBonus);
+		} else if (o instanceof SegmentIDPartie) {
+			this.idPartie = ((SegmentIDPartie) o).idPartie;
+			System.out.println("Le joueur a cree la partie : " + idPartie);
+		} else if (o instanceof String) {
+			if (o.equals("ko")) {
 				System.out.println("Je suis touch�");
 				client.close();
 				System.exit(0);
@@ -114,4 +151,3 @@ public class ConnectionClient extends Listener{
 		}
 	}
 }
-

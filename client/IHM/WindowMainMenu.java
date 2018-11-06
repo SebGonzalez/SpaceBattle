@@ -1,6 +1,7 @@
 package client.IHM;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -8,6 +9,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.Game;
 
@@ -52,7 +55,7 @@ public class WindowMainMenu extends BasicGameState {
 		//Bouton Jouer
 		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-75 && ypos < resY - (resY/3))) {
 			if(input.isMouseButtonDown(0)) {
-				sbg.enterState(4);
+				sbg.enterState(4, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		}
 		
@@ -76,10 +79,6 @@ public class WindowMainMenu extends BasicGameState {
 				container.exit();
 			}
 		}
-		
-		
-		
-		
 	}
 	
 	@Override
