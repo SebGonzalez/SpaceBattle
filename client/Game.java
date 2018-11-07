@@ -39,7 +39,7 @@ public class Game extends StateBasedGame{
 	
 	public static void playMusic() throws SlickException {
 		ambiance = new Music ("ressources/sounds/ambiance.ogg");
-		//ambiance.play(1, 0.2f);
+		ambiance.play(1, 0f);
 	}
 	
 	public static int getMusicVolume() {

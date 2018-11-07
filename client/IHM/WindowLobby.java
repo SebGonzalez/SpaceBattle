@@ -3,6 +3,7 @@ package client.IHM;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -10,7 +11,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.Game;
 import client.Model.Joueur;
@@ -73,14 +75,14 @@ public class WindowLobby extends BasicGameState{
 		// Bouton quitter
 		if(((xpos > (resX/18) + (resX/1.6) + 25 && xpos <  (resX/18) + (resX/1.6) + 125)&& (ypos > resY - (resY/1.15) - 45 && ypos < resY - (resY/1.15)))) {
 			if(input.isMouseButtonDown(0)) {
-				sbg.enterState(0);
+				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		}
 		
 		if( xpos > (resX/18) + (resX/1.6) + (resX/3.6) - 75 && xpos <  (resX/18) + (resX/1.6) + (resX/3.6) - 75 + 125) {
 			if(input.isMouseButtonDown(0)) {
 				Game.connexionClient.createGame();
-				sbg.enterState(Game.jeu);
+				sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		}
 
