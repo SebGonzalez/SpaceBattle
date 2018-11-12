@@ -8,12 +8,9 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import com.esotericsoftware.minlog.Log;
 
-import client.IHM.WindowGame;
-import client.IHM.WindowJoinGame;
-import client.IHM.WindowLobby;
-import client.IHM.WindowMainMenu;
-import client.IHM.WindowOptions;
+import client.IHM.*;
 
+	
 public class Game extends StateBasedGame{
 	
 	public static final int menu = 0;
@@ -21,6 +18,7 @@ public class Game extends StateBasedGame{
 	public static final int lobby = 2;
 	public static final int options = 3;
 	public static final int joinGame = 4;
+	public static final int createGame = 5;
 	public static Resolution res = Resolution.LOW;
 	public static Music ambiance;
 	
@@ -39,7 +37,7 @@ public class Game extends StateBasedGame{
 	
 	public static void playMusic() throws SlickException {
 		ambiance = new Music ("ressources/sounds/ambiance.ogg");
-		//ambiance.play(1, 0.2f);
+		ambiance.play(1, 0.0f);
 	}
 	
 	public static int getMusicVolume() {
@@ -61,6 +59,7 @@ public class Game extends StateBasedGame{
 		this.addState(new WindowLobby(lobby));
 		this.addState(new WindowOptions(options));
 		this.addState(new WindowJoinGame(joinGame));
+		this.addState(new WindowCreateGame(createGame));
 	}
 	
 	public static void main(String[] args) {

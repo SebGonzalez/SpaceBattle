@@ -22,7 +22,7 @@ import java.awt.Font;
 public class WindowJoinGame extends BasicGameState implements KeyListener{
 
 	private GameContainer container;
-	private TextField test;
+	private TextField gameID;
 	private String input;
 	private UnicodeFont font;
 	private int resX = Game.res.getX(), resY = Game.res.getY();
@@ -44,9 +44,7 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		}
 		
 		this.container = container;
-		test = new TextField(container, font, resX/2 - 200, resY/2 - 10, 400, 20);
-		test.setTextColor(Color.white);
-		test.setText(input);
+
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadJoinGame();
 	}
@@ -57,13 +55,16 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		GestionnaireImagesIHM.getRessource("buttonJoin").draw(resX/2+100, resY/2 + 50);
 		GestionnaireImagesIHM.getRessource("buttonBack").draw(resX/2-200, resY/2+50);
 		g.drawString("Entrez l'ID de la partie: ", resX/2 - 200, resY/2 - 35);
-		test.render(container, g);
+		gameID = new TextField(container, font, resX/2 - 200, resY/2 - 10, 400, 20);
+		gameID.setTextColor(Color.white);
+		gameID.setText(input);
+		gameID.render(container, g);
 	}
 		
 	public void keyReleased(int key, char c) {
 		if(Character.isDigit(c)) {
 			input+=c;
-			test.setText(input);
+			gameID.setText(input);
 		}
 		if(key == Input.KEY_BACK && input.length() > 0)
 			input = input.substring(0, input.length()-1);
@@ -71,14 +72,14 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg, int delta) throws SlickException {
-		test.setText(input);
+		gameID.setText(input);
 		
 		Input input = container.getInput();
 		int xpos = Mouse.getX(); int ypos = Mouse.getY();
 		
 		if((xpos > resX/2 + 100 && xpos < resX/2 + 200) && ( ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
-				Game.connexionClient.setIdPartie(Integer.parseInt(test.getText()));
+				Game.connexionClient.setIdPartie(Integer.parseInt(gameID.getText()));
 				sbg.enterState(1);
 			}
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))

@@ -11,6 +11,9 @@ public class GestionnaireImagesIHM {
 	private static String[] ressourcesMainMenu = {"ressources/menu/mainmenu/spaceBattle.png","ressources/menu/mainmenu/buttonPlay.png", "ressources/menu/mainmenu/buttonHost.png", "ressources/menu/mainmenu/buttonQuit.png", "ressources/menu/mainmenu/buttonOptions.png"};
 	private static String[] ressourcesLobby = {"ressources/menu/lobby/buttonReady.png","ressources/menu/lobby/buttonBack.png"};
 	private static String[] ressourcesOptions = {"ressources/menu/options/button_LOWRES.png", "ressources/menu/options/button_MIDRES.png", "ressources/menu/options/button_HIGHRES.png", "ressources/menu/options/button_HIGHRES.png","ressources/menu/options/buttonBack.png","ressources/menu/options/button_VOLUP.png","ressources/menu/options/button_VOLDOWN.png"};
+	private static String[] ressourcesCreateGame = {"ressources/menu/createGame/passwordOUI.png", "ressources/menu/createGame/passwordNON.png", "ressources/menu/createGame/buttonBack.png", "ressources/menu/createGame/buttonCreer.png", 
+													"ressources/menu/createGame/buttonMode1.png", "ressources/menu/createGame/buttonMode2.png", "ressources/menu/createGame/buttonMode3.png",
+													"ressources/menu/createGame/buttonMode1Selec.png", "ressources/menu/createGame/buttonMode2Selec.png", "ressources/menu/createGame/buttonMode3Selec.png"};
 	
 	private static Hashtable<String, Image> imageList = new Hashtable<String, Image>();
 	
@@ -53,5 +56,19 @@ public class GestionnaireImagesIHM {
 		imageList.put("buttonBack", new Image(ressourcesOptions[4]));
 		imageList.put("buttonVOLUP", new Image(ressourcesOptions[5]));
 		imageList.put("buttonVOLDOWN", new Image(ressourcesOptions[6]));
+	}
+	
+	public static void loadCreateGame() throws SlickException{
+		initLoad();
+		imageList.put("passwordOUI",  new Image(ressourcesCreateGame[0]));
+		imageList.put("passwordNON",  new Image(ressourcesCreateGame[1]));
+		imageList.put("buttonBack",  new Image(ressourcesCreateGame[2]));
+		imageList.put("buttonCreer",  new Image(ressourcesCreateGame[3]));
+		imageList.put("buttonMode1", new Image(ressourcesCreateGame[4]));
+		imageList.put("buttonMode2", new Image(ressourcesCreateGame[5]));
+		imageList.put("buttonMode3", new Image(ressourcesCreateGame[6]));
+		imageList.put("buttonMode1Selec", new Image(ressourcesCreateGame[7]));
+		imageList.put("buttonMode2Selec", new Image(ressourcesCreateGame[8]));
+		imageList.put("buttonMode3Selec", new Image(ressourcesCreateGame[9]));
 	}
 }
