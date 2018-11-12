@@ -55,7 +55,7 @@ public class GestionnaireJoueur {
 		}
 		
 		if(nouveauJoueur) {
-			ServeurJoueur player = new ServeurJoueur();
+			ServeurJoueur player = new ServeurJoueur(idJoueur);
 			player.setX(datagram.x);
 			player.setY(datagram.y);
 			player.setR(datagram.r);
