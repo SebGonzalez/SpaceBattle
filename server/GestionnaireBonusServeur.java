@@ -41,7 +41,7 @@ public class GestionnaireBonusServeur {
 		}
 
 		collideBonus(idjoueur,datagram);
-		isExpired(idjoueur);
+	 	isExpired(idjoueur);
 	}
 
 	public void collideBonus(int id,DatagramUpdateServer datagram) {
@@ -53,6 +53,9 @@ public class GestionnaireBonusServeur {
 				ServeurJoueur player = entry.getValue();
 				for (Bonus bonus : listeBonus) {
 					if ( bonus.getX() > player.getX()-25 && bonus.getX() < player.getX()+25 && bonus.getY() > player.getY()-25 && bonus.getY() < player.getY()+25) {
+						
+						
+						
 						switch ( bonus.getType() ) {
 						case TripleMissile:
 								if ( player.getBonusState(0) == false) {
@@ -66,6 +69,7 @@ public class GestionnaireBonusServeur {
 									player.enableBonus(1);
 									listeBonus.get( indice ).disappear();
 								}
+								
 								break;
 								
 							case TeteChercheuse:
@@ -73,6 +77,7 @@ public class GestionnaireBonusServeur {
 									player.enableBonus(2);
 									listeBonus.get( indice ).disappear();
 								}
+								
 								break;
 								
 							case Bouclier:
@@ -80,6 +85,7 @@ public class GestionnaireBonusServeur {
 									player.enableBonus(3);
 									listeBonus.get( indice ).disappear();
 								}
+								
 								break;
 							}
 						

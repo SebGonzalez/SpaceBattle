@@ -29,6 +29,13 @@ public class ServeurJoueur {
 		r = (float) Math.PI/2;
 		listeMissile = new ArrayList<>();
 		
+		for(int i=0;i<4;i++) {
+			bonus[i] = false;
+		}
+		
+		for( int i = 0; i < 4 ; i++)
+			bonusTimer[i] = 0;
+		
 	}
 	
 	public ServeurJoueur(int id) {
@@ -53,6 +60,13 @@ public class ServeurJoueur {
 		this.y = y;
 		this.r = r;
 		this.listeMissile = listeMissile;
+		
+		for(int i=0;i<4;i++) {
+			bonus[i] = false;
+		}
+		
+		for( int i = 0; i < 4 ; i++)
+			bonusTimer[i] = 0;
 	}
 	
 	public void bonusVitesseUP(DatagramUpdateServer datagram) {

@@ -11,6 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.Game;
 
@@ -79,12 +81,17 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		
 		if((xpos > resX/2 + 100 && xpos < resX/2 + 200) && ( ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
+<<<<<<< HEAD
 				Game.connexionClient.setIdPartie(Integer.parseInt(gameID.getText()));
 				sbg.enterState(1);
+=======
+				Game.connexionClient.setIdPartie(Integer.parseInt(test.getText()));
+				sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
+>>>>>>> 5c5ccea8353254b8d9683924c8f33da768c35fcb
 			}
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
-				sbg.enterState(0);
+				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 	}
 	

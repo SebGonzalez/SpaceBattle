@@ -2,6 +2,7 @@ package client.IHM;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -9,6 +10,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.Game;
 import client.Resolution;
@@ -40,7 +43,7 @@ public class WindowOptions extends BasicGameState{
 		GestionnaireImagesIHM.getRessource("buttonLOWRES").draw(resX/12 + 25, resY/12 + 25);
 		GestionnaireImagesIHM.getRessource("buttonMIDRES").draw(resX/12 + 150, resY/12 + 25);
 		GestionnaireImagesIHM.getRessource("buttonHIGHRES").draw(resX/12 + 275, resY/12 + 25);	
-		GestionnaireImagesIHM.getRessource("buttonVERYHIGHRES").draw(resX/12 + 400, resY/12 + 25);	
+		GestionnaireImagesIHM.getRessource("buttonEXTRAHIGHRES").draw(resX/12 + 400, resY/12 + 25);	
 		GestionnaireImagesIHM.getRessource("buttonBack").draw((float) (resX/1.2),(float) (resY/1.2));
 		g.drawString("Volume de la musique: ", resX/1.5f, resY/12);
 		g.drawString("" + Game.getMusicVolume(), resX/1.5f + 80, resY/12+40);
@@ -87,18 +90,18 @@ public class WindowOptions extends BasicGameState{
 			}
 		
 		//EXTRAHIGHRES
-				if((xpos > resX/12 + 400 && xpos < resX/12 +500) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
-					if(input.isMouseButtonDown(0)) {
-						Game.setResolution(Resolution.EXTRAHIGH);
-						gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
-						resX = Game.res.getX();
-						resY = Game.res.getY();
-					}
+		if((xpos > resX/12 + 400 && xpos < resX/12 +500) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
+			if(input.isMouseButtonDown(0)) {
+				Game.setResolution(Resolution.EXTRAHIGH);
+				gc.setDisplayMode(Game.res.getX(), Game.res.getY(), false);
+				resX = Game.res.getX();
+				resY = Game.res.getY();
+			}
 		
 		//Bouton Retour
 		if((xpos > resX/1.2 && xpos < resX/1.2 +100) && (ypos > resY - resY/1.2 -45 && ypos < resY - resY/1.2 ))
 			if(input.isMouseButtonDown(0)) {
-				sbg.enterState(0);
+				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		
 		//Bouton Volume UP
