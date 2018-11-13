@@ -102,6 +102,7 @@ public class WindowOptions extends BasicGameState{
 		if((xpos > resX/1.2 && xpos < resX/1.2 +100) && (ypos > resY - resY/1.2 -45 && ypos < resY - resY/1.2 ))
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
+				Game.saveSettings();
 			}
 		
 		//Bouton Volume UP

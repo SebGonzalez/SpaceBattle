@@ -43,6 +43,8 @@ public class WindowMainMenu extends BasicGameState {
 		this.container = container;		
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadMainMenu();
+		
+		Game.playMusic();
 	}
 
 	@Override
@@ -62,7 +64,7 @@ public class WindowMainMenu extends BasicGameState {
 		//Bouton Host
 		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-200 && ypos < resY - (resY/3)-125)) {
 			if(input.isMouseButtonDown(0)) {
-				sbg.enterState(2, new EmptyTransition(), new FadeInTransition(Color.black));
+				sbg.enterState(5, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		}
 		
