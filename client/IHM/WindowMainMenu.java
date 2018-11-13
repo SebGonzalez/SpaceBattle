@@ -43,6 +43,8 @@ public class WindowMainMenu extends BasicGameState {
 		this.container = container;		
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadMainMenu();
+		
+		Game.playMusic();
 	}
 
 	@Override

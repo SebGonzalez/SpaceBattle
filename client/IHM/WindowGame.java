@@ -50,8 +50,6 @@ public class WindowGame extends BasicGameState {
 		container.setAlwaysRender(true);
 		this.map = new TiledMap("ressources/map/SpaceBattle.tmx");
 
-		Game.playMusic();
-
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");
 			missileJoueur = new Image("ressources/sprites/missile.png");
