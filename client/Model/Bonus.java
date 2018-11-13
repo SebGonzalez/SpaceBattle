@@ -14,14 +14,12 @@ public class Bonus {
 	private int lifetime;
 	private int x;
 	private int y;
-	private boolean taken = false;
-	
+
 	public Bonus() {
 		type = TypeBonus.VitesseUp;
 		lifetime = 200;
 		x = 0;
 		y = 0;
-		taken = false;
 	}
 	
 	
@@ -29,8 +27,8 @@ public class Bonus {
 		Random rand = new Random();
 		this.type = TypeBonus.randomValue();
 		this.lifetime = lifetime;
-		this.x = rand.nextInt(2600) + 900;
-		this.y = rand.nextInt(2300) + 900;
+		this.x = rand.nextInt(1700) + 900;
+		this.y = rand.nextInt(1800) + 600;
 		
 	}
 
@@ -56,14 +54,6 @@ public class Bonus {
 	
 	public int getY() {
 		return y;
-	}
-	
-	public void take() {
-		taken = true;
-		}
-	
-	public void release() {
-		taken = false;
 	}
 	
 	public TypeBonus getType() {

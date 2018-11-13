@@ -109,6 +109,8 @@ public class ConnectionClient extends Listener {
 			datagram.idPartie = idPartie;
 			datagram.x = joueur.getX();
 			datagram.y = joueur.getY();
+			datagram.accelerationX = joueur.getaccelerationX();
+			datagram.accelerationY = joueur.getaccelerationY();
 			datagram.r = joueur.getRotation();
 
 			datagram.listeMissile = gestionnaireMissile.getListeMissileClient();
@@ -138,7 +140,15 @@ public class ConnectionClient extends Listener {
 			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
 
 			gestionnaireAdversaire.setReception(datagram.listeAdversaire);
-			gestionnaireBonus.setReception(datagram.listeBonus);
+			gestionnaireBonus.setReception(datagram.listeBonus,datagram.bonus);
+			
+			for(int i = 0;i<4;i++)
+				joueur.bonus[i] = gestionnaireBonus.bonus[i];
+				
+			
+			//	joueur.setaccelerationX(datagram.accelerationX);
+			//	joueur.setaccelerationY(datagram.accelerationY);
+			
 		} else if (o instanceof SegmentIDPartie) {
 			this.idPartie = ((SegmentIDPartie) o).idPartie;
 			System.out.println("Le joueur a cree la partie : " + idPartie);

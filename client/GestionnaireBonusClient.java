@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import org.newdawn.slick.Graphics;
 
 import client.Model.Bonus;
+import client.Model.Joueur;
 
 public class GestionnaireBonusClient {
 
 	private ArrayList<Bonus> listeBonus;
 	private ArrayList<Bonus> reception;
+	public Boolean bonus[] = new Boolean[4];
+
 
 	public GestionnaireBonusClient() {
 		listeBonus = new ArrayList<>();
@@ -22,11 +25,11 @@ public class GestionnaireBonusClient {
 		}
 	}
 
-	public void setReception(ArrayList<Bonus> reception) {
+	public void setReception(ArrayList<Bonus> reception, Boolean bonus[]) {
 		this.reception = reception;
-		/*
-		 * if(vitesseBoost == true) { client.Model.Joueur.vitesseBoost = true; }
-		 */
+
+		for(int i = 0 ; i < 4 ; i++)
+			this.bonus[i] = bonus[i];
 
 	}
 
@@ -35,6 +38,7 @@ public class GestionnaireBonusClient {
 			listeBonus.clear();
 			listeBonus.addAll(reception);
 			reception = null;
-		}
+			}
+		
 	}
 }

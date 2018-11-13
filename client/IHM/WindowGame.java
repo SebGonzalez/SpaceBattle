@@ -58,8 +58,8 @@ public class WindowGame extends BasicGameState {
 			missileEnnemies = new Image("ressources/sprites/missile2.png");
 			bonus1 = new Image("ressources/sprites/PW/bolt_gold.png");
 			bonus2 = new Image("ressources/sprites/PW/powerupGreen_star.png");
-			bonus3 = new Image("ressources/sprites/PW/shield_gold.png");
-			bonus4 = new Image("ressources/sprites/PW/star_gold.png");
+			bonus4 = new Image("ressources/sprites/PW/shield_gold.png");
+			bonus3 = new Image("ressources/sprites/PW/star_gold.png");
 
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block

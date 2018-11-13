@@ -13,4 +13,9 @@ import server.ServeurJoueur;
 public class DatagramUpdateServer {
 	public ArrayList<ServeurJoueur> listeAdversaire = new ArrayList<>();
 	public ArrayList<Bonus> listeBonus = new ArrayList<>();
+	public Boolean bonus[] = new Boolean[4];
+	
+	public float accelerationX;
+	public float accelerationY;
+	
 }

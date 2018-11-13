@@ -16,7 +16,7 @@ import network.DatagramUpdateServer;
 
 public class GestionnaireBonusServeur {
 
-	private static final int NOMBRE_BONUS = 60;
+	private static final int NOMBRE_BONUS = 20;
 	
 	private GestionnaireJoueur gestionnaireJoueur;
 	private ArrayList<Bonus> listeBonus;
@@ -34,29 +34,47 @@ public class GestionnaireBonusServeur {
 		
 	}
 
+	public ServeurJoueur getPlayerfromID(int id) {
+			
+		ServeurJoueur player = new ServeurJoueur();
+		
+		for ( Entry<Integer, ServeurJoueur> entry : gestionnaireJoueur.listePlayers.entrySet() ) {	
+			int cle = entry.getKey();
+			if ( cle == id )  
+			{
+				player =  entry.getValue();
+			}
+		}
+		
+		return player;
+	}
+	
 	public void updateBonus(int idjoueur, DatagramUpdateServer datagram) {
 
 		for (Bonus bonus : listeBonus) {
 			datagram.listeBonus.add(bonus);
 		}
-
+		
+		
 		collideBonus(idjoueur,datagram);
 	 	isExpired(idjoueur);
+	 	
+	 	
+	 	ServeurJoueur player = getPlayerfromID(idjoueur);
+	 	
+		for(int i = 0 ; i < 4 ; i++) 
+			datagram.bonus[i] = player.getBonusState(i);
+				
+	 	
 	}
 
 	public void collideBonus(int id,DatagramUpdateServer datagram) {
 		int indice = 0;
-	
-		for (Entry<Integer, ServeurJoueur> entry : gestionnaireJoueur.listePlayers.entrySet()) {	
-			int cle = entry.getKey();
-			if (cle == id) { //(cle == id de connexion du client)
-				ServeurJoueur player = entry.getValue();
-				for (Bonus bonus : listeBonus) {
+		ServeurJoueur player = getPlayerfromID(id);
+			for (Bonus bonus : listeBonus) {
 					if ( bonus.getX() > player.getX()-25 && bonus.getX() < player.getX()+25 && bonus.getY() > player.getY()-25 && bonus.getY() < player.getY()+25) {
-						
-						
-						
 						switch ( bonus.getType() ) {
+						
 						case TripleMissile:
 								if ( player.getBonusState(0) == false) {
 									player.enableBonus(0);
@@ -84,38 +102,40 @@ public class GestionnaireBonusServeur {
 								if ( player.getBonusState(3) == false) {
 									player.enableBonus(3);
 									listeBonus.get( indice ).disappear();
+									System.out.println("shield ramassé");
 								}
 								
 								break;
 							}
 						
+						}
+							indice ++;
 					}
-						indice ++;
-				}
 
-			}
-		}
+				}
 		
-	}
 	
-	public void isExpired(int id) {
-			
+	
+		public void isExpired(int id) {
+			ServeurJoueur player = getPlayerfromID(id);
 			for( int i = 0 ; i < 4 ; i ++) {
-				for ( Entry<Integer, ServeurJoueur> entry : gestionnaireJoueur.listePlayers.entrySet() ) {	
-					int cle = entry.getKey();
-							if ( cle == id ) { 
-								ServeurJoueur player = entry.getValue();
-								if( System.currentTimeMillis() - player.getTimerBonus(i) > 5000 && player.getTimerBonus(i) != 0 ) {
+				if( System.currentTimeMillis() - player.getTimerBonus(i) > 5000 && player.getTimerBonus(i) != 0 ) {
 								player.disableBonus(i);
 								System.out.println("bonus" +i+"du joueur :  "+id+" a expiré");
-								}
-								
-								
-							}
 						}
 					}
 				}
-			}
+	
+	
+	
+	
+	
+					
+}
+			
+	
+
+		
 	
 	
 	

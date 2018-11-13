@@ -22,9 +22,10 @@ public class Joueur {
 	private float directionX = (float) Math.cos(rotation);
 	private float directionY = (float) Math.sin(rotation);
 	private Image ship;
-	public boolean ameliorations[] = new boolean[4];
-	public static boolean vitesseBoost = false;
-	public int boost = 1;
+	public  boolean bonus[] = new boolean[4];
+	private Image bonusEffect[] = new Image[4];
+	public boolean vitesseBoost = false;
+	public float boost = 1;
 	
 	public Joueur() {
 		x = 1200;
@@ -34,7 +35,7 @@ public class Joueur {
 			keys_pressed[i] = false;
 		}
 		for(int i=0;i<4;i++) {
-			ameliorations[i] = false;
+			bonus[i] = false;
 		}
 	}
 	
@@ -53,6 +54,10 @@ public class Joueur {
 		}
 	}
 	
+	public void render_bonus() {
+		
+		
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -107,6 +112,14 @@ public class Joueur {
     	accelerationX += value;
 	}
 	
+	public void setaccelerationX(float value) {
+    	accelerationX =  value ;
+	}
+	
+	public void setaccelerationY(float value) {
+		accelerationY = value;
+	}
+	
 	public void addaccelerationY(float value) {
 		accelerationY += value;
 	}
@@ -150,43 +163,48 @@ public class Joueur {
 	
 	public void collide(float futurX,float futurY,TiledMap map) {
 		
+		
 		Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
 				(int) futurY / map.getTileHeight(),map.getLayerIndex("logic"));
-		// il y a colision si la tuile existe
+				
 		boolean collision = tile != null;
 		if (!collision) {
 			setX(futurX);
 			setY(futurY);
 		}
+		
 		else {
 			if(x < 950 || x > 2550) {
 				accelerationX *= -1;
 				if(accelerationX < -2 || accelerationX > 2) {
 					accelerationX /= 1.5;
-
+					}
 				}
-			}
+			
 			if(y < 650 || y > 2400) {
 				accelerationY *= -1;
 				if(accelerationY < -2 || accelerationY > 2) {
 					accelerationY /= 1.5;
+					}
 				}
 			}
-			
 		}
-	}
 	
 	public void updatePosition(int delta, TiledMap map) {
 			
-			if(vitesseBoost) boost = 2;
+			if(bonus[0]) boost = (float) 1.75 ;
+			else if (!bonus[0]) boost = 1;
+			
+			
 			if(keys_pressed[0] == true) accelerate(delta);
 			if(keys_pressed[1] == true) rotationGauche(delta);
 			if(keys_pressed[2] == true) rotationDroite(delta);
 		
 			
-			float futurX = getX() - .1f * delta * accelerationX * boost;
+			float futurX = getX() - .1f * delta * accelerationX	* boost;
 			float futurY = getY() - .1f * delta * accelerationY * boost;	
 			
 			collide(futurX,futurY,map);
-	}
-}
+			
+			}
+		}
