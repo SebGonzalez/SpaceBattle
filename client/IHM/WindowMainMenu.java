@@ -62,11 +62,7 @@ public class WindowMainMenu extends BasicGameState {
 		//Bouton Host
 		if((xpos > resX/2-125 && xpos  < (resX/2)+125) && (ypos > resY - (resY/3)-200 && ypos < resY - (resY/3)-125)) {
 			if(input.isMouseButtonDown(0)) {
-<<<<<<< HEAD
-				sbg.enterState(5);
-=======
-				sbg.enterState(2, new EmptyTransition(), new FadeInTransition(Color.black));
->>>>>>> 5c5ccea8353254b8d9683924c8f33da768c35fcb
+				sbg.enterState(5, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		}
 		
