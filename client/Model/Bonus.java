@@ -27,8 +27,8 @@ public class Bonus {
 		Random rand = new Random();
 		this.type = TypeBonus.randomValue();
 		this.lifetime = lifetime;
-		this.x = rand.nextInt(2500) + 1050;
-		this.y = rand.nextInt(2300) + 650;
+		this.x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
+		this.y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 650);
 		
 	}
 
@@ -67,8 +67,8 @@ public class Bonus {
 	public void disappear() {
 		Random rand = new Random();
 		this.type = TypeBonus.randomValue();
-		this.x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
-		this.y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 1050);
+			this.x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
+			this.y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 650);
 		
 	}
 }

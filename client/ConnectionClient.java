@@ -31,7 +31,7 @@ public class ConnectionClient extends Listener {
 	GestionnaireMissile gestionnaireMissile;
 	GestionnaireBonusClient gestionnaireBonus;
 
-	String ip = "192.168.43.12";
+	String ip = "localhost";
 	final int portTCP = 18000;
 	final int portUDP = 19000;
 	Client client;
