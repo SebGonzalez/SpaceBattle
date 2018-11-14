@@ -48,12 +48,22 @@ public class Missile {
 	}
 
 	public void update(int delta) {
-		if(System.currentTimeMillis() - time >= 3000) {
+		if(System.currentTimeMillis() - time >= 10000) {
 			autoDestruction = true;
 		}
 		
 		x += - .1f * delta * directionX * 4;
 		y += - .1f * delta * directionY * 4;			
+	}
+	
+	public void updateTeteChercheuse(int delta,ServeurJoueur joueur) {
+		if(System.currentTimeMillis() - time >= 10000) {
+			autoDestruction = true;
+		}
+	
+		x += - .1f * delta * joueur.accelerationX * 6;
+		y += - .1f * delta * joueur.accelerationY * 6;		
+		
 	}
 	
 	public boolean collision(ServeurJoueur joueur) {

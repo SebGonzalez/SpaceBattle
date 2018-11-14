@@ -15,6 +15,7 @@ public class DatagramUpdateClient {
 	public double y;
 	public float accelerationX;
 	public float accelerationY;
+	
 	public float r;
 	public ArrayList<Missile> listeMissile = new ArrayList<>();
 	

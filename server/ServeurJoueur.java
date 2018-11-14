@@ -118,11 +118,11 @@ public class ServeurJoueur {
 		return y;
 	}
 
-	public void setAccelerationX(double X) {
+	public void setaccelerationX(double X) {
 		this.accelerationX = X;
 	}
 	
-	public void setAccelerationY(double Y) {
+	public void setaccelerationY(double Y) {
 		this.accelerationY = Y;
 	}
 	

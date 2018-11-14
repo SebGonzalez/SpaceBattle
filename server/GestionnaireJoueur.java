@@ -48,8 +48,8 @@ public class GestionnaireJoueur {
 				player.setX(datagram.x);
 				player.setY(datagram.y);
 				player.setR(datagram.r);
-				player.setAccelerationX(datagram.accelerationX);
-				player.setAccelerationY(datagram.accelerationY);
+				player.setaccelerationX(datagram.accelerationX);
+				player.setaccelerationY(datagram.accelerationY);
 				
 				player.setListeMissile(datagram.listeMissile);
 				nouveauJoueur = false;
@@ -63,8 +63,8 @@ public class GestionnaireJoueur {
 			player.setX(datagram.x);
 			player.setY(datagram.y);
 			player.setR(datagram.r);
-			player.setAccelerationX(datagram.accelerationX);
-			player.setAccelerationY(datagram.accelerationY);
+			player.setaccelerationX(datagram.accelerationX);
+			player.setaccelerationY(datagram.accelerationY);
 			player.setListeMissile(datagram.listeMissile);
 			listePlayers.put(idJoueur, player);
 		}

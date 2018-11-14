@@ -142,11 +142,16 @@ public class ConnectionClient extends Listener {
 			gestionnaireAdversaire.setReception(datagram.listeAdversaire);
 			gestionnaireBonus.setReception(datagram.listeBonus,datagram.bonus);
 			
-			for(int i = 0;i<4;i++)
+			for(int i = 0;i<4;i++) {
 				joueur.bonus[i] = gestionnaireBonus.bonus[i];
+				gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
+			}
 				
 			joueur.listeAdversaire.clear();
 			joueur.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
+			
+			gestionnaireMissile.listeAdversaire.clear();
+			gestionnaireMissile.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
 			
 			
 		} else if (o instanceof SegmentIDPartie) {

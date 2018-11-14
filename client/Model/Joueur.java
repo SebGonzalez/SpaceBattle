@@ -197,7 +197,7 @@ public class Joueur {
 			if ( x > joueur.getX()-25 && x < joueur.getX()+25 && y > joueur.getY()-25 && y < joueur.getY()+25) {
 					
 				accelerationX *= -1;
-				accelerationY *= -1;
+				accelerationY *= -1;	
 				System.out.println("collide");
 					
 				}
