@@ -77,6 +77,7 @@ public class GestionnaireMissile {
 			else {
 				
 					m.update(delta,joueur);
+
 				/*if(bonus[2]) {
 					for(ServeurJoueur joueur : listeAdversaire) 
 						if(m.getX() > joueur.getX()-500 && m.getX() < joueur.getX()+500 && m.getY() > joueur.getY()-500 && m.getY() < joueur.getY()+500)
@@ -84,7 +85,7 @@ public class GestionnaireMissile {
 				}*/
 			
 				
-				
+			
 				}
 		}
 	}

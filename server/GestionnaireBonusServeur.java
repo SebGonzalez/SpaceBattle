@@ -41,6 +41,7 @@ public class GestionnaireBonusServeur {
 			if ( cle == id )  
 			{
 				player =  entry.getValue();
+				break;
 			}
 		}
 		
@@ -70,7 +71,8 @@ public class GestionnaireBonusServeur {
 		int indice = 0;
 		ServeurJoueur player = getPlayerfromID(id);
 			for (Bonus bonus : listeBonus) {
-					if ( bonus.getX() > player.getX()-45 && bonus.getX() < player.getX()+45 && bonus.getY() > player.getY()-45 && bonus.getY() < player.getY()+45) {
+
+					if ( bonus.getX() > player.getX()-56 && bonus.getX() < player.getX()+56 && bonus.getY()+30 > player.getY()-37 && bonus.getY()+30 < player.getY()+37) {
 						switch ( bonus.getType() ) {
 						
 						case TripleMissile:

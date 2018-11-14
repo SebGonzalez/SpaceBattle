@@ -24,7 +24,6 @@ public class Joueur {
 	private float directionY = (float) Math.sin(rotation);
 	private Image ship;
 	public  boolean bonus[] = new boolean[4];
-	public ArrayList<ServeurJoueur> listeAdversaire;
 	public float boost = 1;
 	
 	public Joueur() {
@@ -38,7 +37,6 @@ public class Joueur {
 			bonus[i] = false;
 		}
 		
-		listeAdversaire = new ArrayList();
 	}
 	
 	public Joueur(String nom, float x, float y) {
@@ -191,7 +189,7 @@ public class Joueur {
 			}
 		}
 	
-	public void collidePlayer(float futurX,float futurY) {
+	public void collidePlayer(float futurX,float futurY, ArrayList<ServeurJoueur> listeAdversaire) {
 		
 		for(ServeurJoueur joueur : listeAdversaire) {
 			if ( x > joueur.getX()-25 && x < joueur.getX()+25 && y > joueur.getY()-25 && y < joueur.getY()+25) {
@@ -203,9 +201,6 @@ public class Joueur {
 				}
 			}
 		}
-		
-		
-	
 	
 	public void updatePosition(int delta, TiledMap map) {
 			

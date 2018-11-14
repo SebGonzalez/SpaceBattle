@@ -12,6 +12,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.Music;
 
@@ -41,6 +43,8 @@ public class WindowGame extends BasicGameState {
 	private GestionnaireAdversaire gestionnaireAdversaire;
 	private GestionnaireMissile gestionnaireMissile;
 	private GestionnaireBonusClient gestionnaireBonus;
+	
+	public static boolean loop = true;
 
 	public WindowGame(int state) {
 	}
@@ -74,6 +78,7 @@ public class WindowGame extends BasicGameState {
 	}
 
 	public void render(GameContainer container, StateBasedGame sgb, Graphics g) throws SlickException {
+		g.pushTransform();
 		g.translate(container.getWidth() / 2 - (int) joueur.getX(),
 				container.getHeight() / 2 - (int) joueur.getY());
 
@@ -91,10 +96,13 @@ public class WindowGame extends BasicGameState {
 		gestionnaireAdversaire.render(g);
 		gestionnaireBonus.render(g);
 		joueur.render(g);
+		
+		g.popTransform();
+		g.drawString("Id partie : " + Game.connexionClient.getIdPartie(), container.getWidth()-200,10);
 
 	}
 
-	public void update(GameContainer container, StateBasedGame sgb, int delta) throws SlickException {
+	public void update(GameContainer container, StateBasedGame sbg, int delta) throws SlickException {
 		joueur.update(container, delta, map);
 
 		/*try {
@@ -107,6 +115,13 @@ public class WindowGame extends BasicGameState {
 		gestionnaireMissile.update(delta);
 		gestionnaireBonus.update();
 		Game.connexionClient.sendInformationGame(joueur);
+		
+		if(!loop) {
+			loop = true;
+			sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
+			
+			System.out.println("end");
+		}
 
 		// gestionnaireMissile.addMissileClient();
 
