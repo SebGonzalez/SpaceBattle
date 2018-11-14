@@ -211,6 +211,7 @@ public class Joueur {
 			
 		
 			
+			
 			if(bonus[0]) boost = (float) 1.75 ;
 			else if (!bonus[0]) boost = 1;
 			
@@ -223,7 +224,7 @@ public class Joueur {
 			float futurY = getY() - .1f * delta * accelerationY * boost;	
 			
 			collide(futurX,futurY,map);
-			collidePlayer(futurX,futurY);
+			//collidePlayer(futurX,futurY);
 			
 			}
 		}

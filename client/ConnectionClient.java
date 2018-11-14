@@ -25,12 +25,12 @@ import server.ServeurJoueur;
  */
 public class ConnectionClient extends Listener {
 
-	Joueur joueur;
+	Joueur joueur;  
 	GestionnaireAdversaire gestionnaireAdversaire;
 	GestionnaireMissile gestionnaireMissile;
 	GestionnaireBonusClient gestionnaireBonus;
 
-	String ip = "localhost";
+	String ip = "192.168.43.12";
 	final int portTCP = 18000;
 	final int portUDP = 19000;
 	Client client;
@@ -86,7 +86,7 @@ public class ConnectionClient extends Listener {
 			client.connect(5000, ip, portTCP, portUDP);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 
 		System.out.println("Connexion etablie avec le serveur");
 
@@ -118,13 +118,13 @@ public class ConnectionClient extends Listener {
 			// " + datagram.listeMissile.size() + " " +
 			// gestionnaireMissile.getListeMissileClient().size());
 
-			client.sendTCP(datagram);
+			client.sendUDP(datagram);
 		}
-		else System.out.println("PArtie pas encore reçu");
+		else System.out.println("PArtie pas encore reï¿½u");
 	}
 
 	public void createGame() {
-		// à remplacer par SegmentCreationGame quand on aura les paramètre de partie
+		// ï¿½ remplacer par SegmentCreationGame quand on aura les paramï¿½tre de partie
 		client.sendTCP("create");
 	}
 
@@ -147,8 +147,8 @@ public class ConnectionClient extends Listener {
 				gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
 			}
 				
-			joueur.listeAdversaire.clear();
-			joueur.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
+			//joueur.listeAdversaire.clear();
+			//joueur.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
 			
 			gestionnaireMissile.listeAdversaire.clear();
 			gestionnaireMissile.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());

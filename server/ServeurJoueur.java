@@ -21,7 +21,7 @@ public class ServeurJoueur {
 	private ArrayList<Missile> listeMissile;
 	public Boolean bonus[] = new Boolean[4];
 	private long bonusTimer[] = new long[4];
-	
+	 
 	public ServeurJoueur() {
 		this.id = -1;
 		x = 0;

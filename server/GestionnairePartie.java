@@ -25,7 +25,7 @@ public class GestionnairePartie {
 		
 		idPartie++;
 		
-		return reponse;
+		return reponse; 
 	}
 	
 	public Partie getPartie(int id) {

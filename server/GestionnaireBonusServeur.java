@@ -16,7 +16,7 @@ import network.DatagramUpdateServer;
 
 public class GestionnaireBonusServeur {
 
-	private static final int NOMBRE_BONUS = 20;
+	private static final int NOMBRE_BONUS = 10;
 	
 	private GestionnaireJoueur gestionnaireJoueur;
 	private ArrayList<Bonus> listeBonus;
@@ -29,9 +29,7 @@ public class GestionnaireBonusServeur {
 
 		for (int i = 0; i < NOMBRE_BONUS; i++) {
 			listeBonus.add(new Bonus(5000));
-		}
-		
-		
+		}		
 	}
 
 	public ServeurJoueur getPlayerfromID(int id) {
@@ -72,7 +70,7 @@ public class GestionnaireBonusServeur {
 		int indice = 0;
 		ServeurJoueur player = getPlayerfromID(id);
 			for (Bonus bonus : listeBonus) {
-					if ( bonus.getX() > player.getX()-25 && bonus.getX() < player.getX()+25 && bonus.getY() > player.getY()-25 && bonus.getY() < player.getY()+25) {
+					if ( bonus.getX() > player.getX()-45 && bonus.getX() < player.getX()+45 && bonus.getY() > player.getY()-45 && bonus.getY() < player.getY()+45) {
 						switch ( bonus.getType() ) {
 						
 						case TripleMissile:
@@ -102,7 +100,7 @@ public class GestionnaireBonusServeur {
 								if ( player.getBonusState(3) == false) {
 									player.enableBonus(3);
 									listeBonus.get( indice ).disappear();
-									System.out.println("shield ramassé");
+									System.out.println("shield ramassï¿½");
 								}
 								
 								break;
@@ -121,7 +119,7 @@ public class GestionnaireBonusServeur {
 			for( int i = 0 ; i < 4 ; i ++) {
 				if( System.currentTimeMillis() - player.getTimerBonus(i) > 5000 && player.getTimerBonus(i) != 0 ) {
 								player.disableBonus(i);
-								System.out.println("bonus" +i+"du joueur :  "+id+" a expiré");
+								System.out.println("bonus" +i+"du joueur :  "+id+" a expirï¿½");
 						}
 					}
 				}

@@ -47,13 +47,13 @@ public class Missile {
 		this.y = y;
 	}
 
-	public void update(int delta) {
+	public void update(int delta,Joueur joueur) {
 		if(System.currentTimeMillis() - time >= 10000) {
 			autoDestruction = true;
 		}
 		
-		x += - .1f * delta * directionX * 4;
-		y += - .1f * delta * directionY * 4;			
+		x += - .1f * delta * directionX * 7;
+		y += - .1f * delta * directionY * 7;			
 	}
 	
 	public void updateTeteChercheuse(int delta,ServeurJoueur joueur) {
@@ -61,8 +61,8 @@ public class Missile {
 			autoDestruction = true;
 		}
 	
-		x += - .1f * delta * joueur.accelerationX * 6;
-		y += - .1f * delta * joueur.accelerationY * 6;		
+		x += - .1f * delta * joueur.accelerationX * 4;
+		y += - .1f * delta * joueur.accelerationY * 4;		
 		
 	}
 	

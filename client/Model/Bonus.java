@@ -27,8 +27,8 @@ public class Bonus {
 		Random rand = new Random();
 		this.type = TypeBonus.randomValue();
 		this.lifetime = lifetime;
-		this.x = rand.nextInt(1700) + 900;
-		this.y = rand.nextInt(1800) + 600;
+		this.x = rand.nextInt(2500) + 1050;
+		this.y = rand.nextInt(2300) + 650;
 		
 	}
 
@@ -37,8 +37,8 @@ public class Bonus {
 		switch(type) {
 		case TripleMissile : WindowGame.bonus1.draw(getX(), getY());
 			break;
-		case VitesseUp : WindowGame.bonus2.draw(getX(), getY());
-		break;
+	//	case VitesseUp : WindowGame.bonus2.draw(getX(), getY());
+	//	break;
 		case TeteChercheuse : WindowGame.bonus3.draw(getX(), getY());
 		break;
 		case Bouclier : WindowGame.bonus4.draw(getX(), getY());
@@ -67,8 +67,8 @@ public class Bonus {
 	public void disappear() {
 		Random rand = new Random();
 		this.type = TypeBonus.randomValue();
-		this.x = rand.nextInt(2600) + 900;
-		this.y = rand.nextInt(2300) + 900;
+		this.x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
+		this.y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 1050);
 		
 	}
 }
