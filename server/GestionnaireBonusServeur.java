@@ -43,6 +43,7 @@ public class GestionnaireBonusServeur {
 			if ( cle == id )  
 			{
 				player =  entry.getValue();
+				break;
 			}
 		}
 		
@@ -72,7 +73,7 @@ public class GestionnaireBonusServeur {
 		int indice = 0;
 		ServeurJoueur player = getPlayerfromID(id);
 			for (Bonus bonus : listeBonus) {
-					if ( bonus.getX() > player.getX()-25 && bonus.getX() < player.getX()+25 && bonus.getY() > player.getY()-25 && bonus.getY() < player.getY()+25) {
+					if ( bonus.getX() > player.getX()-56 && bonus.getX() < player.getX()+56 && bonus.getY()+30 > player.getY()-37 && bonus.getY()+30 < player.getY()+37) {
 						switch ( bonus.getType() ) {
 						
 						case TripleMissile:
@@ -102,7 +103,7 @@ public class GestionnaireBonusServeur {
 								if ( player.getBonusState(3) == false) {
 									player.enableBonus(3);
 									listeBonus.get( indice ).disappear();
-									System.out.println("shield ramassé");
+									System.out.println("shield ramassï¿½");
 								}
 								
 								break;
@@ -121,7 +122,7 @@ public class GestionnaireBonusServeur {
 			for( int i = 0 ; i < 4 ; i ++) {
 				if( System.currentTimeMillis() - player.getTimerBonus(i) > 5000 && player.getTimerBonus(i) != 0 ) {
 								player.disableBonus(i);
-								System.out.println("bonus" +i+"du joueur :  "+id+" a expiré");
+								System.out.println("bonus" +i+"du joueur :  "+id+" a expirÃ©");
 						}
 					}
 				}

@@ -77,12 +77,12 @@ public class Serveur extends Listener {
 			DatagramUpdateClient datagram = (DatagramUpdateClient)o;
 			DatagramUpdateServer datagramReponse = gestionnairePartie.updateClient(c.getID(), datagram);
 	
-			server.sendToTCP(c.getID(), datagramReponse);
+			server.sendToUDP(c.getID(), datagramReponse);
 		}
 		else if(o instanceof String) {
-			System.out.println("reçu : " + o);
+			System.out.println("reï¿½u : " + o);
 			if(o.equals("create")) {
-				System.out.println("Création partie");
+				System.out.println("Crï¿½ation partie");
 				SegmentIDPartie segmentReponse = gestionnairePartie.creationPartie();
 				server.sendToTCP(c.getID(), segmentReponse);
 			}

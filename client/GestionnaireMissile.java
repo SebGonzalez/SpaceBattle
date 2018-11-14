@@ -75,11 +75,11 @@ public class GestionnaireMissile {
 			Missile m = it.next();
 			if(m.isAutoDestruction()) it.remove();
 			else {
-				if(bonus[2]) {
+				/*if(bonus[2]) {
 					for(ServeurJoueur joueur : listeAdversaire) 
 						if(m.getX() > joueur.getX()-500 && m.getX() < joueur.getX()+500 && m.getY() > joueur.getY()-500 && m.getY() < joueur.getY()+500)
 							m.updateTeteChercheuse(delta,joueur);
-				}
+				}*/
 			
 				m.update(delta);
 				

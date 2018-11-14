@@ -14,7 +14,10 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
 
+import client.ConnectionClient;
 import client.Game;
 
 public class WindowCreateGame extends BasicGameState implements KeyListener{
@@ -110,7 +113,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 			break;
 		}
 		
-		System.out.println(selectedMode);
+		//System.out.println(selectedMode);
 		
 	}
 
@@ -145,9 +148,15 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 				sbg.enterState(0);
 		
 		//Bouton creer
-		if((xpos > resX/2 + 300 && xpos < resX/2 + 400) && (ypos > resY - (resY/3 + 320) && ypos < resY - (resY/3 + 275)))		
-			if(input.isMouseButtonDown(0))
-				createGame();
+		if((xpos > resX/2 + 150 && xpos < resX/2 + 250) && (ypos > resY - (resY/3 + 320) && ypos < resY - (resY/3 + 275)))		
+			if(input.isMouseButtonDown(0)) {
+				System.out.println("oui");
+				Game.connexionClient = new ConnectionClient();
+				Game.connexionClient.connect();
+				sbg.getState(1).init(container, sbg);
+				Game.connexionClient.createGame();
+				sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
+			}
 		
 		//Boutons Modes
 		if((xpos > resX/2 - 300 && xpos < resX/2 - 200) && (ypos > resY - (resY/4 + 75) && ypos < resY - (resY/4 + 30)))		

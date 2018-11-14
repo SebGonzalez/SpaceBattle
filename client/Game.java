@@ -125,7 +125,7 @@ public class Game extends StateBasedGame{
 			break;
 		}
 		
-		System.out.println("Parametres chargés");
+		System.out.println("Parametres chargÃ©s");
 	}
 	
 	public static boolean settingsFileExists() {
@@ -168,7 +168,7 @@ public class Game extends StateBasedGame{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Parametres sauvegardés");
+			System.out.println("Parametres sauvegardï¿½s");
 		}
 	}
 	
@@ -185,7 +185,7 @@ public class Game extends StateBasedGame{
 			
 				try {
 					settings.store(out, "Parametres SpaceBattle");
-					System.out.println("Fichier parametres créé");
+					System.out.println("Fichier parametres crï¿½ï¿½");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

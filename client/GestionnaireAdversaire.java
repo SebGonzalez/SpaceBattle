@@ -17,7 +17,6 @@ public class GestionnaireAdversaire {
 
 	private ArrayList<ServeurJoueur> listeAdversaire;
 	
-	
 	private ArrayList<ServeurJoueur> reception;
 	
 	public GestionnaireAdversaire() {
@@ -50,7 +49,7 @@ public class GestionnaireAdversaire {
 			reception = null;
 		//	System.out.println("recu");
 		}
-	//	else System.out.println("adv pas reçu");
+	//	else System.out.println("adv pas reï¿½u");
 	}
 	
 	/**

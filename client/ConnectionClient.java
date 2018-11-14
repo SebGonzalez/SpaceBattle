@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import client.IHM.WindowGame;
 import client.Model.Bonus;
 import client.Model.Joueur;
 import client.Model.Missile;
@@ -60,6 +61,10 @@ public class ConnectionClient extends Listener {
 	public void setIdPartie(int idPartie) {
 		System.out.println("Le joueur rejoint la partie : " + idPartie);
 		this.idPartie = idPartie;
+	}
+
+	public int getIdPartie() {
+		return idPartie;
 	}
 
 	/**
@@ -118,13 +123,13 @@ public class ConnectionClient extends Listener {
 			// " + datagram.listeMissile.size() + " " +
 			// gestionnaireMissile.getListeMissileClient().size());
 
-			client.sendTCP(datagram);
+			client.sendUDP(datagram);
 		}
-		else System.out.println("PArtie pas encore reçu");
+		else System.out.println("PArtie pas encore reï¿½u");
 	}
 
 	public void createGame() {
-		// à remplacer par SegmentCreationGame quand on aura les paramètre de partie
+		// ï¿½ remplacer par SegmentCreationGame quand on aura les paramï¿½tre de partie
 		client.sendTCP("create");
 	}
 
@@ -147,9 +152,6 @@ public class ConnectionClient extends Listener {
 				gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
 			}
 				
-			joueur.listeAdversaire.clear();
-			joueur.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
-			
 			gestionnaireMissile.listeAdversaire.clear();
 			gestionnaireMissile.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
 			
@@ -161,7 +163,7 @@ public class ConnectionClient extends Listener {
 			if (o.equals("ko")) {
 				System.out.println("Je suis touchï¿½");
 				client.close();
-				System.exit(0);
+				WindowGame.loop = false;
 			}
 		}
 	}
