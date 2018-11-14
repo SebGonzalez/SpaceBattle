@@ -40,17 +40,8 @@ public class GestionnaireJoueur {
 		DatagramUpdateServer datagramReponse = new DatagramUpdateServer();
 
 		checkCollision(datagram.listeMissile, idJoueur);
-		checkCollisionJoueur(datagramReponse);
 		
-		
-		/* CEST ICI QUE CA COUILLE, JE CROIS QUE ACCELERATION SE MET TROP VITE A JOUR POUR PRENDRE EN COMPTE LE *= -1*/
-		
-		datagramReponse.accelerationX = datagram.accelerationX;
-		datagramReponse.accelerationY = datagram.accelerationY;
-		
-		System.out.println();
-
-		for (Entry<Integer, ServeurJoueur> entry : listePlayers.entrySet()) {
+			for (Entry<Integer, ServeurJoueur> entry : listePlayers.entrySet()) {
 			int cle = entry.getKey();
 			if (cle == idJoueur) {
 				ServeurJoueur player = entry.getValue();
@@ -108,23 +99,6 @@ public class GestionnaireJoueur {
 	}
 	
 
-	public void checkCollisionJoueur(DatagramUpdateServer datagram) {
-		
-			Iterator<Entry<Integer, ServeurJoueur>> listejoueur = listePlayers.entrySet().iterator();
-		
-		while ( listejoueur.hasNext() ) {
-			Entry<Integer, ServeurJoueur> entry1 = listejoueur.next();
-			ServeurJoueur joueur1 = entry1.getValue();
-		while ( listejoueur.hasNext() ) {
-			Entry<Integer, ServeurJoueur> entry2 = listejoueur.next();
-			ServeurJoueur joueur2 = entry2.getValue();
-			
-			joueur1.JoueurCollide(joueur2,datagram);
-			
-			}
-		}
-	}
-	
 
 	/**
 	 * Supprime un joueur de la liste

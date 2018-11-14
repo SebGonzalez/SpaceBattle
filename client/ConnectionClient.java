@@ -145,9 +145,9 @@ public class ConnectionClient extends Listener {
 			for(int i = 0;i<4;i++)
 				joueur.bonus[i] = gestionnaireBonus.bonus[i];
 				
+			joueur.listeAdversaire.clear();
+			joueur.listeAdversaire.addAll(gestionnaireAdversaire.getListeAdversaire());
 			
-			//	joueur.setaccelerationX(datagram.accelerationX);
-			//	joueur.setaccelerationY(datagram.accelerationY);
 			
 		} else if (o instanceof SegmentIDPartie) {
 			this.idPartie = ((SegmentIDPartie) o).idPartie;

@@ -81,45 +81,6 @@ public class ServeurJoueur {
 		bonusTimer[indice] = 0;
 	}
 	
-	public void JoueurCollide(ServeurJoueur player,DatagramUpdateServer datagram) {
-		
-	if ( this.x > player.getX()-25 && this.getX() < player.getX()+25 && this.getY() > player.getY()-25 && this.getY() < player.getY()+25 ) {
-		
-	
-		//setCollide(datagram);
-		System.out.println("collide entre joueur " + id + "et joueur : " + player.getId());
-	}
-			
-	}
-		
-	
-
-	public void setCollide(DatagramUpdateServer datagram) {
-		
-		
-		
-		if(this.x < 950 || this.x > 2550) {
-			datagram.accelerationX *= -1;
-			if(this.accelerationX < -2 || this.accelerationX > 2) {
-				datagram.accelerationX /= 1.5;
-				}
-			}
-		
-		if(this.y < 650 || this.y > 2400) {
-			datagram.accelerationY *= -1;
-			if(this.accelerationY < -2 || this.accelerationY > 2) {
-				datagram.accelerationY /= 1.5;
-				}
-			}
-		
-		
-		
-		}
-		
-		
-	
-	
-	
 	public boolean getBonusState(int indice) {
 		return bonus[indice];
 	}

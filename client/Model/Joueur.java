@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 import client.GestionnaireBonusClient;
+import server.ServeurJoueur;
 
 public class Joueur {
 	
@@ -23,8 +24,7 @@ public class Joueur {
 	private float directionY = (float) Math.sin(rotation);
 	private Image ship;
 	public  boolean bonus[] = new boolean[4];
-	private Image bonusEffect[] = new Image[4];
-	public boolean vitesseBoost = false;
+	public ArrayList<ServeurJoueur> listeAdversaire;
 	public float boost = 1;
 	
 	public Joueur() {
@@ -37,6 +37,8 @@ public class Joueur {
 		for(int i=0;i<4;i++) {
 			bonus[i] = false;
 		}
+		
+		listeAdversaire = new ArrayList();
 	}
 	
 	public Joueur(String nom, float x, float y) {
@@ -163,7 +165,6 @@ public class Joueur {
 	
 	public void collide(float futurX,float futurY,TiledMap map) {
 		
-		
 		Image tile = map.getTileImage((int) futurX / map.getTileWidth(),
 				(int) futurY / map.getTileHeight(),map.getLayerIndex("logic"));
 				
@@ -190,11 +191,28 @@ public class Joueur {
 			}
 		}
 	
+	public void collidePlayer(float futurX,float futurY) {
+		
+		for(ServeurJoueur joueur : listeAdversaire) {
+			if ( x > joueur.getX()-25 && x < joueur.getX()+25 && y > joueur.getY()-25 && y < joueur.getY()+25) {
+					
+				accelerationX *= -1;
+				accelerationY *= -1;
+				System.out.println("collide");
+					
+				}
+			}
+		}
+		
+		
+	
+	
 	public void updatePosition(int delta, TiledMap map) {
+			
+		
 			
 			if(bonus[0]) boost = (float) 1.75 ;
 			else if (!bonus[0]) boost = 1;
-			
 			
 			if(keys_pressed[0] == true) accelerate(delta);
 			if(keys_pressed[1] == true) rotationGauche(delta);
@@ -205,6 +223,7 @@ public class Joueur {
 			float futurY = getY() - .1f * delta * accelerationY * boost;	
 			
 			collide(futurX,futurY,map);
+			collidePlayer(futurX,futurY);
 			
 			}
 		}
