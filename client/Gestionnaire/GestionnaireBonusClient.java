@@ -1,4 +1,4 @@
-package client;
+package client.Gestionnaire;
 
 import java.util.ArrayList;
 
@@ -39,6 +39,5 @@ public class GestionnaireBonusClient {
 			listeBonus.addAll(reception);
 			reception = null;
 			}
-		
 	}
 }

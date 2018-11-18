@@ -6,10 +6,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+
+import client.Gestionnaire.GestionnaireBonusClient;
+
 import java.util.ArrayList;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
-import client.GestionnaireBonusClient;
+
 import server.ServeurJoueur;
 
 public class Joueur {

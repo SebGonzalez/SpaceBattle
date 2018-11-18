@@ -19,9 +19,9 @@ import org.newdawn.slick.Music;
 
 import client.ConnectionClient;
 import client.Game;
-import client.GestionnaireAdversaire;
-import client.GestionnaireBonusClient;
-import client.GestionnaireMissile;
+import client.Gestionnaire.GestionnaireAdversaire;
+import client.Gestionnaire.GestionnaireBonusClient;
+import client.Gestionnaire.GestionnaireMissile;
 import client.Model.Bonus;
 import client.Model.Joueur;
 import client.Model.Missile;
@@ -114,6 +114,7 @@ public class WindowGame extends BasicGameState {
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
 		gestionnaireBonus.update();
+		
 		Game.connexionClient.sendInformationGame(joueur);
 		
 		if(!loop) {

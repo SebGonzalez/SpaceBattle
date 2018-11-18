@@ -1,4 +1,4 @@
-package client;
+package client.Gestionnaire;
 
 import java.util.ArrayList;
 import java.util.Iterator;

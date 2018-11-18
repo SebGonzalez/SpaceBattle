@@ -6,6 +6,9 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import client.Gestionnaire.GestionnaireAdversaire;
+import client.Gestionnaire.GestionnaireBonusClient;
+import client.Gestionnaire.GestionnaireMissile;
 import client.IHM.WindowGame;
 import client.Model.Bonus;
 import client.Model.Joueur;
@@ -15,6 +18,7 @@ import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.MissileSerializer;
 import network.PacketAddPlayer;
+import network.SegmentCreationPartie;
 import network.SegmentIDPartie;
 import server.ServeurJoueur;
 
@@ -37,6 +41,7 @@ public class ConnectionClient extends Listener {
 	Client client;
 
 	int idPartie = -1;
+	ModeJeu modeJeu = null;
 
 	public ConnectionClient() {
 
@@ -83,6 +88,8 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(Boolean[].class);
 		client.getKryo().register(long[].class);
 		client.getKryo().register(TypeBonus.class);
+		client.getKryo().register(SegmentCreationPartie.class);
+		client.getKryo().register(ModeJeu.class);
 
 		client.addListener(this);
 
@@ -129,8 +136,9 @@ public class ConnectionClient extends Listener {
 	}
 
 	public void createGame() {
-		// � remplacer par SegmentCreationGame quand on aura les param�tre de partie
-		client.sendTCP("create");
+		SegmentCreationPartie segment = new SegmentCreationPartie();
+		segment.modeJeu = modeJeu;
+		client.sendTCP(segment);
 	}
 
 	/**

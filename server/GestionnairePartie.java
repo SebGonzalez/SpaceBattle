@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import client.Model.Joueur;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
+import network.SegmentCreationPartie;
 import network.SegmentIDPartie;
 
 public class GestionnairePartie {
@@ -16,8 +17,8 @@ public class GestionnairePartie {
 		listePartie = new ArrayList<>();
 	}
 	
-	public SegmentIDPartie creationPartie() {
-		Partie partie = new Partie(idPartie);
+	public SegmentIDPartie creationPartie(SegmentCreationPartie creationPartie) {
+		Partie partie = new Partie(idPartie, creationPartie.modeJeu);
 		listePartie.add(partie);
 		
 		SegmentIDPartie reponse = new SegmentIDPartie();

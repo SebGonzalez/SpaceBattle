@@ -8,6 +8,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 
+import client.ModeJeu;
 import client.Model.Bonus;
 import client.Model.Missile;
 import client.Model.TypeBonus;
@@ -15,6 +16,7 @@ import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.MissileSerializer;
 import network.PacketAddPlayer;
+import network.SegmentCreationPartie;
 import network.SegmentIDPartie;
 
 /**
@@ -43,6 +45,9 @@ public class Serveur extends Listener {
 		server.getKryo().register(Boolean[].class);
 		server.getKryo().register(long[].class);
 		server.getKryo().register(TypeBonus.class);
+		server.getKryo().register(SegmentCreationPartie.class);
+		server.getKryo().register(ModeJeu.class);
+
 		server.bind(portTCP, portUDP);
 		server.start();
 		server.addListener(new Serveur());
@@ -79,13 +84,9 @@ public class Serveur extends Listener {
 	
 			server.sendToUDP(c.getID(), datagramReponse);
 		}
-		else if(o instanceof String) {
-			System.out.println("re�u : " + o);
-			if(o.equals("create")) {
-				System.out.println("Cr�ation partie");
-				SegmentIDPartie segmentReponse = gestionnairePartie.creationPartie();
+		else if(o instanceof SegmentCreationPartie) {
+				SegmentIDPartie segmentReponse = gestionnairePartie.creationPartie((SegmentCreationPartie)o);
 				server.sendToTCP(c.getID(), segmentReponse);
-			}
 		}
 	}
 
