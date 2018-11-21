@@ -10,10 +10,12 @@ import com.esotericsoftware.minlog.Log;
 
 import client.ModeJeu;
 import client.Model.Bonus;
+import client.Model.Flag;
 import client.Model.Missile;
 import client.Model.TypeBonus;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
+import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
 import network.PacketAddPlayer;
 import network.SegmentCreationPartie;
@@ -47,6 +49,8 @@ public class Serveur extends Listener {
 		server.getKryo().register(TypeBonus.class);
 		server.getKryo().register(SegmentCreationPartie.class);
 		server.getKryo().register(ModeJeu.class);
+		server.getKryo().register(DatagramUpdateServerCapture.class);
+		server.getKryo().register(Flag.class);
 
 		server.bind(portTCP, portUDP);
 		server.start();

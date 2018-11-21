@@ -1,6 +1,8 @@
 package server;
 
 import client.ModeJeu;
+import network.DatagramUpdateClient;
+import network.DatagramUpdateServer;
 
 public class Partie {
 
@@ -19,6 +21,13 @@ public class Partie {
 
 	public int getId() {
 		return id;
+	}
+	
+	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
+		DatagramUpdateServer datagramReponse = gestionnaireJoueur.updateJoueur(idJoueur, datagram);
+		gestionnaireBonus.updateBonus(idJoueur, datagramReponse);
+		
+		return datagramReponse;
 	}
 	
 	

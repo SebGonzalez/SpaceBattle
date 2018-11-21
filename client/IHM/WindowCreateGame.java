@@ -2,6 +2,8 @@ package client.IHM;
 
 import java.awt.Font;
 
+import javax.jws.WebParam.Mode;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -19,6 +21,9 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.ConnectionClient;
 import client.Game;
+import client.ModeJeu;
+import client.Gestionnaire.GestionnairePartie;
+import client.Gestionnaire.GestionnairePartieCapture;
 
 public class WindowCreateGame extends BasicGameState implements KeyListener{
 	
@@ -27,7 +32,8 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 	private boolean privateGame;
 	private String password;
 	private int maxPlayers;
-	private int currentField, selectedMode;
+	private int currentField;
+	private ModeJeu selectedMode = ModeJeu.DEATHMATCH;
 	
 	private TextField passwordField, maxPlayersField;
 	
@@ -91,17 +97,17 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 		GestionnaireImagesIHM.getRessource("buttonCreer").draw(resX/2 + 150, resY/3 + 275);
 		
 		switch(selectedMode) {
-		case 1:
+		case DEATHMATCH:
 			GestionnaireImagesIHM.getRessource("buttonMode1Selec").draw(resX/2 - 300, resY/4 + 30);
 			GestionnaireImagesIHM.getRessource("buttonMode2").draw(resX/2 - 150, resY/4 + 30);
 			GestionnaireImagesIHM.getRessource("buttonMode3").draw(resX/2, resY/4 + 30);
 			break;
-		case 2:
+		case CAPTURE:
 			GestionnaireImagesIHM.getRessource("buttonMode1").draw(resX/2 - 300, resY/4 + 30);
 			GestionnaireImagesIHM.getRessource("buttonMode2Selec").draw(resX/2 - 150, resY/4 + 30);
 			GestionnaireImagesIHM.getRessource("buttonMode3").draw(resX/2, resY/4 + 30);
 			break;
-		case 3:
+		case COURSE:
 			GestionnaireImagesIHM.getRessource("buttonMode1").draw(resX/2 - 300, resY/4 + 30);
 			GestionnaireImagesIHM.getRessource("buttonMode2").draw(resX/2 - 150, resY/4 + 30);
 			GestionnaireImagesIHM.getRessource("buttonMode3Selec").draw(resX/2, resY/4 + 30);
@@ -151,9 +157,16 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 		if((xpos > resX/2 + 150 && xpos < resX/2 + 250) && (ypos > resY - (resY/3 + 320) && ypos < resY - (resY/3 + 275)))		
 			if(input.isMouseButtonDown(0)) {
 				System.out.println("oui");
-				Game.connexionClient = new ConnectionClient();
+				if(selectedMode == ModeJeu.DEATHMATCH)
+					Game.gestionnairePartie = new GestionnairePartie();
+				else if(selectedMode == ModeJeu.CAPTURE)
+					Game.gestionnairePartie = new GestionnairePartieCapture();
+				else
+					Game.gestionnairePartie = new GestionnairePartie(); //sprint
+				
+				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+				Game.gestionnairePartie.setModeJeu(selectedMode);
 				Game.connexionClient.connect();
-				sbg.getState(1).init(container, sbg);
 				Game.connexionClient.createGame();
 				sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
@@ -161,13 +174,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 		//Boutons Modes
 		if((xpos > resX/2 - 300 && xpos < resX/2 - 200) && (ypos > resY - (resY/4 + 75) && ypos < resY - (resY/4 + 30)))		
 			if(input.isMouseButtonDown(0))
-				selectedMode = 1;
+				selectedMode = ModeJeu.DEATHMATCH;
 		if((xpos > resX/2 - 150 && xpos < resX/2 - 50) && (ypos > resY - (resY/4 + 75) && ypos < resY - (resY/4 + 30)))		
 			if(input.isMouseButtonDown(0))
-				selectedMode = 2;
+				selectedMode = ModeJeu.CAPTURE;
 		if((xpos > resX/2 && xpos < resX/2 + 100) && (ypos > resY - (resY/4 + 75) && ypos < resY - (resY/4 + 30)))		
 			if(input.isMouseButtonDown(0))
-				selectedMode = 3;
+				selectedMode = ModeJeu.COURSE;
 		
 		switch (currentField) {
 			case 1:

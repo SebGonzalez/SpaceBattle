@@ -9,13 +9,16 @@ import com.esotericsoftware.kryonet.Listener;
 import client.Gestionnaire.GestionnaireAdversaire;
 import client.Gestionnaire.GestionnaireBonusClient;
 import client.Gestionnaire.GestionnaireMissile;
+import client.Gestionnaire.GestionnairePartie;
 import client.IHM.WindowGame;
 import client.Model.Bonus;
+import client.Model.Flag;
 import client.Model.Joueur;
 import client.Model.Missile;
 import client.Model.TypeBonus;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
+import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
 import network.PacketAddPlayer;
 import network.SegmentCreationPartie;
@@ -29,47 +32,24 @@ import server.ServeurJoueur;
  *
  */
 public class ConnectionClient extends Listener {
-
-	Joueur joueur;  
-	GestionnaireAdversaire gestionnaireAdversaire;
-	GestionnaireMissile gestionnaireMissile;
-	GestionnaireBonusClient gestionnaireBonus;
+	
+	GestionnairePartie gestionnairePartie;
 
 	String ip = "localhost";
 	final int portTCP = 18000;
 	final int portUDP = 19000;
 	Client client;
 
-	int idPartie = -1;
-	ModeJeu modeJeu = null;
-
-	public ConnectionClient() {
-
+	public ConnectionClient(GestionnairePartie gestionnairePartie) {
+		this.gestionnairePartie = gestionnairePartie;
 	}
 
-	public ConnectionClient(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire,
-			GestionnaireMissile gestionnaireMissile, GestionnaireBonusClient gestionnaireBonus) {
-		this.joueur = joueur;
-		this.gestionnaireAdversaire = gestionnaireAdversaire;
-		this.gestionnaireMissile = gestionnaireMissile;
-		this.gestionnaireBonus = gestionnaireBonus;
+	public ConnectionClient(Joueur joueur, GestionnairePartie gestionnairePartie) {
+		this.gestionnairePartie = gestionnairePartie;
 	}
 
-	public void addData(Joueur joueur, GestionnaireAdversaire gestionnaireAdversaire,
-			GestionnaireMissile gestionnaireMissile, GestionnaireBonusClient gestionnaireBonus) {
-		this.joueur = joueur;
-		this.gestionnaireAdversaire = gestionnaireAdversaire;
-		this.gestionnaireMissile = gestionnaireMissile;
-		this.gestionnaireBonus = gestionnaireBonus;
-	}
-
-	public void setIdPartie(int idPartie) {
-		System.out.println("Le joueur rejoint la partie : " + idPartie);
-		this.idPartie = idPartie;
-	}
-
-	public int getIdPartie() {
-		return idPartie;
+	public void addData(GestionnairePartie gestionnairePartie) {
+		this.gestionnairePartie = gestionnairePartie;
 	}
 
 	/**
@@ -90,6 +70,9 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(TypeBonus.class);
 		client.getKryo().register(SegmentCreationPartie.class);
 		client.getKryo().register(ModeJeu.class);
+		client.getKryo().register(DatagramUpdateServerCapture.class);
+		client.getKryo().register(Flag.class);
+		
 
 		client.addListener(this);
 
@@ -116,16 +99,16 @@ public class ConnectionClient extends Listener {
 	 * @param joueur
 	 */
 	public void sendInformationGame(Joueur joueur) {
-		if (idPartie != -1) {
+		if (gestionnairePartie.getIdPartie() != -1) {
 			DatagramUpdateClient datagram = new DatagramUpdateClient();
-			datagram.idPartie = idPartie;
+			datagram.idPartie = gestionnairePartie.getIdPartie();
 			datagram.x = joueur.getX();
 			datagram.y = joueur.getY();
 			datagram.accelerationX = joueur.getaccelerationX();
 			datagram.accelerationY = joueur.getaccelerationY();
 			datagram.r = joueur.getRotation();
 
-			datagram.listeMissile = gestionnaireMissile.getListeMissileClient();
+			datagram.listeMissile = gestionnairePartie.getListeMissileClient();
 			// if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyé :
 			// " + datagram.listeMissile.size() + " " +
 			// gestionnaireMissile.getListeMissileClient().size());
@@ -137,7 +120,8 @@ public class ConnectionClient extends Listener {
 
 	public void createGame() {
 		SegmentCreationPartie segment = new SegmentCreationPartie();
-		segment.modeJeu = modeJeu;
+		segment.modeJeu = gestionnairePartie.getModeJeu();
+		System.out.println("Création partie : " + segment.modeJeu);
 		client.sendTCP(segment);
 	}
 
@@ -151,18 +135,11 @@ public class ConnectionClient extends Listener {
 		} else if (o instanceof DatagramUpdateServer) {
 			// System.out.println("Update reçu");
 			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
-
-			gestionnaireAdversaire.setReception(datagram.listeAdversaire);
-			gestionnaireBonus.setReception(datagram.listeBonus,datagram.bonus);
-			
-			for(int i = 0;i<4;i++) {
-				joueur.bonus[i] = gestionnaireBonus.bonus[i];
-				gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
-			}
+			gestionnairePartie.setReception(datagram);
 				
 		} else if (o instanceof SegmentIDPartie) {
-			this.idPartie = ((SegmentIDPartie) o).idPartie;
-			System.out.println("Le joueur a cree la partie : " + idPartie);
+			gestionnairePartie.setIdPartie(((SegmentIDPartie) o).idPartie);
+			System.out.println("Le joueur a cree la partie : " +  gestionnairePartie.getIdPartie());
 		} else if (o instanceof String) {
 			if (o.equals("ko")) {
 				System.out.println("Je suis touch�");

@@ -2,6 +2,7 @@ package server;
 
 import java.util.ArrayList;
 
+import client.ModeJeu;
 import client.Model.Joueur;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
@@ -18,7 +19,15 @@ public class GestionnairePartie {
 	}
 	
 	public SegmentIDPartie creationPartie(SegmentCreationPartie creationPartie) {
-		Partie partie = new Partie(idPartie, creationPartie.modeJeu);
+		Partie partie;
+		if(creationPartie.modeJeu == ModeJeu.DEATHMATCH)
+			partie = new Partie(idPartie, creationPartie.modeJeu);
+		else if(creationPartie.modeJeu == ModeJeu.CAPTURE)
+			partie = new PartieCapture(idPartie, creationPartie.modeJeu);
+		else {
+			partie = new Partie(idPartie, creationPartie.modeJeu); //course
+		}
+		
 		listePartie.add(partie);
 		
 		SegmentIDPartie reponse = new SegmentIDPartie();
@@ -40,8 +49,7 @@ public class GestionnairePartie {
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
 		
 		Partie p = getPartie(datagram.idPartie);
-		DatagramUpdateServer datagramReponse = p.gestionnaireJoueur.updateJoueur(idJoueur, datagram);
-		p.gestionnaireBonus.updateBonus(idJoueur, datagramReponse);
+		DatagramUpdateServer datagramReponse = p.updateClient(idJoueur, datagram);
 		
 		return datagramReponse;
 	}

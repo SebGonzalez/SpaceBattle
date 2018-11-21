@@ -17,7 +17,9 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import com.esotericsoftware.minlog.Log;
 
+import client.Gestionnaire.GestionnairePartie;
 import client.IHM.*;
+import client.Model.Joueur;
 
 	
 public class Game extends StateBasedGame{
@@ -33,11 +35,14 @@ public class Game extends StateBasedGame{
 	public static float musicVolume = 0.0f;
 	
 	public static ConnectionClient connexionClient;
+
+	public static GestionnairePartie gestionnairePartie;
 	
 	public Game() {
 		super("SpaceBattle");
 		
-		connexionClient = new ConnectionClient();
+		gestionnairePartie = new GestionnairePartie();
+		connexionClient = new ConnectionClient(gestionnairePartie);
 		connexionClient.connect();
 	}
 	

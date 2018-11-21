@@ -16,6 +16,9 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.ConnectionClient;
 import client.Game;
+import client.ModeJeu;
+import client.Gestionnaire.GestionnairePartie;
+import client.Gestionnaire.GestionnairePartieCapture;
 
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
@@ -82,10 +85,18 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		
 		if((xpos > resX/2 + 100 && xpos < resX/2 + 200) && ( ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
-				Game.connexionClient = new ConnectionClient();
+				ModeJeu selectedMode = ModeJeu.CAPTURE; //A recup dans la liste de partie
+				if(selectedMode == ModeJeu.DEATHMATCH)
+					Game.gestionnairePartie = new GestionnairePartie();
+				else if(selectedMode == ModeJeu.CAPTURE)
+					Game.gestionnairePartie = new GestionnairePartieCapture();
+				else
+					Game.gestionnairePartie = new GestionnairePartie(); //sprint
+				
+				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+				Game.gestionnairePartie.setModeJeu(selectedMode);
 				Game.connexionClient.connect();
-				Game.connexionClient.setIdPartie(Integer.parseInt(gameID.getText()));
-				sbg.getState(1).init(container, sbg);
+				Game.gestionnairePartie.setIdPartie(Integer.parseInt(gameID.getText()));
 				sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
