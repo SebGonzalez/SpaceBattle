@@ -7,7 +7,8 @@ import client.Model.Joueur;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.SegmentCreationPartie;
-import network.SegmentIDPartie;
+import network.SegmentNouveauJoueur;
+import network.SegmentRejoindrePartie;
 
 public class GestionnairePartie {
 	
@@ -18,7 +19,7 @@ public class GestionnairePartie {
 		listePartie = new ArrayList<>();
 	}
 	
-	public SegmentIDPartie creationPartie(SegmentCreationPartie creationPartie) {
+	public SegmentNouveauJoueur creationPartie(SegmentCreationPartie creationPartie, int idClient) {
 		Partie partie;
 		if(creationPartie.modeJeu == ModeJeu.DEATHMATCH)
 			partie = new Partie(idPartie, creationPartie.modeJeu);
@@ -30,12 +31,29 @@ public class GestionnairePartie {
 		
 		listePartie.add(partie);
 		
-		SegmentIDPartie reponse = new SegmentIDPartie();
+		ServeurJoueur nouveauJoueur = new ServeurJoueur(idClient);
+		partie.addJoueur(nouveauJoueur);
+		
+		SegmentNouveauJoueur reponse = new SegmentNouveauJoueur();
 		reponse.idPartie = idPartie;
+		reponse.team = nouveauJoueur.getTeam();
 		
 		idPartie++;
 		
 		return reponse; 
+	}
+	
+	public SegmentNouveauJoueur rejoindrePartie(SegmentRejoindrePartie segment, int idClient) {
+		Partie partie = getPartie(segment.idPartie);
+		
+		ServeurJoueur nouveauJoueur = new ServeurJoueur(idClient);
+		partie.addJoueur(nouveauJoueur);
+		
+		SegmentNouveauJoueur reponse = new SegmentNouveauJoueur();
+		reponse.idPartie = partie.getId();
+		reponse.team = nouveauJoueur.getTeam();
+		
+		return reponse;
 	}
 	
 	public Partie getPartie(int id) {

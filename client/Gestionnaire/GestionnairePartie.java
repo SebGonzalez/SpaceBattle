@@ -44,6 +44,10 @@ public class GestionnairePartie {
 	public void setModeJeu(ModeJeu modeJeu) {
 		this.modeJeu = modeJeu;
 	}
+	
+	public void setTeamJoueur(int team) {
+		joueur.setTeam(team);
+	}
 
 	public void setReception(DatagramUpdateServer datagram) {
 		

@@ -23,8 +23,8 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 	public void renderAll(Graphics g) {
 		super.renderAll(g);
 		if(flagTeam != null) {
-			flagTeam.render(g);
-			flagEnemy.render(g);
+			flagTeam.render(g, joueur.getTeam());
+			flagEnemy.render(g, joueur.getTeam());
 		}
 	}
 	

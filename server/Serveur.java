@@ -1,12 +1,10 @@
 package server;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import com.esotericsoftware.minlog.Log;
 
 import client.ModeJeu;
 import client.Model.Bonus;
@@ -17,9 +15,9 @@ import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
-import network.PacketAddPlayer;
 import network.SegmentCreationPartie;
-import network.SegmentIDPartie;
+import network.SegmentNouveauJoueur;
+import network.SegmentRejoindrePartie;
 
 /**
  * Classe principale du serveur
@@ -39,10 +37,9 @@ public class Serveur extends Listener {
 		server.getKryo().register(java.util.ArrayList.class);
 		server.getKryo().register(Missile.class, new MissileSerializer());
 		server.getKryo().register(ServeurJoueur.class);
-		server.getKryo().register(PacketAddPlayer.class);
 		server.getKryo().register(DatagramUpdateClient.class);
 		server.getKryo().register(DatagramUpdateServer.class);
-		server.getKryo().register(SegmentIDPartie.class);
+		server.getKryo().register(SegmentNouveauJoueur.class);
 		server.getKryo().register(Bonus.class);
 		server.getKryo().register(Boolean[].class);
 		server.getKryo().register(long[].class);
@@ -51,6 +48,8 @@ public class Serveur extends Listener {
 		server.getKryo().register(ModeJeu.class);
 		server.getKryo().register(DatagramUpdateServerCapture.class);
 		server.getKryo().register(Flag.class);
+		server.getKryo().register(SegmentRejoindrePartie.class);
+
 
 		server.bind(portTCP, portUDP);
 		server.start();
@@ -89,8 +88,12 @@ public class Serveur extends Listener {
 			server.sendToUDP(c.getID(), datagramReponse);
 		}
 		else if(o instanceof SegmentCreationPartie) {
-				SegmentIDPartie segmentReponse = gestionnairePartie.creationPartie((SegmentCreationPartie)o);
+				SegmentNouveauJoueur segmentReponse = gestionnairePartie.creationPartie((SegmentCreationPartie)o, c.getID());
 				server.sendToTCP(c.getID(), segmentReponse);
+		}
+		else if(o instanceof SegmentRejoindrePartie) {
+			SegmentNouveauJoueur segmentReponse = gestionnairePartie.rejoindrePartie((SegmentRejoindrePartie)o, c.getID());
+			server.sendToTCP(c.getID(), segmentReponse);
 		}
 	}
 

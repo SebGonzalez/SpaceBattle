@@ -1,6 +1,7 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import client.Model.Missile;
 import network.DatagramUpdateServer;
@@ -21,6 +22,7 @@ public class ServeurJoueur {
 	private ArrayList<Missile> listeMissile;
 	public Boolean bonus[] = new Boolean[4];
 	private long bonusTimer[] = new long[4];
+	private int team;
 	 
 	public ServeurJoueur() {
 		this.id = -1;
@@ -51,25 +53,8 @@ public class ServeurJoueur {
 		for( int i = 0; i < 4 ; i++)
 			bonusTimer[i] = 0;
 
-
+		team = new Random().nextInt(2) + 1;
 	}
-	
-	public ServeurJoueur(int id, double x, double y, float r, ArrayList<Missile> listeMissile) {
-		this.id = id;
-		this.x = x;
-		this.y = y;
-		this.r = r;
-		this.listeMissile = listeMissile;
-		
-		for(int i=0;i<4;i++) {
-			bonus[i] = false;
-		}
-		
-		for( int i = 0; i < 4 ; i++)
-			bonusTimer[i] = 0;
-	}
-	
-
 
 	public void enableBonus(int indice) {
 		bonus[indice] = true;
@@ -136,6 +121,14 @@ public class ServeurJoueur {
 	
 	public void setR(float r) {
 		this.r = r;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	public ArrayList<Missile> getListeMissile() {

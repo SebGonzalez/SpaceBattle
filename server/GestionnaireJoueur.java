@@ -25,6 +25,10 @@ public class GestionnaireJoueur {
 		ServeurJoueur newPlayer = new ServeurJoueur(id);
 		listePlayers.put(id, newPlayer);
 	}
+	
+	public void addJoueur(ServeurJoueur nouveauJoueur) {
+		listePlayers.put(nouveauJoueur.getId(), nouveauJoueur);
+	}
  
 	/**
 	 * Mets à jour les informations reçues du client et prépare la réponse
@@ -114,5 +118,4 @@ public class GestionnaireJoueur {
 
 		}
 	}
-
 }

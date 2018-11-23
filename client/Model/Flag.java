@@ -43,10 +43,10 @@ public class Flag {
 		this.y = y;
 	}
 	
-	public void render(Graphics g) {
-		if(numTeam == 1)
-			WindowGame.flag1.draw(x-16, y-16);
+	public void render(Graphics g, int teamJoueur) {
+		if(numTeam == teamJoueur)
+			WindowGame.flag1.draw(x-32, y-32);
 		else
-			WindowGame.flag2.draw(x-16, y-16);
+			WindowGame.flag2.draw(x-32, y-32);
 	}
 }

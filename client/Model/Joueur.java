@@ -28,6 +28,8 @@ public class Joueur {
 	private float directionY = (float) Math.sin(rotation);
 	public boolean bonus[] = new boolean[4];
 	public float boost = 1;
+	
+	private int team = -1;
 
 	public Joueur() {
 		x = 1200;
@@ -114,6 +116,14 @@ public class Joueur {
 
 	public void addaccelerationY(float value) {
 		accelerationY += value;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	public void accelerate(int delta) {
