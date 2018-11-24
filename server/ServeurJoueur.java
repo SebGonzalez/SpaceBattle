@@ -14,8 +14,8 @@ import network.DatagramUpdateServer;
 public class ServeurJoueur {
 
 	private int id;
-	private double x;
-	private double y;
+	private float x;
+	private float y;
 	public double accelerationX;
 	public double accelerationY;
 	private float r;
@@ -91,15 +91,15 @@ public class ServeurJoueur {
 		this.id = id;
 	}
 
-	public double getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(double x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public double getY() {
+	public float getY() {
 		return y;
 	}
 
@@ -111,7 +111,7 @@ public class ServeurJoueur {
 		this.accelerationY = Y;
 	}
 	
-	public void setY(double y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 	

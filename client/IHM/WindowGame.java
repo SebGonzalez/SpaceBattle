@@ -43,6 +43,8 @@ public class WindowGame extends BasicGameState {
 	
 	public static Image flag1;
 	public static Image flag2;
+	public static Image baseFlag1;
+	public static Image baseFlag2;
 
 	public static boolean loop = true;
 
@@ -65,6 +67,8 @@ public class WindowGame extends BasicGameState {
 			bonus3 = new Image("ressources/sprites/PW/star_gold.png");
 			flag1 = new Image("ressources/sprites/flag1.png");
 			flag2 = new Image("ressources/sprites/flag2.png");
+			baseFlag1 = new Image("ressources/sprites/baseFlag1.png");
+			baseFlag2 = new Image("ressources/sprites/baseFlag2.png");
 
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
@@ -82,14 +86,7 @@ public class WindowGame extends BasicGameState {
 				container.getHeight() / 2 - (int)  Game.gestionnairePartie.joueur.getY());
 
 		// Background
-		this.map.render(0, 0, 0);
-		// Foreground
-		this.map.render(0, 0, 1);
-		// Logic
-		this.map.render(0, 0, 2);
-		// Fore-Foreground
-		// this.map.render(0, 0, 3);
-		// this.map.render(0, 0, 4);
+		this.map.render(0, 0);
 
 		Game.gestionnairePartie.renderAll(g);
 		

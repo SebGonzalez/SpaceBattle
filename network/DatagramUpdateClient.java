@@ -11,8 +11,8 @@ import client.Model.Missile;
  */
 public class DatagramUpdateClient {
 	public int idPartie;
-	public double x;
-	public double y;
+	public float x;
+	public float y;
 	public float accelerationX;
 	public float accelerationY;
 	

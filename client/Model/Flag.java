@@ -43,10 +43,32 @@ public class Flag {
 		this.y = y;
 	}
 	
+	public float getxBase() {
+		return xBase;
+	}
+
+	public float getyBase() {
+		return yBase;
+	}
+
 	public void render(Graphics g, int teamJoueur) {
-		if(numTeam == teamJoueur)
+		if(numTeam == teamJoueur) {
+			WindowGame.baseFlag1.draw(xBase-64, yBase);
 			WindowGame.flag1.draw(x-32, y-32);
-		else
+		}
+		else {
+			WindowGame.baseFlag2.draw(xBase-64, yBase);
 			WindowGame.flag2.draw(x-32, y-32);
+		}
+	}
+	
+	public boolean collision(double d, double e) {
+		if(x > d-56 && x < d+56 && y > e-37 && y < e+37) return true;
+		return false;
+	}
+
+	public void resetPos() {
+		x = xBase;
+		y = yBase;
 	}
 }

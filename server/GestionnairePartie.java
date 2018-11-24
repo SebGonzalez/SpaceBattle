@@ -74,9 +74,7 @@ public class GestionnairePartie {
 
 	public void removeJoueur(int id) {
 		for(Partie p : listePartie) {
-			if(p.gestionnaireJoueur.listePlayers.get(id) != null) {
-				p.gestionnaireJoueur.listePlayers.remove(id);
-			}
+			p.joueurDeco(id);
 		}
 	}
 	

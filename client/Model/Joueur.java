@@ -143,14 +143,14 @@ public class Joueur {
 	}
 
 	public void rotationGauche(int delta) {
-		this.rotation -= (float) delta / 100;
+		this.rotation -= (float) delta / 250;
 		setdirectionX();
 		setdirectionY();
 		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 
 	public void rotationDroite(int delta) {
-		this.rotation += (float) delta / 100;
+		this.rotation += (float) delta / 250;
 		setdirectionX();
 		setdirectionY();
 		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
