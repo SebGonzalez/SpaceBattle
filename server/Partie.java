@@ -29,6 +29,16 @@ public class Partie {
 		
 		return datagramReponse;
 	}
+
+	public void addJoueur(ServeurJoueur nouveauJoueur) {
+		gestionnaireJoueur.addJoueur(nouveauJoueur);
+	}
+	
+	public void joueurDeco(int id) {
+		if(gestionnaireJoueur.getJoueur(id) != null) {
+			gestionnaireJoueur.removeJoueur(id);
+		}
+	}
 	
 	
 }

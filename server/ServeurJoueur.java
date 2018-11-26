@@ -1,6 +1,7 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import client.Model.Missile;
 import network.DatagramUpdateServer;
@@ -13,14 +14,15 @@ import network.DatagramUpdateServer;
 public class ServeurJoueur {
 
 	private int id;
-	private double x;
-	private double y;
+	private float x;
+	private float y;
 	public double accelerationX;
 	public double accelerationY;
 	private float r;
 	private ArrayList<Missile> listeMissile;
 	public Boolean bonus[] = new Boolean[4];
 	private long bonusTimer[] = new long[4];
+	private int team;
 	 
 	public ServeurJoueur() {
 		this.id = -1;
@@ -51,25 +53,8 @@ public class ServeurJoueur {
 		for( int i = 0; i < 4 ; i++)
 			bonusTimer[i] = 0;
 
-
+		team = new Random().nextInt(2) + 1;
 	}
-	
-	public ServeurJoueur(int id, double x, double y, float r, ArrayList<Missile> listeMissile) {
-		this.id = id;
-		this.x = x;
-		this.y = y;
-		this.r = r;
-		this.listeMissile = listeMissile;
-		
-		for(int i=0;i<4;i++) {
-			bonus[i] = false;
-		}
-		
-		for( int i = 0; i < 4 ; i++)
-			bonusTimer[i] = 0;
-	}
-	
-
 
 	public void enableBonus(int indice) {
 		bonus[indice] = true;
@@ -106,15 +91,15 @@ public class ServeurJoueur {
 		this.id = id;
 	}
 
-	public double getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(double x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public double getY() {
+	public float getY() {
 		return y;
 	}
 
@@ -126,7 +111,7 @@ public class ServeurJoueur {
 		this.accelerationY = Y;
 	}
 	
-	public void setY(double y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 	
@@ -136,6 +121,14 @@ public class ServeurJoueur {
 	
 	public void setR(float r) {
 		this.r = r;
+	}
+
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 
 	public ArrayList<Missile> getListeMissile() {

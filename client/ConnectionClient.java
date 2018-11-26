@@ -6,9 +6,6 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
-import client.Gestionnaire.GestionnaireAdversaire;
-import client.Gestionnaire.GestionnaireBonusClient;
-import client.Gestionnaire.GestionnaireMissile;
 import client.Gestionnaire.GestionnairePartie;
 import client.IHM.WindowGame;
 import client.Model.Bonus;
@@ -20,9 +17,9 @@ import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
-import network.PacketAddPlayer;
 import network.SegmentCreationPartie;
-import network.SegmentIDPartie;
+import network.SegmentNouveauJoueur;
+import network.SegmentRejoindrePartie;
 import server.ServeurJoueur;
 
 /**
@@ -60,10 +57,9 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(java.util.ArrayList.class);
 		client.getKryo().register(Missile.class, new MissileSerializer());
 		client.getKryo().register(ServeurJoueur.class);
-		client.getKryo().register(PacketAddPlayer.class);
 		client.getKryo().register(DatagramUpdateClient.class);
 		client.getKryo().register(DatagramUpdateServer.class);
-		client.getKryo().register(SegmentIDPartie.class);
+		client.getKryo().register(SegmentNouveauJoueur.class);
 		client.getKryo().register(Bonus.class);
 		client.getKryo().register(Boolean[].class);
 		client.getKryo().register(long[].class);
@@ -72,8 +68,8 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(ModeJeu.class);
 		client.getKryo().register(DatagramUpdateServerCapture.class);
 		client.getKryo().register(Flag.class);
+		client.getKryo().register(SegmentRejoindrePartie.class);
 		
-
 		client.addListener(this);
 
 		client.start();
@@ -124,22 +120,27 @@ public class ConnectionClient extends Listener {
 		System.out.println("Création partie : " + segment.modeJeu);
 		client.sendTCP(segment);
 	}
+	
+	public void joinGame() {
+		SegmentRejoindrePartie segment = new SegmentRejoindrePartie();
+		segment.idPartie = gestionnairePartie.getIdPartie();
+		segment.pseudo = "";
+		client.sendTCP(segment);
+	}
 
 	/**
 	 * Fonction appelée dès qu'un packet ou un datagram est reçu
 	 */
 	public void received(Connection c, Object o) {
-		if (o instanceof PacketAddPlayer) {
-			PacketAddPlayer packet = (PacketAddPlayer) o;
-			System.out.println("Nouveau joueur : " + packet.id);
-		} else if (o instanceof DatagramUpdateServer) {
+		if (o instanceof DatagramUpdateServer) {
 			// System.out.println("Update reçu");
 			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
 			gestionnairePartie.setReception(datagram);
 				
-		} else if (o instanceof SegmentIDPartie) {
-			gestionnairePartie.setIdPartie(((SegmentIDPartie) o).idPartie);
-			System.out.println("Le joueur a cree la partie : " +  gestionnairePartie.getIdPartie());
+		} else if (o instanceof SegmentNouveauJoueur) {
+			gestionnairePartie.setIdPartie(((SegmentNouveauJoueur) o).idPartie);
+			gestionnairePartie.setTeamJoueur(((SegmentNouveauJoueur) o).team);
+			System.out.println("Le joueur a rejoint la partie : " +  gestionnairePartie.getIdPartie() + " et appartient à la team : " + ((SegmentNouveauJoueur) o).team );
 		} else if (o instanceof String) {
 			if (o.equals("ko")) {
 				System.out.println("Je suis touch�");

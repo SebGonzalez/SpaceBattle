@@ -30,6 +30,8 @@ public class Joueur {
 	private float directionY = (float) Math.sin(rotation);
 	public boolean bonus[] = new boolean[4];
 	public float boost = 1;
+	
+	private int team = -1;
 
 	public Joueur() {
 		x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
@@ -118,6 +120,14 @@ public class Joueur {
 		accelerationY += value;
 	}
 
+	public int getTeam() {
+		return team;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
+	}
+
 	public void accelerate(int delta) {
 
 		if (getaccelerationX() + (delta * (getdirectionX() / 200)) > -4
@@ -135,14 +145,14 @@ public class Joueur {
 	}
 
 	public void rotationGauche(int delta) {
-		this.rotation -= (float) delta / 100;
+		this.rotation -= (float) delta / 250;
 		setdirectionX();
 		setdirectionY();
 		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 
 	public void rotationDroite(int delta) {
-		this.rotation += (float) delta / 100;
+		this.rotation += (float) delta / 250;
 		setdirectionX();
 		setdirectionY();
 		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
