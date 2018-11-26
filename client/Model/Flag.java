@@ -66,6 +66,11 @@ public class Flag {
 		if(x > d-56 && x < d+56 && y > e-37 && y < e+37) return true;
 		return false;
 	}
+	
+	public boolean collisionBase(double xJoueur, double yJoueur) {
+		if(xBase > xJoueur-56 && xBase < xJoueur+56 && yBase+64 > yJoueur-37 && yBase < yJoueur+37) return true;
+		return false;
+	}
 
 	public void resetPos() {
 		x = xBase;

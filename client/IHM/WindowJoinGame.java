@@ -40,6 +40,8 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		
+		resX = Game.res.getX();
+		resY = Game.res.getY();
 		
 		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
 		font.addAsciiGlyphs(); font.addGlyphs(400,600); font.getEffects().add(new ColorEffect(java.awt.Color.white));
