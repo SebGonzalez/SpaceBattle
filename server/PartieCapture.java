@@ -8,11 +8,14 @@ import network.DatagramUpdateServerCapture;
 
 public class PartieCapture extends Partie {
 
-	Flag flag1; //flag team1
-	Flag flag2; //flag team2
+	private Flag flag1; //flag team1
+	private Flag flag2; //flag team2
 	
-	ServeurJoueur joueurFlag1; //joueur qui porte le flag de la team 1 (donc joueur de team 2)
-	ServeurJoueur joueurFlag2; //joueur qui porte le flag de la team 2 (donc joueur de team 1)
+	private ServeurJoueur joueurFlag1; //joueur qui porte le flag de la team 1 (donc joueur de team 2)
+	private ServeurJoueur joueurFlag2; //joueur qui porte le flag de la team 2 (donc joueur de team 1)
+	
+	private int scoreTeam1 = 0;
+	private int scoreTeam2 = 0;
 	
 	public PartieCapture(int id, ModeJeu modeJeu) {
 		super(id, modeJeu);
@@ -26,20 +29,37 @@ public class PartieCapture extends Partie {
 		
 		checkCollisionFlag(idJoueur);
 		
-		System.out.println("Joueur  : "+ joueurFlag1 + " " + joueurFlag2);
-		
 		DatagramUpdateServerCapture datagramReponse2 = new DatagramUpdateServerCapture();
 		datagramReponse2.listeAdversaire = datagramReponse.listeAdversaire;
 		datagramReponse2.listeBonus = datagramReponse.listeBonus;
 		datagramReponse2.bonus = datagramReponse.bonus;
 		datagramReponse2.flag1 = flag1;
 		datagramReponse2.flag2 = flag2;
+		datagramReponse2.scoreTeam1 = scoreTeam1;
+		datagramReponse2.scoreTeam2 = scoreTeam2;
 		
 		return datagramReponse2;
 	}
 	
 	public void checkCollisionFlag(int idJoueur) {
 		ServeurJoueur joueur = gestionnaireJoueur.getJoueur(idJoueur);
+		
+		if(joueur == joueurFlag1) {
+			System.out.println("oui");
+			if(flag2.collisionBase(joueurFlag1.getX(), joueurFlag1.getY())) {
+				scoreTeam2++;
+				joueurFlag1=null;
+				flag1.resetPos();
+			}
+		}
+		else if(joueur == joueurFlag2) {
+			System.out.println("non");
+			if(flag1.collisionBase(joueurFlag2.getX(), joueurFlag2.getY())) {
+				scoreTeam1++;
+				joueurFlag2=null;
+				flag2.resetPos();
+			}
+		}
 		
 		if(joueur.getTeam() == 1) {
 			if(joueurFlag2 == null) {

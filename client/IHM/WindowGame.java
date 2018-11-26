@@ -90,7 +90,11 @@ public class WindowGame extends BasicGameState {
 
 		Game.gestionnairePartie.renderAll(g);
 		
-		g.popTransform();
+		try {
+			g.popTransform();
+		}catch(RuntimeException r) {
+			
+		}
 		g.drawString("Id partie : " + Game.gestionnairePartie.getIdPartie(), container.getWidth()-200,10);
 
 	}
