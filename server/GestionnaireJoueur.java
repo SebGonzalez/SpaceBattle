@@ -83,7 +83,9 @@ public class GestionnaireJoueur {
 
 					for (Missile m : listeMissile) {
 						if (m.collision(joueur)) {
-							
+							m.setAutoDestruction(true);
+							System.out.println(m.isAutoDestruction());
+							System.out.println("collide");
 							if(!joueur.getBonusState(3)) {
 							System.out.println("MORT");
 							Serveur.server.sendToTCP(joueur.getId(), "ko");

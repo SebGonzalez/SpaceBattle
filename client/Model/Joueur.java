@@ -17,6 +17,8 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 import server.ServeurJoueur;
 
 public class Joueur {
+	
+	
 
 	private String nom;
 	private float x = 900, y = 900;
@@ -30,8 +32,8 @@ public class Joueur {
 	public float boost = 1;
 
 	public Joueur() {
-		x = 1200;
-		y = 1200;
+		x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
+		y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 650);
 		nom = "test23";
 		for (int i = 0; i < 3; i++) {
 			keys_pressed[i] = false;

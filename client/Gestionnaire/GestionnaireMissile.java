@@ -73,20 +73,13 @@ public class GestionnaireMissile {
 	public void update(int delta) {
 		for (Iterator<Missile> it = listeMissileClient.iterator(); it.hasNext();) {
 			Missile m = it.next();
-			if(m.isAutoDestruction()) it.remove();
-			else {
-				
-					m.update(delta,joueur);
-
-				/*if(bonus[2]) {
-					for(ServeurJoueur joueur : listeAdversaire) 
-						if(m.getX() > joueur.getX()-500 && m.getX() < joueur.getX()+500 && m.getY() > joueur.getY()-500 && m.getY() < joueur.getY()+500)
-							m.updateTeteChercheuse(delta,joueur);
-				}*/
+				//if( m.getX() < 900 || m.getX() > 2600 || m.getY() < 650 || m.getY() > 2500)
+					//m.setAutoDestruction(true);
 			
-				
+				if(m.isAutoDestruction()) it.remove();
 			
-				}
+				else m.update(delta,joueur);
+			
 		}
 	}
 }
