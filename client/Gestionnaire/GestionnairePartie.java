@@ -9,6 +9,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import client.Game;
 import client.GameOptions;
 import client.ModeJeu;
+import client.IHM.WindowGame;
 import client.Model.Joueur;
 import client.Model.Missile;
 import network.DatagramUpdateServer;
@@ -24,12 +25,15 @@ public class GestionnairePartie {
 	
 	int idPartie = -1;
 	
+	protected TiledMap map;
+	
 	public GestionnairePartie(GameOptions options) {
 		joueur = new Joueur();
 		gestionnaireAdversaire = new GestionnaireAdversaire();
 		gestionnaireMissile = new GestionnaireMissile(joueur);
 		gestionnaireBonus = new GestionnaireBonusClient();
 		this.options = options;
+		map = WindowGame.map1;
 	}
 
 	public ArrayList<Missile> getListeMissileClient() {
@@ -69,12 +73,9 @@ public class GestionnairePartie {
 		gestionnaireAdversaire.render(g);
 		gestionnaireBonus.render(g);
 		joueur.render(g);
-		
-			
-
 	}
 	
-	public void update(GameContainer container, int delta, TiledMap map) {
+	public void update(GameContainer container, int delta) {
 		joueur.update(container, delta, map);
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
@@ -88,5 +89,15 @@ public class GestionnairePartie {
 		gestionnaireAdversaire = new GestionnaireAdversaire();
 		gestionnaireMissile = new GestionnaireMissile(joueur);
 		gestionnaireBonus = new GestionnaireBonusClient();
+	}
+
+	public void tirer() {
+		if(options.getTir())
+			gestionnaireMissile.addMissileClient();
+		
+	}
+
+	public void drawMap() {
+		map.render(0, 0);
 	}
 }

@@ -25,6 +25,7 @@ import client.GameOptions;
 import client.ModeJeu;
 import client.Gestionnaire.GestionnairePartie;
 import client.Gestionnaire.GestionnairePartieCapture;
+import client.Gestionnaire.GestionnairePartieCourse;
 
 public class WindowCreateGame extends BasicGameState implements KeyListener {
 
@@ -209,7 +210,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 					else if (options.getModeJeu() == ModeJeu.CAPTURE)
 						Game.gestionnairePartie = new GestionnairePartieCapture(options);
 					else
-						Game.gestionnairePartie = new GestionnairePartie(options); // sprint
+						Game.gestionnairePartie = new GestionnairePartieCourse(options); // sprint
 
 					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
 					Game.connexionClient.connect();

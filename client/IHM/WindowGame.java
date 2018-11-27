@@ -30,7 +30,6 @@ import client.Model.Missile;
 public class WindowGame extends BasicGameState {
 
 	private GameContainer container;
-	private TiledMap map;
 
 	public static Image ship;
 	public static Image shipJoueur;
@@ -47,6 +46,9 @@ public class WindowGame extends BasicGameState {
 	public static Image baseFlag2;
 
 	public static boolean loop = true;
+	
+	public static TiledMap map1;
+	public static TiledMap map2;
 
 	public WindowGame(int state) {
 	}
@@ -54,7 +56,8 @@ public class WindowGame extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sgb) throws SlickException {
 		this.container = container;
 		container.setAlwaysRender(true);
-		this.map = new TiledMap("ressources/map/SpaceBattle.tmx");
+		this.map1 = new TiledMap("ressources/map/SpaceBattle.tmx");
+		this.map2 = new TiledMap("ressources/map/Race.tmx");
 
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");
@@ -85,9 +88,7 @@ public class WindowGame extends BasicGameState {
 		g.translate(container.getWidth() / 2 - (int) Game.gestionnairePartie.joueur.getX(),
 				container.getHeight() / 2 - (int)  Game.gestionnairePartie.joueur.getY());
 
-		// Background
-		this.map.render(0, 0);
-
+		Game.gestionnairePartie.drawMap();
 		Game.gestionnairePartie.renderAll(g);
 		
 		try {
@@ -100,7 +101,7 @@ public class WindowGame extends BasicGameState {
 	}
 
 	public void update(GameContainer container, StateBasedGame sbg, int delta) throws SlickException {
-		Game.gestionnairePartie.update(container, delta, map);
+		Game.gestionnairePartie.update(container, delta);
 		
 		if(!loop) {
 			loop = true;
@@ -133,7 +134,7 @@ public class WindowGame extends BasicGameState {
 		if (key == Input.KEY_RIGHT || key == Input.KEY_D)
 			Game.gestionnairePartie.joueur.keys_pressed[2] = true;
 		if (key == Input.KEY_SPACE)
-			Game.gestionnairePartie.gestionnaireMissile.addMissileClient();
+			Game.gestionnairePartie.tirer();
 	}
 
 	@Override
