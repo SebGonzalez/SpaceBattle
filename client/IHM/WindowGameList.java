@@ -38,7 +38,8 @@ public class WindowGameList extends BasicGameState{
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		this.container = container;		
 		container.setAlwaysRender(true);
-		test();
+		Game.connexionClient.askForGameList();
+		//test();
 	}
 
 	@Override
