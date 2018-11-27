@@ -3,6 +3,7 @@ package network;
 import java.util.ArrayList;
 
 import client.Model.Bonus;
+import client.Model.Missile;
 import server.ServeurJoueur;
 
 /**
@@ -14,6 +15,7 @@ public class DatagramUpdateServer {
 	public ArrayList<ServeurJoueur> listeAdversaire = new ArrayList<>();
 	public ArrayList<Bonus> listeBonus = new ArrayList<>();
 	public Boolean bonus[] = new Boolean[4];
+	public int health;
 	
 	
 	

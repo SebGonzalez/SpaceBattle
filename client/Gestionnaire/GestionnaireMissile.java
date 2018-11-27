@@ -17,6 +17,7 @@ import server.ServeurJoueur;
 public class GestionnaireMissile {
 
 	private ArrayList<Missile> listeMissileClient;
+	private ArrayList<Missile> reception;
 	public ArrayList<ServeurJoueur> listeAdversaire;
 	private Joueur joueur;
 	private long lastTir;
@@ -63,6 +64,10 @@ public class GestionnaireMissile {
 			m.render(g);
 		}
 	}
+	
+	public void setReception(ArrayList<Missile> reception) {
+		this.reception = reception;
+	}
 
 	/**
 	 * Mets à jour les missiles
@@ -70,7 +75,17 @@ public class GestionnaireMissile {
 	 * 	Adversaire : 
 	 * @param delta
 	 */
+	
+	public void removeMissileonCollide(ArrayList<ServeurJoueur> listeAdversaire) {
+		
+		for(ServeurJoueur joueur : listeAdversaire) {
+			for(Missile m : listeMissileClient)
+				if(m.collision(joueur)) m.setAutoDestruction(true);
+			}
+		}
+	
 	public void update(int delta) {
+	
 		for (Iterator<Missile> it = listeMissileClient.iterator(); it.hasNext();) {
 			Missile m = it.next();
 				

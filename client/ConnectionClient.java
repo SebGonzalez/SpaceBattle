@@ -103,7 +103,7 @@ public class ConnectionClient extends Listener {
 			datagram.accelerationX = joueur.getaccelerationX();
 			datagram.accelerationY = joueur.getaccelerationY();
 			datagram.r = joueur.getRotation();
-
+			
 			datagram.listeMissile = gestionnairePartie.getListeMissileClient();
 			// if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyé :
 			// " + datagram.listeMissile.size() + " " +
@@ -117,7 +117,7 @@ public class ConnectionClient extends Listener {
 	public void createGame() {
 		SegmentCreationPartie segment = new SegmentCreationPartie();
 		segment.modeJeu = gestionnairePartie.getModeJeu();
-		segment.pseudo = "hote";
+		segment.pseudo = "hôte";
 		System.out.println("Création partie : " + segment.modeJeu);
 		client.sendTCP(segment);
 	}

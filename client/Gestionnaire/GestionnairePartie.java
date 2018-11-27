@@ -54,12 +54,13 @@ public class GestionnairePartie {
 		
 		gestionnaireAdversaire.setReception(datagram.listeAdversaire);
 		gestionnaireBonus.setReception(datagram.listeBonus,datagram.bonus);
-		
+				
 		for(int i = 0;i<4;i++) {
 			joueur.bonus[i] = gestionnaireBonus.bonus[i];
 			gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
 		}
-		joueur.collidePlayer(datagram.listeAdversaire);
+		joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
+		gestionnaireMissile.removeMissileonCollide(gestionnaireAdversaire.getListeAdversaire());
 		
 	}
 	

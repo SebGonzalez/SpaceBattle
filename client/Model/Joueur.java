@@ -30,6 +30,7 @@ public class Joueur {
 	private float directionY = (float) Math.sin(rotation);
 	public boolean bonus[] = new boolean[4];
 	public float boost = 1;
+	public int health;
 	
 	private int team = -1;
 
@@ -163,8 +164,8 @@ public class Joueur {
 	public void render(Graphics g) {
 
 		WindowGame.shipJoueur.draw(getX() - 56, getY() - 37);
+	
 		
-
 	}
 
 	public void update(GameContainer container, int delta, TiledMap map) {

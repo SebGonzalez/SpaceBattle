@@ -44,6 +44,8 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		
+		resX = Game.res.getX();
+		resY = Game.res.getY();
 		
 		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
 		font.addAsciiGlyphs(); font.addGlyphs(400,600); font.getEffects().add(new ColorEffect(java.awt.Color.white));
@@ -70,6 +72,7 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
+		resX = Game.res.getX(); resY = Game.res.getY();
 		GestionnaireImagesIHM.getRessource("background").draw(0,0,container.getWidth(), container.getHeight());
 		GestionnaireImagesIHM.getRessource("buttonJoin").draw(resX/2+100, resY/2 + 50);
 		GestionnaireImagesIHM.getRessource("buttonBack").draw(resX/2-200, resY/2+50);

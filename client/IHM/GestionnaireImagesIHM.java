@@ -11,9 +11,9 @@ public class GestionnaireImagesIHM {
 	private static String[] ressourcesMainMenu = {"ressources/menu/mainmenu/spaceBattle.png","ressources/menu/mainmenu/buttonPlay.png", "ressources/menu/mainmenu/buttonHost.png", "ressources/menu/mainmenu/buttonQuit.png", "ressources/menu/mainmenu/buttonOptions.png"};
 	private static String[] ressourcesLobby = {"ressources/menu/lobby/buttonReady.png","ressources/menu/lobby/buttonBack.png"};
 	private static String[] ressourcesOptions = {"ressources/menu/options/buttonLOWRES.png", "ressources/menu/options/buttonMIDRES.png", "ressources/menu/options/buttonHIGHRES.png", "ressources/menu/options/buttonHIGHRES.png","ressources/menu/options/buttonBack.png","ressources/menu/options/button_VOLUP.png","ressources/menu/options/button_VOLDOWN.png"};
-	private static String[] ressourcesCreateGame = {"ressources/menu/createGame/passwordOUI.png", "ressources/menu/createGame/passwordNON.png", "ressources/menu/createGame/buttonBack.png", "ressources/menu/createGame/buttonCreer.png", 
+	private static String[] ressourcesCreateGame = {"ressources/menu/createGame/buttonOui.png", "ressources/menu/createGame/buttonNon.png", "ressources/menu/createGame/buttonBack.png", "ressources/menu/createGame/buttonCreer.png", 
 													"ressources/menu/createGame/buttonMode1.png", "ressources/menu/createGame/buttonMode2.png", "ressources/menu/createGame/buttonMode3.png",
-													"ressources/menu/createGame/buttonMode1Selec.png", "ressources/menu/createGame/buttonMode2Selec.png", "ressources/menu/createGame/buttonMode3Selec.png"};
+													"ressources/menu/createGame/buttonMode1Selec.png", "ressources/menu/createGame/buttonMode2Selec.png", "ressources/menu/createGame/buttonMode3Selec.png", "ressources/menu/createGame/buttonOptions.png"};
 
 	
 	private static Hashtable<String, Image> imageList = new Hashtable<String, Image>();
@@ -61,8 +61,8 @@ public class GestionnaireImagesIHM {
 	
 	public static void loadCreateGame() throws SlickException{
 		initLoad();
-		imageList.put("passwordOUI",  new Image(ressourcesCreateGame[0]));
-		imageList.put("passwordNON",  new Image(ressourcesCreateGame[1]));
+		imageList.put("buttonOui",  new Image(ressourcesCreateGame[0]));
+		imageList.put("buttonNon",  new Image(ressourcesCreateGame[1]));
 		imageList.put("buttonBack",  new Image(ressourcesCreateGame[2]));
 		imageList.put("buttonCreer",  new Image(ressourcesCreateGame[3]));
 		imageList.put("buttonMode1", new Image(ressourcesCreateGame[4]));
@@ -71,5 +71,7 @@ public class GestionnaireImagesIHM {
 		imageList.put("buttonMode1Selec", new Image(ressourcesCreateGame[7]));
 		imageList.put("buttonMode2Selec", new Image(ressourcesCreateGame[8]));
 		imageList.put("buttonMode3Selec", new Image(ressourcesCreateGame[9]));
+		imageList.put("buttonOptions", new Image(ressourcesCreateGame[10]));
+		
 	}
 }

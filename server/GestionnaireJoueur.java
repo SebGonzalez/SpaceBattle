@@ -91,13 +91,14 @@ public class GestionnaireJoueur {
 
 					for (Missile m : listeMissile) {
 						if (m.collision(joueur)) {
-							m.setAutoDestruction(true);
-							System.out.println(m.isAutoDestruction());
-							System.out.println("collide");
 							if(!joueur.getBonusState(3)) {
+								joueur.damage();
+								System.out.println(joueur.getHealth());
+							if(joueur.getHealth() == 0) {
 							System.out.println("MORT");
 							Serveur.server.sendToTCP(joueur.getId(), "ko");
 							entryIt2.remove();
+							}
 							
 							}
 							else if (joueur.getBonusState(3)) System.out.println("joueur " + joueur.getId() + "shielded");

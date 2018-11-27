@@ -24,6 +24,7 @@ public class ServeurJoueur {
 	public Boolean bonus[] = new Boolean[4];
 	private long bonusTimer[] = new long[4];
 	private int team;
+	private int health = 3;
 	 
 	public ServeurJoueur() {
 		this.id = -1;
@@ -78,6 +79,19 @@ public class ServeurJoueur {
 	
 	public void bonusTeteChercheuseMissile() {
 		
+	}
+	
+	public void damage() {
+		health -= 1;
+	}
+	
+	public void heal() {
+		if(health <= 2)
+		health += 1;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 		
 	
