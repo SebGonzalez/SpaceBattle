@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.tiled.TiledMap;
 
 import client.Game;
+import client.GameOptions;
 import client.ModeJeu;
 import client.Model.Joueur;
 import client.Model.Missile;
@@ -19,15 +20,16 @@ public class GestionnairePartie {
 	public GestionnaireMissile gestionnaireMissile;
 	public GestionnaireBonusClient gestionnaireBonus;
 	public Joueur joueur;
+	private GameOptions options;
 	
 	int idPartie = -1;
-	ModeJeu modeJeu = null;
 	
-	public GestionnairePartie() {
+	public GestionnairePartie(GameOptions options) {
 		joueur = new Joueur();
 		gestionnaireAdversaire = new GestionnaireAdversaire();
 		gestionnaireMissile = new GestionnaireMissile(joueur);
 		gestionnaireBonus = new GestionnaireBonusClient();
+		this.options = options;
 	}
 
 	public ArrayList<Missile> getListeMissileClient() {
@@ -40,10 +42,8 @@ public class GestionnairePartie {
 		this.idPartie = idPartie;
 	}
 	
-	public ModeJeu getModeJeu() { return modeJeu; }
-	
-	public void setModeJeu(ModeJeu modeJeu) {
-		this.modeJeu = modeJeu;
+	public GameOptions getOptionsPartie() {
+		return options;
 	}
 	
 	public void setTeamJoueur(int team) {
@@ -89,6 +89,4 @@ public class GestionnairePartie {
 		gestionnaireMissile = new GestionnaireMissile(joueur);
 		gestionnaireBonus = new GestionnaireBonusClient();
 	}
-	
-	
 }

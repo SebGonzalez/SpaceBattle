@@ -21,15 +21,18 @@ public class WindowLobby extends BasicGameState{
 
 	private final int maxPlayer = 8;
 	private String hostName = "defaultName";
-	private ArrayList<Joueur> playersInLobby;
+	public static ArrayList<String> playersInLobby;
 	
 	GameContainer container;
+	
+	public static boolean hote = false;
+	public static boolean start = false;
 	
 	private int resX = Game.res.getX(), resY = Game.res.getY();
 	
 	public WindowLobby(int state) {
-		playersInLobby = new ArrayList<Joueur>();
-		testAddPlayers(16);
+		playersInLobby = new ArrayList<String>();
+		//testAddPlayers(16);
 	}
 	
 	public void setHostName(String name) {
@@ -51,23 +54,31 @@ public class WindowLobby extends BasicGameState{
 		GestionnaireImagesIHM.getRessource("background").draw(0, 0, container.getWidth(), container.getHeight());
 		
 		GestionnaireImagesIHM.getRessource("buttonBack").draw((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/1.15));
-		GestionnaireImagesIHM.getRessource("buttonReady").draw((float) ((resX/18) + (resX/1.6) + (resX/3.6) - 75), (float) (resY/1.15));
+		if(hote) GestionnaireImagesIHM.getRessource("buttonReady").draw((float) ((resX/18) + (resX/1.6) + (resX/3.6) - 75), (float) (resY/1.15));
 
 		g.drawRect((float) (resX/18.0),(float) (resY/6.0),(float) (resX/1.6),(float) (resY/1.3));
 		g.drawRect((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/6.0) + 25, (float) (resX/3.6), (float) (resY/1.6));
 		
 		g.drawString("Partie de : " + hostName, resX/2 - 75, resY/12);
 		g.drawString("Options de la partie:" , (float) ((resX/18) + (resX/1.6) + 50), resY/6);
-		
+		g.drawString("Id partie : " + Game.gestionnairePartie.getIdPartie(), container.getWidth()-200,10);
 		
 		
 		for(int i = 0; (i < playersInLobby.size() && i < 16); i++){
-			g.drawString((i+1) + ".	  " + playersInLobby.get(i).getNom(), (resX/18) + 25, (float) ((resY/6.0) + 15 + (i*25)));
+			g.drawString((i+1) + ".	  " + playersInLobby.get(i), (resX/18) + 25, (float) ((resY/6.0) + 15 + (i*25)));
 		}
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg, int delta) throws SlickException {
+		
+		//on vérifie si l'hote a lancé la partie
+		if(start) {
+			hote = false;
+			start = false;
+			sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
+		}
+		
 		Input input = container.getInput();
 		int xpos = Mouse.getX();
 		int ypos = Mouse.getY();	
@@ -79,10 +90,12 @@ public class WindowLobby extends BasicGameState{
 			}
 		}
 		
-		if( xpos > (resX/18) + (resX/1.6) + (resX/3.6) - 75 && xpos <  (resX/18) + (resX/1.6) + (resX/3.6) - 75 + 125) {
-			if(input.isMouseButtonDown(0)) {
-				Game.connexionClient.createGame();
-				sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
+		//bouton ready
+		if(hote) {
+			if( xpos > (resX/18) + (resX/1.6) + (resX/3.6) - 75 && xpos <  (resX/18) + (resX/1.6) + (resX/3.6) - 75 + 125) {
+				if(input.isMouseButtonDown(0)) {
+					Game.connexionClient.startGame();
+				}
 			}
 		}
 
@@ -96,7 +109,7 @@ public class WindowLobby extends BasicGameState{
 	
 	private void testAddPlayers(int n) {
 		for(int i =0; i<n; i++) {
-			playersInLobby.add(new Joueur("Joueur" + i, 0, 0));
+			playersInLobby.add("Joueur" + i);
 		}
 	}
 

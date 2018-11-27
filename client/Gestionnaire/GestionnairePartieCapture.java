@@ -9,6 +9,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.tiled.TiledMap;
 
 import client.Game;
+import client.GameOptions;
 import client.Model.Flag;
 import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
@@ -28,8 +29,8 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 	TrueTypeFont font2 = new TrueTypeFont(font, true);
 	
 	
-	public GestionnairePartieCapture() {
-		super();
+	public GestionnairePartieCapture(GameOptions options) {
+		super(options);
 	}
 	
 	public void renderAll(Graphics g) {

@@ -1,5 +1,6 @@
 package server;
 
+import client.GameOptions;
 import client.ModeJeu;
 import client.Model.Flag;
 import network.DatagramUpdateClient;
@@ -17,8 +18,8 @@ public class PartieCapture extends Partie {
 	private int scoreTeam1 = 0;
 	private int scoreTeam2 = 0;
 	
-	public PartieCapture(int id, ModeJeu modeJeu) {
-		super(id, modeJeu);
+	public PartieCapture(int id, GameOptions optionsPartie) {
+		super(id, optionsPartie);
 		
 		flag1 = new Flag(1200, 1200, 1);
 		flag2 = new Flag(2000, 1200, 2);

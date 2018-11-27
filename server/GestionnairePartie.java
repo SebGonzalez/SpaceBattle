@@ -21,12 +21,12 @@ public class GestionnairePartie {
 	
 	public SegmentNouveauJoueur creationPartie(SegmentCreationPartie creationPartie, int idClient) {
 		Partie partie;
-		if(creationPartie.modeJeu == ModeJeu.DEATHMATCH)
-			partie = new Partie(idPartie, creationPartie.modeJeu);
-		else if(creationPartie.modeJeu == ModeJeu.CAPTURE)
-			partie = new PartieCapture(idPartie, creationPartie.modeJeu);
+		if(creationPartie.optionsPartie.getModeJeu() == ModeJeu.DEATHMATCH)
+			partie = new Partie(idPartie, creationPartie.optionsPartie);
+		else if(creationPartie.optionsPartie.getModeJeu() == ModeJeu.CAPTURE)
+			partie = new PartieCapture(idPartie, creationPartie.optionsPartie);
 		else {
-			partie = new Partie(idPartie, creationPartie.modeJeu); //course
+			partie = new Partie(idPartie, creationPartie.optionsPartie); //course
 		}
 		
 		listePartie.add(partie);
@@ -54,8 +54,7 @@ public class GestionnairePartie {
 		
 		SegmentNouveauJoueur reponse = new SegmentNouveauJoueur();
 		reponse.idPartie = partie.getId();
-		reponse.team = nouveauJoueur.getTeam();
-		
+		reponse.team = nouveauJoueur.getTeam();	
 		
 		return reponse;
 	}

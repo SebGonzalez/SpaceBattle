@@ -41,7 +41,7 @@ public class Game extends StateBasedGame{
 	public Game() {
 		super("SpaceBattle");
 		
-		gestionnairePartie = new GestionnairePartie();
+		//gestionnairePartie = new GestionnairePartie();
 		connexionClient = new ConnectionClient(gestionnairePartie);
 		connexionClient.connect();
 	}
