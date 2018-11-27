@@ -30,6 +30,10 @@ public class Partie {
 		return id;
 	}
 	
+	public GameOptions getOptions() {
+		return optionsPartie;
+	}
+	
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
 		DatagramUpdateServer datagramReponse = gestionnaireJoueur.updateJoueur(idJoueur, datagram);
 		gestionnaireBonus.updateBonus(idJoueur, datagramReponse);

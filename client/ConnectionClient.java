@@ -8,6 +8,7 @@ import com.esotericsoftware.kryonet.Listener;
 
 import client.Gestionnaire.GestionnairePartie;
 import client.IHM.WindowGame;
+import client.IHM.WindowGameList;
 import client.IHM.WindowLobby;
 import client.Model.Bonus;
 import client.Model.Flag;
@@ -19,6 +20,7 @@ import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
 import network.SegmentCreationPartie;
+import network.SegmentListeParties;
 import network.SegmentLobby;
 import network.SegmentNouveauJoueur;
 import network.SegmentRejoindrePartie;
@@ -140,6 +142,11 @@ public class ConnectionClient extends Listener {
 		segment.idPartie = gestionnairePartie.getIdPartie();
 		client.sendTCP(segment);
 	}
+	
+	public void askForGameList() {
+		SegmentListeParties segment = new SegmentListeParties();
+		client.sendTCP(segment);
+	}
 
 	/**
 	 * Fonction appelée dès qu'un packet ou un datagram est reçu
@@ -165,6 +172,8 @@ public class ConnectionClient extends Listener {
 			WindowLobby.playersInLobby = ((SegmentLobby) o).listeJoueurLobby;
 		} else if(o instanceof SegmentStartPartie) {
 			WindowLobby.start = true;
+		} else if(o instanceof SegmentListeParties) {
+			WindowGameList.setListeParties(((SegmentListeParties) o).listeParties);
 		}
 	}
 }

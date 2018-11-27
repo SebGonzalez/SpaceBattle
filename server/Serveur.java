@@ -18,6 +18,7 @@ import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
 import network.SegmentCreationPartie;
+import network.SegmentListeParties;
 import network.SegmentLobby;
 import network.SegmentNouveauJoueur;
 import network.SegmentRejoindrePartie;
@@ -115,6 +116,10 @@ public class Serveur extends Listener {
 			for(Entry<Integer,ServeurJoueur> e : partie.gestionnaireJoueur.listePlayers.entrySet()) {
 				server.sendToTCP(e.getKey(), o);
 			}
+		} else if(o instanceof SegmentListeParties) {
+			SegmentListeParties response = new SegmentListeParties();
+			response.listeParties = gestionnairePartie.getListePartie();
+			server.sendToTCP(c.getID(), response);
 		}
 	}
 

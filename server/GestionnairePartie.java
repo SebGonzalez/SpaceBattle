@@ -67,6 +67,11 @@ public class GestionnairePartie {
 		
 		return null;
 	}
+	
+	public ArrayList<Partie> getListePartie(){
+		return listePartie;
+	}
+	
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
 		
 		Partie p = getPartie(datagram.idPartie);

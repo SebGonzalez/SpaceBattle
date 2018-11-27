@@ -14,6 +14,7 @@ public class GestionnaireImagesIHM {
 	private static String[] ressourcesCreateGame = {"ressources/menu/createGame/buttonOui.png", "ressources/menu/createGame/buttonNon.png", "ressources/menu/createGame/buttonBack.png", "ressources/menu/createGame/buttonCreer.png", 
 													"ressources/menu/createGame/buttonMode1.png", "ressources/menu/createGame/buttonMode2.png", "ressources/menu/createGame/buttonMode3.png",
 													"ressources/menu/createGame/buttonMode1Selec.png", "ressources/menu/createGame/buttonMode2Selec.png", "ressources/menu/createGame/buttonMode3Selec.png", "ressources/menu/createGame/buttonOptions.png"};
+	private static String[] ressourcesGameList = {"ressources/menu/gameList/buttonBack.png"};
 
 	
 	private static Hashtable<String, Image> imageList = new Hashtable<String, Image>();
@@ -72,6 +73,10 @@ public class GestionnaireImagesIHM {
 		imageList.put("buttonMode2Selec", new Image(ressourcesCreateGame[8]));
 		imageList.put("buttonMode3Selec", new Image(ressourcesCreateGame[9]));
 		imageList.put("buttonOptions", new Image(ressourcesCreateGame[10]));
-		
+	}
+	
+	public static void loadGameList() throws SlickException{
+		initLoad();
+		imageList.put("buttonBack", new Image(ressourcesGameList[0]));
 	}
 }
