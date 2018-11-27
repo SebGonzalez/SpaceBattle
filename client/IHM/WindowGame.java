@@ -54,7 +54,7 @@ public class WindowGame extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sgb) throws SlickException {
 		this.container = container;
 		container.setAlwaysRender(true);
-		this.map = new TiledMap("ressources/map/SpaceBattle.tmx");
+		this.map = new TiledMap("ressources/map/Race.tmx");
 
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");
