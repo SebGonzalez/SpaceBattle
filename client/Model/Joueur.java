@@ -35,10 +35,8 @@ public class Joueur {
 	private int team = -1;
 
 	public Joueur() {
-		//x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
-		//y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 650);
-		x=846;
-		y =1344;
+		x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
+		y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 650);
 		nom = "test23";
 		for (int i = 0; i < 3; i++) {
 			keys_pressed[i] = false;
