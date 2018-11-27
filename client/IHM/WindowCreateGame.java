@@ -30,6 +30,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 	private GameContainer container;
 	
 	private boolean privateGame;
+	private TextField playerName;
 	private String password;
 	private int maxPlayers;
 	private int currentField;
@@ -73,6 +74,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener{
 		
 		g.drawString("Creation de la partie: ", resX/2 - 100, resY/4 - 30);
 		g.drawString("Mode de jeu: ", resX/2 - 200, resY/4);
+		g.drawString("Entrez votre nom : ", resX/2 - 300, resY - 35);
 		
 		g.drawString("Nombre maximum de joueurs (2-64): ", resX/2 - 200, resY/3 + 70);
 		maxPlayersField = new TextField(container, font, resX/2 - 200, resY/3 + 100, 400, 20);

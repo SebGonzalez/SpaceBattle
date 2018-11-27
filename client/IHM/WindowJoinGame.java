@@ -29,9 +29,13 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 
 	private GameContainer container;
 	private TextField gameID;
-	private String input;
+	private TextField playerName;
+	private String input = "";
+	private String input2 = "";
 	private UnicodeFont font;
 	private int resX = Game.res.getX(), resY = Game.res.getY();
+	
+	boolean nameUse = true;
 	
 	public WindowJoinGame(int state) {
 		input="";
@@ -53,7 +57,16 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadJoinGame();
+		
+		gameID = new TextField(container, font, resX/2 - 200, resY/2 - 10, 400, 20);
+		gameID.setTextColor(Color.white);
+		
+		playerName = new TextField(container, font, resX/2 - 200, resY/3 - 10, 400, 20);
+		playerName.setTextColor(Color.white);
+		playerName.setText(input2);
 	}
+	
+	
 
 	@Override
 	public void render(GameContainer container, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -61,25 +74,39 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		GestionnaireImagesIHM.getRessource("buttonJoin").draw(resX/2+100, resY/2 + 50);
 		GestionnaireImagesIHM.getRessource("buttonBack").draw(resX/2-200, resY/2+50);
 		g.drawString("Entrez l'ID de la partie: ", resX/2 - 200, resY/2 - 35);
-		gameID = new TextField(container, font, resX/2 - 200, resY/2 - 10, 400, 20);
-		gameID.setTextColor(Color.white);
-		gameID.setText(input);
+		g.drawString("Entrez votre nom : ", resX/2 - 200, resY/3 - 35);
+		
+		
+
 		gameID.render(container, g);
+		playerName.render(container, g);
 	}
 		
 	public void keyReleased(int key, char c) {
-		if(Character.isDigit(c)) {
+		if(key == Input.KEY_ENTER)
+			nameUse = !nameUse;
+		
+		
+		if(nameUse) input2+=c;
+		else {
+			if( Character.isDigit(c) ) 
 			input+=c;
-			gameID.setText(input);
 		}
-		if(key == Input.KEY_BACK && input.length() > 0)
-			input = input.substring(0, input.length()-1);
-	}
+			if(key == Input.KEY_BACK && input2.length() > 0)
+				input2 = input2.substring(0, input2.length()-1);
+		
+		
+			
+			if(key == Input.KEY_BACK && input.length() > 0)
+				input = input.substring(0, input.length()-1);
+		
+		}
+	
 
 	@Override
 	public void update(GameContainer container, StateBasedGame sbg, int delta) throws SlickException {
 		gameID.setText(input);
-		
+		playerName.setText(input2);
 		Input input = container.getInput();
 		int xpos = Mouse.getX(); int ypos = Mouse.getY();
 		
@@ -97,7 +124,7 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 				Game.gestionnairePartie.setModeJeu(selectedMode);
 				Game.connexionClient.connect();
 				Game.gestionnairePartie.setIdPartie(Integer.parseInt(gameID.getText()));
-				Game.connexionClient.joinGame();
+				Game.connexionClient.joinGame(playerName.getText());
 				sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))

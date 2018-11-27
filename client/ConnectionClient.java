@@ -117,14 +117,15 @@ public class ConnectionClient extends Listener {
 	public void createGame() {
 		SegmentCreationPartie segment = new SegmentCreationPartie();
 		segment.modeJeu = gestionnairePartie.getModeJeu();
+		segment.pseudo = "hote";
 		System.out.println("Création partie : " + segment.modeJeu);
 		client.sendTCP(segment);
 	}
 	
-	public void joinGame() {
+	public void joinGame(String pseudo) {
 		SegmentRejoindrePartie segment = new SegmentRejoindrePartie();
 		segment.idPartie = gestionnairePartie.getIdPartie();
-		segment.pseudo = "";
+		segment.pseudo = pseudo;
 		client.sendTCP(segment);
 	}
 
@@ -135,6 +136,7 @@ public class ConnectionClient extends Listener {
 		if (o instanceof DatagramUpdateServer) {
 			// System.out.println("Update reçu");
 			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
+			
 			gestionnairePartie.setReception(datagram);
 				
 		} else if (o instanceof SegmentNouveauJoueur) {

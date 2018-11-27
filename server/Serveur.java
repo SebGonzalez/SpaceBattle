@@ -94,6 +94,8 @@ public class Serveur extends Listener {
 		else if(o instanceof SegmentRejoindrePartie) {
 			SegmentNouveauJoueur segmentReponse = gestionnairePartie.rejoindrePartie((SegmentRejoindrePartie)o, c.getID());
 			server.sendToTCP(c.getID(), segmentReponse);
+			
+			
 		}
 	}
 

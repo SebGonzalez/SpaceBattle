@@ -73,8 +73,9 @@ public class GestionnaireMissile {
 	public void update(int delta) {
 		for (Iterator<Missile> it = listeMissileClient.iterator(); it.hasNext();) {
 			Missile m = it.next();
-				//if( m.getX() < 900 || m.getX() > 2600 || m.getY() < 650 || m.getY() > 2500)
-					//m.setAutoDestruction(true);
+				
+			if( m.getX() < 900 || m.getX() > 2600 || m.getY() < 650 || m.getY() > 2500)
+				m.setAutoDestruction(true);
 			
 				if(m.isAutoDestruction()) it.remove();
 			

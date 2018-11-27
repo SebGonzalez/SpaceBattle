@@ -11,6 +11,7 @@ import client.ModeJeu;
 import client.Model.Joueur;
 import client.Model.Missile;
 import network.DatagramUpdateServer;
+import server.ServeurJoueur;
 
 public class GestionnairePartie {
 	
@@ -58,6 +59,7 @@ public class GestionnairePartie {
 			joueur.bonus[i] = gestionnaireBonus.bonus[i];
 			gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
 		}
+		joueur.collidePlayer(datagram.listeAdversaire);
 		
 	}
 	
@@ -66,6 +68,9 @@ public class GestionnairePartie {
 		gestionnaireAdversaire.render(g);
 		gestionnaireBonus.render(g);
 		joueur.render(g);
+		
+			
+
 	}
 	
 	public void update(GameContainer container, int delta, TiledMap map) {

@@ -33,6 +33,7 @@ public class GestionnairePartie {
 		
 		ServeurJoueur nouveauJoueur = new ServeurJoueur(idClient);
 		partie.addJoueur(nouveauJoueur);
+		nouveauJoueur.setName(creationPartie.pseudo);
 		
 		SegmentNouveauJoueur reponse = new SegmentNouveauJoueur();
 		reponse.idPartie = idPartie;
@@ -47,11 +48,14 @@ public class GestionnairePartie {
 		Partie partie = getPartie(segment.idPartie);
 		
 		ServeurJoueur nouveauJoueur = new ServeurJoueur(idClient);
+		nouveauJoueur.setName(segment.pseudo);
 		partie.addJoueur(nouveauJoueur);
+		
 		
 		SegmentNouveauJoueur reponse = new SegmentNouveauJoueur();
 		reponse.idPartie = partie.getId();
 		reponse.team = nouveauJoueur.getTeam();
+		
 		
 		return reponse;
 	}

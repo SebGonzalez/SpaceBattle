@@ -10,6 +10,7 @@ import client.Model.Missile;
  *
  */
 public class DatagramUpdateClient {
+	public String name;
 	public int idPartie;
 	public float x;
 	public float y;

@@ -12,7 +12,8 @@ import network.DatagramUpdateServer;
  *
  */
 public class ServeurJoueur {
-
+	
+	private String name;
 	private int id;
 	private float x;
 	private float y;
@@ -137,6 +138,14 @@ public class ServeurJoueur {
 
 	public void setListeMissile(ArrayList<Missile> listeMissile) {
 		this.listeMissile = listeMissile;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

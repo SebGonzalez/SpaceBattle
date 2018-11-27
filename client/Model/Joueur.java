@@ -139,6 +139,8 @@ public class Joueur {
 			addaccelerationY(delta * (getdirectionY() / 200));
 
 	}
+	
+
 
 	public float getRotation() {
 		return rotation;
@@ -161,6 +163,8 @@ public class Joueur {
 	public void render(Graphics g) {
 
 		WindowGame.shipJoueur.draw(getX() - 56, getY() - 37);
+		
+
 	}
 
 	public void update(GameContainer container, int delta, TiledMap map) {
@@ -211,7 +215,7 @@ public class Joueur {
 		}
 	}
 
-	public void collidePlayer(float futurX, float futurY, ArrayList<ServeurJoueur> listeAdversaire) {
+	public void collidePlayer(ArrayList<ServeurJoueur> listeAdversaire) {
 
 		for (ServeurJoueur joueur : listeAdversaire) {
 			if (x > joueur.getX() - 25 && x < joueur.getX() + 25 && y > joueur.getY() - 25 && y < joueur.getY() + 25) {
