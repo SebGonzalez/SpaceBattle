@@ -46,7 +46,6 @@ public class PartieCapture extends Partie {
 		ServeurJoueur joueur = gestionnaireJoueur.getJoueur(idJoueur);
 		
 		if(joueur == joueurFlag1) {
-			System.out.println("oui");
 			if(flag2.collisionBase(joueurFlag1.getX(), joueurFlag1.getY())) {
 				scoreTeam2++;
 				joueurFlag1=null;

@@ -7,6 +7,7 @@ import client.Model.Joueur;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.SegmentCreationPartie;
+import network.SegmentListeParties;
 import network.SegmentNouveauJoueur;
 import network.SegmentRejoindrePartie;
 
@@ -70,6 +71,16 @@ public class GestionnairePartie {
 	
 	public ArrayList<Partie> getListePartie(){
 		return listePartie;
+	}
+	
+	public SegmentListeParties sendListePartie(){
+		SegmentListeParties segment = new SegmentListeParties();
+		
+		for(Partie p : listePartie) {
+			segment.listeIdParties.add(p.getId());
+			segment.listeOptionsParties.add(p.optionsPartie);
+		}
+		return segment;
 	}
 	
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {

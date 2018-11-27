@@ -57,6 +57,7 @@ public class Serveur extends Listener {
 		server.getKryo().register(GameOptions.class);
 		server.getKryo().register(SegmentLobby.class);
 		server.getKryo().register(SegmentStartPartie.class);
+		server.getKryo().register(SegmentListeParties.class);
 
 
 		server.bind(portTCP, portUDP);
@@ -116,10 +117,11 @@ public class Serveur extends Listener {
 			for(Entry<Integer,ServeurJoueur> e : partie.gestionnaireJoueur.listePlayers.entrySet()) {
 				server.sendToTCP(e.getKey(), o);
 			}
-		} else if(o instanceof SegmentListeParties) {
-			SegmentListeParties response = new SegmentListeParties();
-			response.listeParties = gestionnairePartie.getListePartie();
-			server.sendToTCP(c.getID(), response);
+		} else if(o instanceof String) {
+			if(o.equals("liste")) {
+				SegmentListeParties response = gestionnairePartie.sendListePartie();
+				server.sendToTCP(c.getID(), response);
+			}
 		}
 	}
 

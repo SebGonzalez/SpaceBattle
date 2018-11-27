@@ -77,6 +77,7 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(GameOptions.class);
 		client.getKryo().register(SegmentLobby.class);
 		client.getKryo().register(SegmentStartPartie.class);
+		client.getKryo().register(SegmentListeParties.class);
 		
 		client.addListener(this);
 
@@ -144,8 +145,7 @@ public class ConnectionClient extends Listener {
 	}
 	
 	public void askForGameList() {
-		SegmentListeParties segment = new SegmentListeParties();
-		client.sendTCP(segment);
+		client.sendTCP("liste");
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class ConnectionClient extends Listener {
 		} else if(o instanceof SegmentStartPartie) {
 			WindowLobby.start = true;
 		} else if(o instanceof SegmentListeParties) {
-			WindowGameList.setListeParties(((SegmentListeParties) o).listeParties);
+			WindowGameList.setListeParties( ((SegmentListeParties) o).listeIdParties, ((SegmentListeParties) o).listeOptionsParties);
 		}
 	}
 }
