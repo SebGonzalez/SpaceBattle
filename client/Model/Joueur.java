@@ -152,6 +152,8 @@ public class Joueur {
 		setdirectionX();
 		setdirectionY();
 		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		WindowGame.damage2Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		WindowGame.damage3Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 
 	public void rotationDroite(int delta) {
@@ -159,20 +161,21 @@ public class Joueur {
 		setdirectionX();
 		setdirectionY();
 		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		WindowGame.damage2Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		WindowGame.damage3Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 
 	public void render(Graphics g) {
 
 		WindowGame.shipJoueur.draw(getX() - 56, getY() - 37);
+		
+		if( health ==  2) WindowGame.damage2Joueur.draw(x-56,y-37);
+		if( health ==  1) WindowGame.damage3Joueur.draw(x-56,y-37);
+		
 		if(bonus[0])WindowGame.bonus1.draw(x + 30, y + 50, 20,20);
 		if(bonus[1])WindowGame.bonus2.draw(x - 50 , y + 50,20,20);
 		if(bonus[2])WindowGame.bonus3.draw(x + 30, y - 60, 20,20);
-		if(bonus[3])WindowGame.bonus4.draw(x - 50, y - 60, 20,20);
-		
-		if( health ==  2) WindowGame.damage1.draw(x,y);
-		if( health ==  1) WindowGame.damage2.draw(x,y);
-	
-		
+		if(bonus[3])WindowGame.bonus4.draw(x - 50, y - 60, 20,20);	
 	}
 
 	public void update(GameContainer container, int delta, TiledMap map) {

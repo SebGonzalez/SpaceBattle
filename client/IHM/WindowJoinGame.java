@@ -117,7 +117,7 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		
 		if((xpos > resX/2 + 100 && xpos < resX/2 + 200) && ( ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
-				ModeJeu selectedMode = ModeJeu.COURSE; //A recup dans la liste de partie
+				ModeJeu selectedMode = ModeJeu.DEATHMATCH; //A recup dans la liste de partie
 				if(selectedMode == ModeJeu.DEATHMATCH) //remplacer par gameOptions.getModeJeu() == ModeJeu.DEATHMATCH
 					Game.gestionnairePartie = new GestionnairePartie(new GameOptions());
 				else if(selectedMode == ModeJeu.CAPTURE)

@@ -13,8 +13,8 @@ public class GameOptions {
 	private boolean lobby;
 
 	public GameOptions() {
-		collisions = reapparitions = tir = privateGame = false;
-		lobby = true; //à supprimer
+		collisions = reapparitions = tir = privateGame = true;
+		lobby = false; //à supprimer
 		password = "";
 		maxPlayers = 8;
 		modeJeu = ModeJeu.DEATHMATCH;
