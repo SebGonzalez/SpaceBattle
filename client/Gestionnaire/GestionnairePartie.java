@@ -60,6 +60,7 @@ public class GestionnairePartie {
 			gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
 		}
 		joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
+		joueur.health = datagram.health;
 		gestionnaireMissile.removeMissileonCollide(gestionnaireAdversaire.getListeAdversaire());
 		
 	}

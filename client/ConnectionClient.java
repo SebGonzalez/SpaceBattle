@@ -138,6 +138,7 @@ public class ConnectionClient extends Listener {
 			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
 			
 			gestionnairePartie.setReception(datagram);
+			
 				
 		} else if (o instanceof SegmentNouveauJoueur) {
 			gestionnairePartie.setIdPartie(((SegmentNouveauJoueur) o).idPartie);
