@@ -8,6 +8,8 @@ import com.esotericsoftware.kryonet.Listener;
 
 import client.Gestionnaire.GestionnairePartie;
 import client.IHM.WindowGame;
+import client.IHM.WindowGameList;
+import client.IHM.WindowLobby;
 import client.Model.Bonus;
 import client.Model.Flag;
 import client.Model.Joueur;
@@ -18,8 +20,11 @@ import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
 import network.SegmentCreationPartie;
+import network.SegmentListeParties;
+import network.SegmentLobby;
 import network.SegmentNouveauJoueur;
 import network.SegmentRejoindrePartie;
+import network.SegmentStartPartie;
 import server.ServeurJoueur;
 
 /**
@@ -69,6 +74,10 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(DatagramUpdateServerCapture.class);
 		client.getKryo().register(Flag.class);
 		client.getKryo().register(SegmentRejoindrePartie.class);
+		client.getKryo().register(GameOptions.class);
+		client.getKryo().register(SegmentLobby.class);
+		client.getKryo().register(SegmentStartPartie.class);
+		client.getKryo().register(SegmentListeParties.class);
 		
 		client.addListener(this);
 
@@ -116,9 +125,9 @@ public class ConnectionClient extends Listener {
 
 	public void createGame() {
 		SegmentCreationPartie segment = new SegmentCreationPartie();
-		segment.modeJeu = gestionnairePartie.getModeJeu();
+		segment.optionsPartie = gestionnairePartie.getOptionsPartie();
 		segment.pseudo = "hôte";
-		System.out.println("Création partie : " + segment.modeJeu);
+		System.out.println("Création partie : " + segment.optionsPartie);
 		client.sendTCP(segment);
 	}
 	
@@ -127,6 +136,16 @@ public class ConnectionClient extends Listener {
 		segment.idPartie = gestionnairePartie.getIdPartie();
 		segment.pseudo = pseudo;
 		client.sendTCP(segment);
+	}
+	
+	public void startGame() {
+		SegmentStartPartie segment = new SegmentStartPartie();
+		segment.idPartie = gestionnairePartie.getIdPartie();
+		client.sendTCP(segment);
+	}
+	
+	public void askForGameList() {
+		client.sendTCP("liste");
 	}
 
 	/**
@@ -150,6 +169,12 @@ public class ConnectionClient extends Listener {
 				client.close();
 				WindowGame.loop = false;
 			}
+		} else if(o instanceof SegmentLobby) {
+			WindowLobby.playersInLobby = ((SegmentLobby) o).listeJoueurLobby;
+		} else if(o instanceof SegmentStartPartie) {
+			WindowLobby.start = true;
+		} else if(o instanceof SegmentListeParties) {
+			WindowGameList.setListeParties( ((SegmentListeParties) o).listeIdParties, ((SegmentListeParties) o).listeOptionsParties);
 		}
 	}
 }

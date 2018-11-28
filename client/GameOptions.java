@@ -9,14 +9,15 @@ public class GameOptions {
 	private boolean privateGame;
 	private String password;
 	private int maxPlayers;
-	private ModeJeu selectedMode;
+	private ModeJeu modeJeu;
 	private boolean lobby;
 
 	public GameOptions() {
 		collisions = reapparitions = tir = privateGame = false;
+		lobby = true; //à supprimer
 		password = "";
 		maxPlayers = 8;
-		selectedMode = ModeJeu.DEATHMATCH;
+		modeJeu = ModeJeu.DEATHMATCH;
 	}
 	
 	public boolean getLobby() {
@@ -51,12 +52,12 @@ public class GameOptions {
 		this.maxPlayers = maxPlayers;
 	}
 
-	public ModeJeu getSelectedMode() {
-		return selectedMode;
+	public ModeJeu getModeJeu() {
+		return modeJeu;
 	}
 
-	public void setSelectedMode(ModeJeu selectedMode) {
-		this.selectedMode = selectedMode;
+	public void setModeJeu(ModeJeu mode) {
+		this.modeJeu = mode;
 	}
 	
 	public boolean getCollisions() {
@@ -76,6 +77,11 @@ public class GameOptions {
 	}
 	public void setTir(boolean tir) {
 		this.tir = tir;
+	}
+	
+	@Override
+	public String toString() {
+		return "ModeJeu : " + modeJeu + " reapparition : " + reapparitions + " lobby : " + lobby + " collision : " + collisions + " tir : " + tir;
 	}
 	
 	

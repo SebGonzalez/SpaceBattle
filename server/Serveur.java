@@ -1,11 +1,13 @@
 package server;
 
 import java.io.IOException;
+import java.util.Map.Entry;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
+import client.GameOptions;
 import client.ModeJeu;
 import client.Model.Bonus;
 import client.Model.Flag;
@@ -16,8 +18,11 @@ import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
 import network.MissileSerializer;
 import network.SegmentCreationPartie;
+import network.SegmentListeParties;
+import network.SegmentLobby;
 import network.SegmentNouveauJoueur;
 import network.SegmentRejoindrePartie;
+import network.SegmentStartPartie;
 
 /**
  * Classe principale du serveur
@@ -49,6 +54,10 @@ public class Serveur extends Listener {
 		server.getKryo().register(DatagramUpdateServerCapture.class);
 		server.getKryo().register(Flag.class);
 		server.getKryo().register(SegmentRejoindrePartie.class);
+		server.getKryo().register(GameOptions.class);
+		server.getKryo().register(SegmentLobby.class);
+		server.getKryo().register(SegmentStartPartie.class);
+		server.getKryo().register(SegmentListeParties.class);
 
 
 		server.bind(portTCP, portUDP);
@@ -80,8 +89,6 @@ public class Serveur extends Listener {
 	 */
 	public void received(Connection c, Object o) {
 		if(o instanceof DatagramUpdateClient) {
-			
-			//System.out.println("datagramme recu par le serveur");
 			DatagramUpdateClient datagram = (DatagramUpdateClient)o;
 			DatagramUpdateServer datagramReponse = gestionnairePartie.updateClient(c.getID(), datagram);
 	
@@ -95,7 +102,26 @@ public class Serveur extends Listener {
 			SegmentNouveauJoueur segmentReponse = gestionnairePartie.rejoindrePartie((SegmentRejoindrePartie)o, c.getID());
 			server.sendToTCP(c.getID(), segmentReponse);
 			
-			
+			Partie partie = gestionnairePartie.getPartie( ((SegmentRejoindrePartie)o).idPartie);
+			if( !partie.getStart()) {
+				
+				SegmentLobby segment = partie.getSegmentLobby();
+				for(Entry<Integer,ServeurJoueur> e : partie.gestionnaireJoueur.listePlayers.entrySet()) {
+					server.sendToTCP(e.getKey(), segment);
+				}
+			}
+		}
+		else if(o instanceof SegmentStartPartie) {
+			Partie partie = gestionnairePartie.getPartie( ((SegmentStartPartie)o).idPartie);
+			partie.startPartie();
+			for(Entry<Integer,ServeurJoueur> e : partie.gestionnaireJoueur.listePlayers.entrySet()) {
+				server.sendToTCP(e.getKey(), o);
+			}
+		} else if(o instanceof String) {
+			if(o.equals("liste")) {
+				SegmentListeParties response = gestionnairePartie.sendListePartie();
+				server.sendToTCP(c.getID(), response);
+			}
 		}
 	}
 

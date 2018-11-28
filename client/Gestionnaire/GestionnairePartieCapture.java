@@ -9,6 +9,7 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.tiled.TiledMap;
 
 import client.Game;
+import client.GameOptions;
 import client.Model.Flag;
 import network.DatagramUpdateServer;
 import network.DatagramUpdateServerCapture;
@@ -28,8 +29,8 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 	TrueTypeFont font2 = new TrueTypeFont(font, true);
 	
 	
-	public GestionnairePartieCapture() {
-		super();
+	public GestionnairePartieCapture(GameOptions options) {
+		super(options);
 	}
 	
 	public void renderAll(Graphics g) {
@@ -58,8 +59,8 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 		scoreTeam2 = ((DatagramUpdateServerCapture)datagram).scoreTeam2;
 	}
 	
-	public void update(GameContainer container, int delta, TiledMap map) {
-		super.update(container, delta, map);
+	public void update(GameContainer container, int delta) {
+		super.update(container, delta);
 		if(flagEnemyReception != null) {
 			flagTeam = flagTeamReception;
 			flagEnemy = flagEnemyReception;

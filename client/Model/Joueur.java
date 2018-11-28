@@ -207,18 +207,23 @@ public class Joueur {
 		}
 
 		else {
-			if (x < 950 || x > 2550) {
+			//if (x < 950 || x > 2550) {
+			
+			//System.out.println( Math.abs(futurX-x) + " : " + Math.abs(futurY-y) );
+			if(Math.abs(futurX-x) > Math.abs(futurY-y)) {
 				accelerationX *= -1;
 				if (accelerationX < -2 || accelerationX > 2) {
 					accelerationX /= 1.5;
 				}
+			//}
 			}
-
-			if (y < 650 || y > 2400) {
+			else {
+			//if (y < 650 || y > 2400) {
 				accelerationY *= -1;
 				if (accelerationY < -2 || accelerationY > 2) {
 					accelerationY /= 1.5;
 				}
+			//}
 			}
 		}
 	}

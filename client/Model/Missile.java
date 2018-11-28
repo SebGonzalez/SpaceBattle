@@ -47,7 +47,7 @@ public class Missile {
 		this.y = y;
 	}
 
-	public void update(int delta,Joueur joueur) {
+	public void update(int delta, Joueur joueur) {
 		if(System.currentTimeMillis() - time >= 10000) {
 			autoDestruction = true;
 		}

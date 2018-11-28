@@ -30,6 +30,7 @@ public class Game extends StateBasedGame{
 	public static final int options = 3;
 	public static final int joinGame = 4;
 	public static final int createGame = 5;
+	public static final int gameList = 6;
 	public static Resolution res = Resolution.LOW;
 	public static Music ambiance;
 	public static float musicVolume = 0.0f;
@@ -41,7 +42,7 @@ public class Game extends StateBasedGame{
 	public Game() {
 		super("SpaceBattle");
 		
-		gestionnairePartie = new GestionnairePartie();
+		//gestionnairePartie = new GestionnairePartie();
 		connexionClient = new ConnectionClient(gestionnairePartie);
 		connexionClient.connect();
 	}
@@ -75,6 +76,7 @@ public class Game extends StateBasedGame{
 		this.addState(new WindowOptions(options));
 		this.addState(new WindowJoinGame(joinGame));
 		this.addState(new WindowCreateGame(createGame));
+		this.addState(new WindowGameList(gameList));
 	}
 	
 	public static void main(String[] args) {

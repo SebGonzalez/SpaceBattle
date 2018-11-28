@@ -1,5 +1,6 @@
 package server;
 
+import client.GameOptions;
 import client.ModeJeu;
 import client.Model.Flag;
 import network.DatagramUpdateClient;
@@ -17,8 +18,8 @@ public class PartieCapture extends Partie {
 	private int scoreTeam1 = 0;
 	private int scoreTeam2 = 0;
 	
-	public PartieCapture(int id, ModeJeu modeJeu) {
-		super(id, modeJeu);
+	public PartieCapture(int id, GameOptions optionsPartie) {
+		super(id, optionsPartie);
 		
 		flag1 = new Flag(1200, 1200, 1);
 		flag2 = new Flag(2000, 1200, 2);
@@ -45,7 +46,6 @@ public class PartieCapture extends Partie {
 		ServeurJoueur joueur = gestionnaireJoueur.getJoueur(idJoueur);
 		
 		if(joueur == joueurFlag1) {
-			System.out.println("oui");
 			if(flag2.collisionBase(joueurFlag1.getX(), joueurFlag1.getY())) {
 				scoreTeam2++;
 				joueurFlag1=null;

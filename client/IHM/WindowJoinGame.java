@@ -16,6 +16,7 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.ConnectionClient;
 import client.Game;
+import client.GameOptions;
 import client.ModeJeu;
 import client.Gestionnaire.GestionnairePartie;
 import client.Gestionnaire.GestionnairePartieCapture;
@@ -116,19 +117,24 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		if((xpos > resX/2 + 100 && xpos < resX/2 + 200) && ( ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {
 				ModeJeu selectedMode = ModeJeu.CAPTURE; //A recup dans la liste de partie
-				if(selectedMode == ModeJeu.DEATHMATCH)
-					Game.gestionnairePartie = new GestionnairePartie();
+				if(selectedMode == ModeJeu.DEATHMATCH) //remplacer par gameOptions.getModeJeu() == ModeJeu.DEATHMATCH
+					Game.gestionnairePartie = new GestionnairePartie(new GameOptions());
 				else if(selectedMode == ModeJeu.CAPTURE)
-					Game.gestionnairePartie = new GestionnairePartieCapture();
+					Game.gestionnairePartie = new GestionnairePartieCapture(new GameOptions());
 				else
-					Game.gestionnairePartie = new GestionnairePartie(); //sprint
+					Game.gestionnairePartie = new GestionnairePartie(new GameOptions()); //sprint
 				
 				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
-				Game.gestionnairePartie.setModeJeu(selectedMode);
 				Game.connexionClient.connect();
 				Game.gestionnairePartie.setIdPartie(Integer.parseInt(gameID.getText()));
 				Game.connexionClient.joinGame(playerName.getText());
-				sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
+				
+				if(!Game.gestionnairePartie.getOptionsPartie().getLobby())
+					sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
+				else {
+					WindowLobby.hote = false;
+					sbg.enterState(Game.lobby, new EmptyTransition(), new FadeInTransition(Color.black));
+				}
 			}
 		if((xpos > resX/2 - 200 && xpos < resX/2 -100) && (ypos > resY - (resY/2 + 100) && ypos < resY - (resY/2 + 55)))
 			if(input.isMouseButtonDown(0)) {

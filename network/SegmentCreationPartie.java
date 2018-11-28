@@ -1,8 +1,9 @@
 package network;
 
+import client.GameOptions;
 import client.ModeJeu;
 
 public class SegmentCreationPartie {
-	public ModeJeu modeJeu;
 	public String pseudo;
+	public GameOptions optionsPartie;
 }

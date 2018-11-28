@@ -1,8 +1,11 @@
 package server;
 
-import client.ModeJeu;
+import java.util.Map.Entry;
+
+import client.GameOptions;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
+import network.SegmentLobby;
 
 public class Partie {
 
@@ -10,17 +13,25 @@ public class Partie {
 	public GestionnaireBonusServeur gestionnaireBonus;
 	private int id;
 	
-	private ModeJeu modeJeu;
+	private boolean start = true;
 	
-	public Partie(int id, ModeJeu modeJeu) {
+	protected GameOptions optionsPartie;
+	
+	public Partie(int id, GameOptions optionsPartie) {
 		this.id = id;
-		this.modeJeu = modeJeu;
+		this.optionsPartie = optionsPartie;
 		gestionnaireJoueur = new GestionnaireJoueur();
 		gestionnaireBonus = new GestionnaireBonusServeur(gestionnaireJoueur);
+		
+		if(optionsPartie.getLobby()) start = false;
 	}
 
 	public int getId() {
 		return id;
+	}
+	
+	public GameOptions getOptions() {
+		return optionsPartie;
 	}
 	
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
@@ -38,6 +49,23 @@ public class Partie {
 		if(gestionnaireJoueur.getJoueur(id) != null) {
 			gestionnaireJoueur.removeJoueur(id);
 		}
+	}
+	
+	public boolean getStart() {
+		return start;
+	}
+	
+	public void startPartie() {
+		start = true;
+	}
+
+	public SegmentLobby getSegmentLobby() {
+		SegmentLobby segment = new SegmentLobby();
+		
+		for(Entry<Integer,ServeurJoueur> e : gestionnaireJoueur.listePlayers.entrySet()) {
+			segment.listeJoueurLobby.add(e.getValue().getName());
+		}
+		return segment;
 	}
 	
 	
