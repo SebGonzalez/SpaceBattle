@@ -143,11 +143,11 @@ public class WindowGameList extends BasicGameState{
 			if(input.isMouseButtonDown(0)) {
 				ModeJeu selectedMode = listeOptionsParties.get(selectedGame).getModeJeu();
 				if(selectedMode == ModeJeu.DEATHMATCH) //remplacer par gameOptions.getModeJeu() == ModeJeu.DEATHMATCH
-					Game.gestionnairePartie = new GestionnairePartie(new GameOptions());
+					Game.gestionnairePartie = new GestionnairePartie(listeOptionsParties.get(selectedGame));
 				else if(selectedMode == ModeJeu.CAPTURE)
-					Game.gestionnairePartie = new GestionnairePartieCapture(new GameOptions());
+					Game.gestionnairePartie = new GestionnairePartieCapture(listeOptionsParties.get(selectedGame));
 				else
-					Game.gestionnairePartie = new GestionnairePartieCourse(new GameOptions()); //sprint
+					Game.gestionnairePartie = new GestionnairePartieCourse(listeOptionsParties.get(selectedGame)); //sprint
 				
 				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
 				Game.connexionClient.connect();

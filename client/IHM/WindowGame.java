@@ -32,6 +32,7 @@ public class WindowGame extends BasicGameState {
 	private GameContainer container;
 
 	public static Image ship;
+	public static Image ship2;
 	public static Image shipJoueur;
 	public static Image missileJoueur;
 	public static Image missileEnnemies;
@@ -69,8 +70,9 @@ public class WindowGame extends BasicGameState {
 		map2 = new TiledMap("ressources/map/Race.tmx");
 
 		try {
-			ship = new Image("ressources/sprites/sprite2.png");
-			shipJoueur = new Image("ressources/sprites/sprite2.png");
+			ship = new Image("ressources/sprites/ship_allie.png");
+			ship2 = new Image("ressources/sprites/ship_adversaire.png");
+			shipJoueur = new Image("ressources/sprites/ship_joueur.png");
 			missileJoueur = new Image("ressources/sprites/missile.png");
 			missileEnnemies = new Image("ressources/sprites/missile2.png");
 			bonus1 = new Image("ressources/sprites/PW/bolt_gold.png");

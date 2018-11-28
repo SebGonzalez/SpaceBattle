@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 
+import client.Game;
 import client.IHM.WindowGame;
 import client.Model.Missile;
 import server.ServeurJoueur;
@@ -66,10 +67,14 @@ public class GestionnaireAdversaire {
 			
 			g.drawString(adversaire.getName(), adversaire.getX() - 26, adversaire.getY() - 76);
 			WindowGame.ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
+			WindowGame.ship2.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
 			WindowGame.damage2.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
 			WindowGame.damage3.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
 			
-			WindowGame.ship.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
+			if(Game.gestionnairePartie.joueur.getTeam() == adversaire.getTeam())
+				WindowGame.ship.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
+			else
+				WindowGame.ship2.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			if( adversaire.getHealth() ==  2) WindowGame.damage2.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			if( adversaire.getHealth() ==  1) WindowGame.damage3.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			
