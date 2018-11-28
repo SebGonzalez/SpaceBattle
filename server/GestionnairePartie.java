@@ -87,7 +87,7 @@ public class GestionnairePartie {
 		
 		Partie p = getPartie(datagram.idPartie);
 		DatagramUpdateServer datagramReponse = p.updateClient(idJoueur, datagram);
-		
+		datagramReponse.health = p.gestionnaireJoueur.getJoueur(idJoueur).getHealth();
 		return datagramReponse;
 	}
 
