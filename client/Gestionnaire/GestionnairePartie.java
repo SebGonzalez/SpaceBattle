@@ -63,7 +63,7 @@ public class GestionnairePartie {
 			joueur.bonus[i] = gestionnaireBonus.bonus[i];
 			gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
 		}
-		joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
+		if(options.getCollisions()) joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
 		gestionnaireMissile.removeMissileonCollide(gestionnaireAdversaire.getListeAdversaire());
 		
 	}
@@ -99,5 +99,9 @@ public class GestionnairePartie {
 
 	public void drawMap() {
 		map.render(0, 0);
+	}
+
+	public void avancer() {
+		joueur.keys_pressed[0] = true;
 	}
 }

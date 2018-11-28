@@ -65,7 +65,6 @@ public class GestionnaireAdversaire {
 			g.fillOval((float)adversaire.getX() - 16, (float)adversaire.getY() - 8, 32, 16);
 			
 			g.drawString(adversaire.getName(), adversaire.getX() - 26, adversaire.getY() - 76);
-			System.out.println(adversaire.getName());
 			WindowGame.ship.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(adversaire.getR()), Math.sin(adversaire.getR())))));
 			WindowGame.ship.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			

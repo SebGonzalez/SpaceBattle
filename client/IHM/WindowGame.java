@@ -44,6 +44,10 @@ public class WindowGame extends BasicGameState {
 	public static Image flag2;
 	public static Image baseFlag1;
 	public static Image baseFlag2;
+	
+	public static Image feuRouge;
+	public static Image feuJaune;
+	public static Image feuVert;
 
 	public static boolean loop = true;
 	
@@ -56,8 +60,8 @@ public class WindowGame extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sgb) throws SlickException {
 		this.container = container;
 		container.setAlwaysRender(true);
-		this.map1 = new TiledMap("ressources/map/SpaceBattle.tmx");
-		this.map2 = new TiledMap("ressources/map/Race.tmx");
+		map1 = new TiledMap("ressources/map/SpaceBattle.tmx");
+		map2 = new TiledMap("ressources/map/Race.tmx");
 
 		try {
 			ship = new Image("ressources/sprites/sprite2.png");
@@ -72,6 +76,10 @@ public class WindowGame extends BasicGameState {
 			flag2 = new Image("ressources/sprites/flag2.png");
 			baseFlag1 = new Image("ressources/sprites/baseFlag1.png");
 			baseFlag2 = new Image("ressources/sprites/baseFlag2.png");
+			
+			feuRouge = new Image("ressources/sprites/feu_rouge.png");
+			feuJaune = new Image("ressources/sprites/feu_jaune.png");
+			feuVert = new Image("ressources/sprites/feu_vert.png");
 
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
@@ -128,7 +136,7 @@ public class WindowGame extends BasicGameState {
 
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_UP || key == Input.KEY_W)
-			Game.gestionnairePartie.joueur.keys_pressed[0] = true;
+			Game.gestionnairePartie.avancer();
 		if (key == Input.KEY_LEFT || key == Input.KEY_A)
 			Game.gestionnairePartie.joueur.keys_pressed[1] = true;
 		if (key == Input.KEY_RIGHT || key == Input.KEY_D)

@@ -105,9 +105,6 @@ public class WindowGameList extends BasicGameState{
 			}
 		}
 		
-		
-		
-		
 		if(listeIdParties.size() > 0)
 			if((xpos > (resX/18 + 25) && xpos < (resX/18 + 225)) && (ypos < resY - (resY/6 + 15) && ypos > resY - (resY/6+15+25)))
 				if(input.isMouseButtonDown(0)) {

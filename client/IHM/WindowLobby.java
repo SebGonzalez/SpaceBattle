@@ -15,6 +15,8 @@ import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
 import client.Game;
+import client.ModeJeu;
+import client.Gestionnaire.GestionnairePartieCourse;
 import client.Model.Joueur;
 
 public class WindowLobby extends BasicGameState{
@@ -76,6 +78,7 @@ public class WindowLobby extends BasicGameState{
 		if(start) {
 			hote = false;
 			start = false;
+			if(Game.gestionnairePartie.getOptionsPartie().getModeJeu() == ModeJeu.COURSE) ((GestionnairePartieCourse)Game.gestionnairePartie).debut();
 			sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
 		}
 		
