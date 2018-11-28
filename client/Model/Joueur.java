@@ -168,13 +168,16 @@ public class Joueur {
 		if(bonus[1])WindowGame.bonus2.draw(x - 50 , y + 50,20,20);
 		if(bonus[2])WindowGame.bonus3.draw(x + 30, y - 60, 20,20);
 		if(bonus[3])WindowGame.bonus4.draw(x - 50, y - 60, 20,20);
+		
+		if( health ==  2) WindowGame.damage1.draw(x,y);
+		if( health ==  1) WindowGame.damage2.draw(x,y);
 	
 		
 	}
 
 	public void update(GameContainer container, int delta, TiledMap map) {
 		
-			System.out.println("health : " + health);
+		//	System.out.println("health : " + health);
 		
 		if (bonus[0])
 			boost = (float) 1.75;

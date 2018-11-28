@@ -39,6 +39,9 @@ public class WindowGame extends BasicGameState {
 	public static Image bonus2;
 	public static Image bonus3;
 	public static Image bonus4;
+	public static Image damage1;
+	public static Image damage2;
+	public static Image damage3;
 	
 	public static Image flag1;
 	public static Image flag2;
@@ -72,6 +75,9 @@ public class WindowGame extends BasicGameState {
 			flag2 = new Image("ressources/sprites/flag2.png");
 			baseFlag1 = new Image("ressources/sprites/baseFlag1.png");
 			baseFlag2 = new Image("ressources/sprites/baseFlag2.png");
+			damage1 = new Image("ressources/sprites/playerShip2_damage1.png");
+			damage2 =  new Image("ressources/sprites/playerShip2_damage2.png");
+			damage3 =  new Image("ressources/sprites/playerShip2_damage3.png");
 
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
