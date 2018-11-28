@@ -59,8 +59,7 @@ public class WindowMainMenu extends BasicGameState {
 			if(input.isMouseButtonDown(0)) {
 				Game.connexionClient.askForGameList();
 
-				sbg.enterState(4, new EmptyTransition(), new FadeInTransition(Color.black));
-				//sbg.enterState(6, new EmptyTransition(), new FadeInTransition(Color.black));
+				sbg.enterState(6, new EmptyTransition(), new FadeInTransition(Color.black));
 
 			}
 		}

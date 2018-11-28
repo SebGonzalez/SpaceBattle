@@ -1,5 +1,6 @@
 package client.IHM;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
@@ -8,23 +9,33 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 
+import client.ConnectionClient;
 import client.Game;
 import client.GameOptions;
 import client.ModeJeu;
+import client.Gestionnaire.GestionnairePartie;
+import client.Gestionnaire.GestionnairePartieCapture;
+import client.Gestionnaire.GestionnairePartieCourse;
 import server.Partie;
 
 public class WindowGameList extends BasicGameState{
 	
 	GameContainer container;
+	TextField nom;
 	int selectedGame = -1;
 	private static ArrayList<Integer> listeIdParties;
 	private static ArrayList<GameOptions> listeOptionsParties;
-	
+	private UnicodeFont font;
+	private String input ="";
+
 	private int resX = Game.res.getX(), resY = Game.res.getY();
 	
 	public WindowGameList(int state) {
@@ -42,6 +53,18 @@ public class WindowGameList extends BasicGameState{
 		this.container = container;		
 		container.setAlwaysRender(true);
 		//test();
+		
+		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
+		font.addAsciiGlyphs(); font.addGlyphs(400,600); font.getEffects().add(new ColorEffect(java.awt.Color.white));
+		try {
+			font.loadGlyphs();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		
+		nom = new TextField(container, font, 50, 65, 300, 20);
+		nom.setTextColor(Color.white);
+		nom.setText(input);
 	}
 
 	@Override
@@ -52,6 +75,9 @@ public class WindowGameList extends BasicGameState{
 		GestionnaireImagesIHM.getRessource("background").draw(0, 0, container.getWidth(), container.getHeight());
 		
 		g.drawString("Liste des parties:", resX/2 - 75, resY/12);
+		
+		g.drawString("Entrez votre nom : ", 75, 40);
+		nom.render(container, g);
 		
 		GestionnaireImagesIHM.getRessource("buttonBack").draw((float) ((resX/18) + (resX/1.6) + 25), (float) (resY/1.15));
 		if(selectedGame >= 0)
@@ -87,6 +113,10 @@ public class WindowGameList extends BasicGameState{
 			if(listeOptionsParties.get(selectedGame).getReapparitions())
 				g.drawString("Reapparition: Oui" , (float) ((resX/18) + (resX/1.6) + 40), resY/6 + 180);
 			else g.drawString("Reapparition: Non" , (float) ((resX/18) + (resX/1.6) + 40), resY/6 + 180);
+			if(listeOptionsParties.get(selectedGame).getLobby())
+				g.drawString("Lobby: Oui" , (float) ((resX/18) + (resX/1.6) + 40), resY/6 + 210);
+			else g.drawString("Lobby: Non" , (float) ((resX/18) + (resX/1.6) + 40), resY/6 + 210);
+			
 		}
 
 		
@@ -98,10 +128,38 @@ public class WindowGameList extends BasicGameState{
 		int xpos = Mouse.getX();
 		int ypos = Mouse.getY();	
 		
+		nom.setText(this.input);
+		
+		
 		// Bouton quitter
 		if(((xpos > (resX/18) + (resX/1.6) + 25 && xpos <  (resX/18) + (resX/1.6) + 125)&& (ypos > resY - (resY/1.15) - 45 && ypos < resY - (resY/1.15)))) {
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
+			}
+		}
+		
+		//bouton rejoindre
+		if( xpos > (resX/18) + (resX/1.6) + (resX/3.6) - 75 && xpos <  (resX/18) + (resX/1.6) + (resX/3.6) - 75 + 125) {
+			if(input.isMouseButtonDown(0)) {
+				ModeJeu selectedMode = listeOptionsParties.get(selectedGame).getModeJeu();
+				if(selectedMode == ModeJeu.DEATHMATCH) //remplacer par gameOptions.getModeJeu() == ModeJeu.DEATHMATCH
+					Game.gestionnairePartie = new GestionnairePartie(new GameOptions());
+				else if(selectedMode == ModeJeu.CAPTURE)
+					Game.gestionnairePartie = new GestionnairePartieCapture(new GameOptions());
+				else
+					Game.gestionnairePartie = new GestionnairePartieCourse(new GameOptions()); //sprint
+				
+				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+				Game.connexionClient.connect();
+				Game.gestionnairePartie.setIdPartie(listeIdParties.get(selectedGame));
+				Game.connexionClient.joinGame(nom.getText());
+				
+				if(!Game.gestionnairePartie.getOptionsPartie().getLobby())
+					sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
+				else {
+					WindowLobby.hote = false;
+					sbg.enterState(Game.lobby, new EmptyTransition(), new FadeInTransition(Color.black));
+				}
 			}
 		}
 		
@@ -185,11 +243,16 @@ public class WindowGameList extends BasicGameState{
 				if(input.isMouseButtonDown(0)) {
 					selectedGame = 15;
 				}
-		
-		
-		
 		//System.out.println(selectedGame);
 	}
+	
+	public void keyReleased(int key, char c) {
+			if(input.length() <= 32 && (Character.isAlphabetic(c) || Character.isDigit(c))) {
+				input+=c;
+			}
+			if(key == Input.KEY_BACK && input.length() > 0)
+				input = input.substring(0, input.length()-1);
+		}
 
 	@Override
 	public int getID() {
