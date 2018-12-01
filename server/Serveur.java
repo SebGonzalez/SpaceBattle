@@ -58,7 +58,7 @@ public class Serveur extends Listener {
 		server.getKryo().register(SegmentLobby.class);
 		server.getKryo().register(SegmentStartPartie.class);
 		server.getKryo().register(SegmentListeParties.class);
-
+		server.getKryo().register(Boolean.class);
 
 		server.bind(portTCP, portUDP);
 		server.start();
@@ -132,7 +132,7 @@ public class Serveur extends Listener {
 	public void disconnected(Connection c) {
 		Partie partie = gestionnairePartie.removeJoueur(c.getID());
 		
-		if( !partie.getStart()) {
+		if( partie != null && !partie.getStart()) {
 			
 			SegmentLobby segment = partie.getSegmentLobby();
 			for(Entry<Integer,ServeurJoueur> e : partie.gestionnaireJoueur.listePlayers.entrySet()) {

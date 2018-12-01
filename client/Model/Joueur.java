@@ -213,24 +213,23 @@ public class Joueur {
 		}
 
 		else {
-			//if (x < 950 || x > 2550) {
+
+			double angle = Math.toDegrees(Math.atan2(futurY- y, futurX - x));
+			//System.out.println(angle);
 			
-			//System.out.println( Math.abs(futurX-x) + " : " + Math.abs(futurY-y) );
-			if(Math.abs(futurX-x) > Math.abs(futurY-y)) {
+			System.out.println(Math.cos(getRotation()) + " " + Math.sin(getRotation()));
+			
 				accelerationX *= -1;
 				if (accelerationX < -2 || accelerationX > 2) {
 					accelerationX /= 1.5;
 				}
-			//}
-			}
-			else {
-			//if (y < 650 || y > 2400) {
+			
+			
 				accelerationY *= -1;
 				if (accelerationY < -2 || accelerationY > 2) {
 					accelerationY /= 1.5;
 				}
-			//}
-			}
+			
 		}
 	}
 

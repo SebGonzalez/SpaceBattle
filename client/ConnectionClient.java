@@ -80,6 +80,7 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(SegmentLobby.class);
 		client.getKryo().register(SegmentStartPartie.class);
 		client.getKryo().register(SegmentListeParties.class);
+		client.getKryo().register(Boolean.class);
 		
 		client.addListener(this);
 

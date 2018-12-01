@@ -78,9 +78,6 @@ public class GestionnaireAdversaire {
 			if( adversaire.getHealth() ==  2) WindowGame.damage2.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			if( adversaire.getHealth() ==  1) WindowGame.damage3.draw((float)adversaire.getX() - 56, (float)adversaire.getY() - 37);
 			
-			
-			
-			
 			for(Missile m : adversaire.getListeMissile()) {
 				m.render(g);
 			}
