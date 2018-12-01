@@ -1,24 +1,16 @@
 package client.Model;
 
-import org.newdawn.slick.Color;
+import java.util.ArrayList;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
-import client.Gestionnaire.GestionnaireBonusClient;
 import client.IHM.WindowGame;
-
-import java.util.ArrayList;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import server.ServeurJoueur;
 
 public class Joueur {
-	
-	
 
 	private String nom;
 	private float x = 900, y = 900;
@@ -31,12 +23,12 @@ public class Joueur {
 	public boolean bonus[] = new boolean[4];
 	public float boost = 1;
 	public int health;
-	
+
 	private int team = -1;
 
 	public Joueur() {
-		x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050; 
-		y = (int) ((Math.random() * ((2300 - 650 ) + 1)) + 650);
+		x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); // rand.nextInt(2500) + 1050;
+		y = (int) ((Math.random() * ((2300 - 650) + 1)) + 650);
 		nom = "test23";
 		for (int i = 0; i < 3; i++) {
 			keys_pressed[i] = false;
@@ -131,17 +123,13 @@ public class Joueur {
 
 	public void accelerate(int delta) {
 
-		if (getaccelerationX() + (delta * (getdirectionX() / 200)) > -4
-				&& getaccelerationX() + (delta * (getdirectionX() / 200)) < 4)
+		if (getaccelerationX() + (delta * (getdirectionX() / 200)) > -4 && getaccelerationX() + (delta * (getdirectionX() / 200)) < 4)
 			addaccelerationX(delta * (getdirectionX() / 200));
 
-		if (getaccelerationY() + (delta * (getdirectionY() / 200)) > -4
-				&& getaccelerationY() + (delta * (getdirectionY() / 200)) < 4)
+		if (getaccelerationY() + (delta * (getdirectionY() / 200)) > -4 && getaccelerationY() + (delta * (getdirectionY() / 200)) < 4)
 			addaccelerationY(delta * (getdirectionY() / 200));
 
 	}
-	
-
 
 	public float getRotation() {
 		return rotation;
@@ -168,20 +156,26 @@ public class Joueur {
 	public void render(Graphics g) {
 
 		WindowGame.shipJoueur.draw(getX() - 56, getY() - 37);
-		
-		if( health ==  2) WindowGame.damage2Joueur.draw(x-56,y-37);
-		if( health ==  1) WindowGame.damage3Joueur.draw(x-56,y-37);
-		
-		if(bonus[0])WindowGame.bonus1.draw(x + 30, y + 50, 20,20);
-		if(bonus[1])WindowGame.bonus2.draw(x - 50 , y + 50,20,20);
-		if(bonus[2])WindowGame.bonus3.draw(x + 30, y - 60, 20,20);
-		if(bonus[3])WindowGame.bonus4.draw(x - 50, y - 60, 20,20);	
+
+		if (health == 2)
+			WindowGame.damage2Joueur.draw(x - 56, y - 37);
+		if (health == 1)
+			WindowGame.damage3Joueur.draw(x - 56, y - 37);
+
+		if (bonus[0])
+			WindowGame.bonusVitesse.draw(x + 30, y + 50, 20, 20);
+		if (bonus[1])
+			WindowGame.bonusTeteChercheuse.draw(x - 50, y + 50, 20, 20);
+		if (bonus[2])
+			WindowGame.bonusTripleMissile.draw(x + 30, y - 60, 20, 20);
+		if (bonus[3])
+			WindowGame.bonusShield.draw(x - 50, y - 60, 20, 20);
 	}
 
 	public void update(GameContainer container, int delta, TiledMap map) {
-		
-		//	System.out.println("health : " + health);
-		
+
+		// System.out.println("health : " + health);
+
 		if (bonus[0])
 			boost = (float) 1.75;
 		else if (!bonus[0])
@@ -198,13 +192,12 @@ public class Joueur {
 		float futurY = getY() - .1f * delta * accelerationY * boost;
 
 		collide(futurX, futurY, map);
-		
+
 	}
 
 	public void collide(float futurX, float futurY, TiledMap map) {
 
-		Image tile = map.getTileImage((int) futurX / map.getTileWidth(), (int) futurY / map.getTileHeight(),
-				map.getLayerIndex("logic"));
+		Image tile = map.getTileImage((int) futurX / map.getTileWidth(), (int) futurY / map.getTileHeight(), map.getLayerIndex("logic"));
 
 		boolean collision = tile != null;
 		if (!collision) {
@@ -214,22 +207,21 @@ public class Joueur {
 
 		else {
 
-			double angle = Math.toDegrees(Math.atan2(futurY- y, futurX - x));
-			//System.out.println(angle);
-			
+			double angle = Math.toDegrees(Math.atan2(futurY - y, futurX - x));
+			// System.out.println(angle);
+
 			System.out.println(Math.cos(getRotation()) + " " + Math.sin(getRotation()));
-			
-				accelerationX *= -1;
-				if (accelerationX < -2 || accelerationX > 2) {
-					accelerationX /= 1.5;
-				}
-			
-			
-				accelerationY *= -1;
-				if (accelerationY < -2 || accelerationY > 2) {
-					accelerationY /= 1.5;
-				}
-			
+
+			accelerationX *= -1;
+			if (accelerationX < -2 || accelerationX > 2) {
+				accelerationX /= 1.5;
+			}
+
+			accelerationY *= -1;
+			if (accelerationY < -2 || accelerationY > 2) {
+				accelerationY /= 1.5;
+			}
+
 		}
 	}
 
@@ -240,8 +232,6 @@ public class Joueur {
 
 				accelerationX *= -1;
 				accelerationY *= -1;
-				System.out.println("collide");
-
 			}
 		}
 	}

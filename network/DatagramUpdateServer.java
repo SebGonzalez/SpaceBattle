@@ -16,7 +16,4 @@ public class DatagramUpdateServer {
 	public ArrayList<Bonus> listeBonus = new ArrayList<>();
 	public Boolean bonus[] = new Boolean[4];
 	public int health;
-	
-	
-	
 }

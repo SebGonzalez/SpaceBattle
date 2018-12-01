@@ -109,8 +109,6 @@ public class GestionnaireJoueur {
 		}
 	}
 	
-
-
 	/**
 	 * Supprime un joueur de la liste
 	 * 

@@ -71,7 +71,6 @@ public class ServeurJoueur {
 	public boolean getBonusState(int indice) {
 		return bonus[indice];
 	}
-	
 
 	public long getTimerBonus(int indice) {
 		return bonusTimer[indice];

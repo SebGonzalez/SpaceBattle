@@ -21,8 +21,6 @@ public class GestionnaireMissile {
 	public ArrayList<ServeurJoueur> listeAdversaire;
 	private Joueur joueur;
 	private long lastTir;
-
-	public Boolean bonus[] = new Boolean[4];
 	
 	public GestionnaireMissile(Joueur joueur) {
 		listeMissileClient = new ArrayList<>();
@@ -40,13 +38,13 @@ public class GestionnaireMissile {
 	 * Méthode appelé lorsque le client effectue un tir
 	 * On vérifie que le délai entre deux tir est passé et on ajoute le missile à la liste
 	 */
-	public void addMissileClient() {
+	public void addMissileClient(Joueur joueur) {
 		if (System.currentTimeMillis() - lastTir > 200) {
 			lastTir = System.currentTimeMillis();
 			Missile m = new Missile(joueur.getX(), joueur.getY(), joueur.getRotation());
 			listeMissileClient.add(m);
 			
-			if(bonus[2]) {
+			if(joueur.bonus[2]) {
 			Missile i = new Missile(joueur.getX(), joueur.getY(), joueur.getRotation() + 1 );
 			Missile j = new Missile(joueur.getX(), joueur.getY(), joueur.getRotation() - 1);
 			listeMissileClient.add(i);

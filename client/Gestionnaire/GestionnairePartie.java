@@ -57,14 +57,11 @@ public class GestionnairePartie {
 	public void setReception(DatagramUpdateServer datagram) {
 		
 		gestionnaireAdversaire.setReception(datagram.listeAdversaire);
-		gestionnaireBonus.setReception(datagram.listeBonus,datagram.bonus);
+		gestionnaireBonus.setReception(datagram.listeBonus);
 				
 		for(int i = 0;i<4;i++) {
-			joueur.bonus[i] = gestionnaireBonus.bonus[i];
-			gestionnaireMissile.bonus[i] = gestionnaireBonus.bonus[i];
+			joueur.bonus[i] = datagram.bonus[i];
 		}
-
-		if(options.getCollisions()) joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
 
 		joueur.health = datagram.health;
 
@@ -81,6 +78,7 @@ public class GestionnairePartie {
 	
 	public void update(GameContainer container, int delta) {
 		joueur.update(container, delta, map);
+		if(options.getCollisions()) joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
 		gestionnaireBonus.update();
@@ -97,7 +95,7 @@ public class GestionnairePartie {
 
 	public void tirer() {
 		if(options.getTir())
-			gestionnaireMissile.addMissileClient();
+			gestionnaireMissile.addMissileClient(joueur);
 		
 	}
 

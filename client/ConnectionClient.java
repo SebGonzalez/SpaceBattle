@@ -35,7 +35,7 @@ import server.ServeurJoueur;
  *
  */
 public class ConnectionClient extends Listener {
-	
+
 	GestionnairePartie gestionnairePartie;
 
 	String ip = "localhost";
@@ -81,7 +81,7 @@ public class ConnectionClient extends Listener {
 		client.getKryo().register(SegmentStartPartie.class);
 		client.getKryo().register(SegmentListeParties.class);
 		client.getKryo().register(Boolean.class);
-		
+
 		client.addListener(this);
 
 		client.start();
@@ -89,16 +89,16 @@ public class ConnectionClient extends Listener {
 			client.connect(5000, ip, portTCP, portUDP);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 
 		System.out.println("Connexion etablie avec le serveur");
 
 		// sendInformation(joueur);
 	}
-	
+
 	public void disconnect() {
 		client.close();
-		//client.discoverHost(18000, 5000);
+		// client.discoverHost(18000, 5000);
 	}
 
 	public void sendInformationConnection() {
@@ -120,15 +120,15 @@ public class ConnectionClient extends Listener {
 			datagram.accelerationX = joueur.getaccelerationX();
 			datagram.accelerationY = joueur.getaccelerationY();
 			datagram.r = joueur.getRotation();
-			
+
 			datagram.listeMissile = gestionnairePartie.getListeMissileClient();
 			// if(datagram.listeMissile.size()> 0) System.out.println("Nb missile envoyé :
 			// " + datagram.listeMissile.size() + " " +
 			// gestionnaireMissile.getListeMissileClient().size());
 
 			client.sendUDP(datagram);
-		}
-		else System.out.println("PArtie pas encore re�u");
+		} else
+			System.out.println("PArtie pas encore re�u");
 	}
 
 	public void createGame() {
@@ -138,24 +138,24 @@ public class ConnectionClient extends Listener {
 		System.out.println("Création partie : " + segment.optionsPartie);
 		client.sendTCP(segment);
 	}
-	
+
 	public void joinGame(String pseudo) {
 		SegmentRejoindrePartie segment = new SegmentRejoindrePartie();
 		segment.idPartie = gestionnairePartie.getIdPartie();
 		segment.pseudo = pseudo;
 		client.sendTCP(segment);
 	}
-	
+
 	public void startGame() {
 		SegmentStartPartie segment = new SegmentStartPartie();
 		segment.idPartie = gestionnairePartie.getIdPartie();
 		client.sendTCP(segment);
 	}
-	
+
 	public void askForGameList() {
 		client.sendTCP("liste");
 	}
-	
+
 	public void leaveLobby() {
 		disconnect();
 	}
@@ -167,26 +167,27 @@ public class ConnectionClient extends Listener {
 		if (o instanceof DatagramUpdateServer) {
 			// System.out.println("Update reçu");
 			DatagramUpdateServer datagram = (DatagramUpdateServer) o;
-			
+
 			gestionnairePartie.setReception(datagram);
-			
-				
+
 		} else if (o instanceof SegmentNouveauJoueur) {
 			gestionnairePartie.setIdPartie(((SegmentNouveauJoueur) o).idPartie);
 			gestionnairePartie.setTeamJoueur(((SegmentNouveauJoueur) o).team);
-			System.out.println("Le joueur a rejoint la partie : " +  gestionnairePartie.getIdPartie() + " et appartient à la team : " + ((SegmentNouveauJoueur) o).team );
+			System.out.println("Le joueur a rejoint la partie : " + gestionnairePartie.getIdPartie()
+					+ " et appartient à la team : " + ((SegmentNouveauJoueur) o).team);
 		} else if (o instanceof String) {
 			if (o.equals("ko")) {
-				System.out.println("Je suis touch�");
+				System.out.println("Je suis touché");
 				client.close();
 				WindowGame.loop = false;
 			}
-		} else if(o instanceof SegmentLobby) {
+		} else if (o instanceof SegmentLobby) {
 			WindowLobby.playersInLobby = ((SegmentLobby) o).listeJoueurLobby;
-		} else if(o instanceof SegmentStartPartie) {
+		} else if (o instanceof SegmentStartPartie) {
 			WindowLobby.start = true;
-		} else if(o instanceof SegmentListeParties) {
-			WindowGameList.setListeParties( ((SegmentListeParties) o).listeIdParties, ((SegmentListeParties) o).listeOptionsParties);
+		} else if (o instanceof SegmentListeParties) {
+			WindowGameList.setListeParties(((SegmentListeParties) o).listeIdParties,
+					((SegmentListeParties) o).listeOptionsParties);
 		}
 	}
 }
