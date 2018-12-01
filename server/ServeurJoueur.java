@@ -13,6 +13,8 @@ import network.DatagramUpdateServer;
  */
 public class ServeurJoueur {
 	
+	public static int generateurTeam = 1;
+	
 	private String name;
 	private int id;
 	private float x;
@@ -55,7 +57,9 @@ public class ServeurJoueur {
 		for( int i = 0; i < 4 ; i++)
 			bonusTimer[i] = 0;
 
-		team = new Random().nextInt(2) + 1;
+		team = generateurTeam;
+		generateurTeam++;
+		if(generateurTeam == 3) generateurTeam = 1;
 	}
 
 	public void enableBonus(int indice) {

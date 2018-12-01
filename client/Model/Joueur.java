@@ -210,7 +210,7 @@ public class Joueur {
 			double angle = Math.toDegrees(Math.atan2(futurY - y, futurX - x));
 			// System.out.println(angle);
 
-			System.out.println(Math.cos(getRotation()) + " " + Math.sin(getRotation()));
+			//System.out.println(Math.cos(getRotation()) + " " + Math.sin(getRotation()));
 
 			accelerationX *= -1;
 			if (accelerationX < -2 || accelerationX > 2) {
