@@ -130,7 +130,15 @@ public class Serveur extends Listener {
 	 */
 	@Override
 	public void disconnected(Connection c) {
-		gestionnairePartie.removeJoueur(c.getID());
+		Partie partie = gestionnairePartie.removeJoueur(c.getID());
+		
+		if( !partie.getStart()) {
+			
+			SegmentLobby segment = partie.getSegmentLobby();
+			for(Entry<Integer,ServeurJoueur> e : partie.gestionnaireJoueur.listePlayers.entrySet()) {
+				server.sendToTCP(e.getKey(), segment);
+			}
+		}
 
 		System.out.println("Connection dropped.");
 	}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.minlog.Log;
 
 import client.Gestionnaire.GestionnairePartie;
 import client.IHM.WindowGame;
@@ -58,6 +59,7 @@ public class ConnectionClient extends Listener {
 	 * Connexion avec le serveur
 	 */
 	public void connect() {
+		Log.set(Log.LEVEL_DEBUG);
 		client = new Client();
 		client.getKryo().register(java.util.ArrayList.class);
 		client.getKryo().register(Missile.class, new MissileSerializer());
@@ -91,6 +93,11 @@ public class ConnectionClient extends Listener {
 		System.out.println("Connexion etablie avec le serveur");
 
 		// sendInformation(joueur);
+	}
+	
+	public void disconnect() {
+		client.close();
+		//client.discoverHost(18000, 5000);
 	}
 
 	public void sendInformationConnection() {
@@ -146,6 +153,10 @@ public class ConnectionClient extends Listener {
 	
 	public void askForGameList() {
 		client.sendTCP("liste");
+	}
+	
+	public void leaveLobby() {
+		disconnect();
 	}
 
 	/**

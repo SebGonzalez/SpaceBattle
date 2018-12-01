@@ -91,10 +91,13 @@ public class GestionnairePartie {
 		return datagramReponse;
 	}
 
-	public void removeJoueur(int id) {
+	public Partie removeJoueur(int id) {
 		for(Partie p : listePartie) {
-			p.joueurDeco(id);
+			if(p.joueurDeco(id))
+				return p;
 		}
+		
+		return null;
 	}
 	
 	

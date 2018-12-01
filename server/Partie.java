@@ -13,8 +13,6 @@ public class Partie {
 	public GestionnaireBonusServeur gestionnaireBonus;
 	private int id;
 	
-	private boolean start = true;
-	
 	protected GameOptions optionsPartie;
 	
 	public Partie(int id, GameOptions optionsPartie) {
@@ -22,8 +20,6 @@ public class Partie {
 		this.optionsPartie = optionsPartie;
 		gestionnaireJoueur = new GestionnaireJoueur();
 		gestionnaireBonus = new GestionnaireBonusServeur(gestionnaireJoueur);
-		
-		if(optionsPartie.getLobby()) start = false;
 	}
 
 	public int getId() {
@@ -45,18 +41,20 @@ public class Partie {
 		gestionnaireJoueur.addJoueur(nouveauJoueur);
 	}
 	
-	public void joueurDeco(int id) {
+	public boolean joueurDeco(int id) {
 		if(gestionnaireJoueur.getJoueur(id) != null) {
 			gestionnaireJoueur.removeJoueur(id);
+			return true;
 		}
+		return false;
 	}
 	
 	public boolean getStart() {
-		return start;
+		return optionsPartie.isStart();
 	}
 	
 	public void startPartie() {
-		start = true;
+		optionsPartie.setStart(true);
 	}
 
 	public SegmentLobby getSegmentLobby() {

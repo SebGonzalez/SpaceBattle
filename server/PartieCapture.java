@@ -128,7 +128,7 @@ public class PartieCapture extends Partie {
 		
 	}
 	
-	public void joueurDeco(int id) {
+	public boolean joueurDeco(int id) {
 		ServeurJoueur joueurDeco = gestionnaireJoueur.getJoueur(id);
 		if(joueurDeco != null) {
 			if(joueurDeco.equals(joueurFlag1)) {
@@ -138,8 +138,12 @@ public class PartieCapture extends Partie {
 				joueurFlag2 = null;
 			}
 			
-			gestionnaireJoueur.removeJoueur(id);
+			if(gestionnaireJoueur.getJoueur(id) != null) {
+				gestionnaireJoueur.removeJoueur(id);
+				return true;
+			}
 		}
+		
+		return false;
 	}
-
 }

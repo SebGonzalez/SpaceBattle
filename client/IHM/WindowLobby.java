@@ -90,6 +90,7 @@ public class WindowLobby extends BasicGameState{
 		if(((xpos > (resX/18) + (resX/1.6) + 25 && xpos <  (resX/18) + (resX/1.6) + 125)&& (ypos > resY - (resY/1.15) - 45 && ypos < resY - (resY/1.15)))) {
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
+				Game.connexionClient.leaveLobby();
 			}
 		}
 		

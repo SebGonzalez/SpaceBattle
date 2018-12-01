@@ -154,11 +154,12 @@ public class WindowGameList extends BasicGameState{
 				Game.gestionnairePartie.setIdPartie(listeIdParties.get(selectedGame));
 				Game.connexionClient.joinGame(nom.getText());
 				
-				if(!Game.gestionnairePartie.getOptionsPartie().getLobby())
-					sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
-				else {
+				if(Game.gestionnairePartie.getOptionsPartie().getLobby() && !Game.gestionnairePartie.getOptionsPartie().isStart()) {
 					WindowLobby.hote = false;
 					sbg.enterState(Game.lobby, new EmptyTransition(), new FadeInTransition(Color.black));
+				}
+				else {
+					sbg.enterState(1, new EmptyTransition(), new FadeInTransition(Color.black));
 				}
 			}
 		}

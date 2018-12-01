@@ -11,10 +11,12 @@ public class GameOptions {
 	private int maxPlayers;
 	private ModeJeu modeJeu;
 	private boolean lobby;
+	
+	private boolean isStart;
 
 	public GameOptions() {
-		collisions = reapparitions = tir = privateGame = true;
-		lobby = false; //à supprimer
+		collisions = reapparitions = tir = privateGame = isStart = true;
+		lobby = false;
 		password = "";
 		maxPlayers = 8;
 		modeJeu = ModeJeu.DEATHMATCH;
@@ -26,6 +28,7 @@ public class GameOptions {
 	
 	public void setLobby(boolean lobby) {
 		this.lobby = lobby;
+		this.isStart = !lobby;
 	}
 	
 	public boolean getPrivateGame() {
@@ -79,6 +82,14 @@ public class GameOptions {
 		this.tir = tir;
 	}
 	
+	public void setStart(boolean isStart) {
+		this.isStart = isStart;
+	}
+
+	public boolean isStart() {
+		return isStart;
+	}
+
 	@Override
 	public String toString() {
 		return "ModeJeu : " + modeJeu + " reapparition : " + reapparitions + " lobby : " + lobby + " collision : " + collisions + " tir : " + tir;

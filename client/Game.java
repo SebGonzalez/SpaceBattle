@@ -18,8 +18,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import com.esotericsoftware.minlog.Log;
 
 import client.Gestionnaire.GestionnairePartie;
-import client.IHM.*;
-import client.Model.Joueur;
+import client.IHM.WindowCreateGame;
+import client.IHM.WindowGame;
+import client.IHM.WindowGameList;
+import client.IHM.WindowJoinGame;
+import client.IHM.WindowLobby;
+import client.IHM.WindowMainMenu;
+import client.IHM.WindowOptions;
 
 	
 public class Game extends StateBasedGame{
@@ -80,7 +85,6 @@ public class Game extends StateBasedGame{
 	}
 	
 	public static void main(String[] args) {
-		
 		AppGameContainer appgc;
 		try {
 			if(Game.settingsFileExists())
