@@ -31,13 +31,20 @@ public class GestionnaireBonusServeur {
 		}
 	}
 
+	/**
+	 * Méthode appelé lorsqu'un paquet d'un client est reçu
+	 * Vérifie si le joueur n'entre pas en collision avec un bonus
+	 * Vérifie si un bonus n'a pas expiré
+	 * @param idJoueur
+	 * @param datagram
+	 */
 	public void updateBonus(int idJoueur, DatagramUpdateServer datagram) {
 
 		for (Bonus bonus : listeBonus) {
 			datagram.listeBonus.add(bonus);
 		}
 
-		collideBonus(idJoueur, datagram);
+		collideBonus(idJoueur);
 		isExpired(idJoueur);
 
 		ServeurJoueur player = gestionnaireJoueur.getJoueur(idJoueur);
@@ -47,7 +54,12 @@ public class GestionnaireBonusServeur {
 
 	}
 
-	public void collideBonus(int idJoueur, DatagramUpdateServer datagram) {
+	/**
+	 * Méthode qui vérifie si le joueur n'entre pas en collision avec un bonus
+	 * Si oui on active le bonus correspondant au joueur et le regénère
+	 * @param idJoueur
+	 */
+	public void collideBonus(int idJoueur) {
 		ServeurJoueur player = gestionnaireJoueur.getJoueur(idJoueur);
 		for (Bonus bonus : listeBonus) {
 
@@ -92,6 +104,11 @@ public class GestionnaireBonusServeur {
 
 	}
 
+	/**
+	 * On vérifie que les bonus du joueur passé en paramètre sont toujours actif
+	 * Sinon on désactive le bonus correponsdant
+	 * @param id
+	 */
 	public void isExpired(int id) {
 		ServeurJoueur player = gestionnaireJoueur.getJoueur(id);
 		for (int i = 0; i < 4; i++) {

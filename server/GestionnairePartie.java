@@ -11,6 +11,11 @@ import network.SegmentListeParties;
 import network.SegmentNouveauJoueur;
 import network.SegmentRejoindrePartie;
 
+/**
+ * Classe qui gère le déroulement de l'ensemble des parties du serveur
+ * @author gonzo
+ *
+ */
 public class GestionnairePartie {
 	
 	private static int idPartie = 0;
@@ -20,6 +25,12 @@ public class GestionnairePartie {
 		listePartie = new ArrayList<>();
 	}
 	
+	/**
+	 * Méthode appelé lorsqu'un joueur créé une nouvelle partie
+	 * @param le segment contenant les informations de la partie
+	 * @param idClient
+	 * @return
+	 */
 	public SegmentNouveauJoueur creationPartie(SegmentCreationPartie creationPartie, int idClient) {
 		Partie partie;
 		if(creationPartie.optionsPartie.getModeJeu() == ModeJeu.DEATHMATCH)
@@ -45,6 +56,12 @@ public class GestionnairePartie {
 		return reponse; 
 	}
 	
+	/**
+	 * Méthode appelé lorsqu'un joueur rejoind une partie
+	 * @param le segment contenant les informations de la partie
+	 * @param idClient
+	 * @return le segment reponse envoyé au client contenant le numéro de sa team
+	 */
 	public SegmentNouveauJoueur rejoindrePartie(SegmentRejoindrePartie segment, int idClient) {
 		Partie partie = getPartie(segment.idPartie);
 		
@@ -60,6 +77,11 @@ public class GestionnairePartie {
 		return reponse;
 	}
 	
+	/**
+	 * Retourne l'instance d'une partie en fonction de son id
+	 * @param id
+	 * @return
+	 */
 	public Partie getPartie(int id) {
 		
 		for(Partie p : listePartie) {
@@ -73,6 +95,11 @@ public class GestionnairePartie {
 		return listePartie;
 	}
 	
+	/**
+	 * Créer un segment contenant la liste des parties disponible
+	 * Appelé lorsque le joueur arrive dans le menu "WindowListePartie"
+	 * @return
+	 */
 	public SegmentListeParties sendListePartie(){
 		SegmentListeParties segment = new SegmentListeParties();
 		
@@ -83,6 +110,16 @@ public class GestionnairePartie {
 		return segment;
 	}
 	
+	/**
+	 * Méthode appelé lorsque le serveur reçoit un paquet du client
+	 * - Mets à jour les informations du client
+	 * - Vérifie les collisions des missiles du clients
+	 * - Vérifie si le client obtient un bonus
+	 * - Prépare la réponse
+	 * @param idJoueur
+	 * @param datagram reçu
+	 * @return
+	 */
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
 		
 		Partie p = getPartie(datagram.idPartie);
@@ -91,6 +128,11 @@ public class GestionnairePartie {
 		return datagramReponse;
 	}
 
+	/**
+	 * Supprime le joueur dans la partie dans laquelle il est
+	 * @param id
+	 * @return
+	 */
 	public Partie removeJoueur(int id) {
 		for(Partie p : listePartie) {
 			if(p.joueurDeco(id))

@@ -80,6 +80,11 @@ public class GestionnaireJoueur {
 		return datagramReponse;
 	}
 
+	/**
+	 * Méthode qui vérifie que les missile du client ne touche pas un autre joueur
+	 * @param listeMissile
+	 * @param idClient
+	 */
 	public void checkCollision(ArrayList<Missile> listeMissile, int idC) {
 		
 		if (listeMissile.size() > 0) {

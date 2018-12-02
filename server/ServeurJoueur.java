@@ -28,20 +28,7 @@ public class ServeurJoueur {
 	private int team;
 	private int health = 3;
 	 
-	public ServeurJoueur() {
-		this.id = -1;
-		x = 0;
-		y = 0;
-		r = (float) Math.PI/2;
-		listeMissile = new ArrayList<>();
-		
-		for(int i=0;i<4;i++) {
-			bonus[i] = false;
-		}
-		
-		for( int i = 0; i < 4 ; i++)
-			bonusTimer[i] = 0;
-		
+	public ServeurJoueur() {		
 	}
 	
 	public ServeurJoueur(int id) {
@@ -62,45 +49,64 @@ public class ServeurJoueur {
 		if(generateurTeam == 3) generateurTeam = 1;
 	}
 
+	/**
+	 * Activation du bonus lorsqu'il est ramassé
+	 * @param indice
+	 */
 	public void enableBonus(int indice) {
 		bonus[indice] = true;
 		bonusTimer[indice] = System.currentTimeMillis();
 	}
 	
+	/**
+	 * Désactivation du bonus lorsqu'il est expiré
+	 * @param indice
+	 */
 	public void disableBonus(int indice) {
 		bonus[indice] = false;
 		bonusTimer[indice] = 0;
 	}
 	
+	/**
+	 * Retourne l'état du bonus (true si le bonus est actif est false dans le cas contraire)
+	 * @param indice
+	 * @return
+	 */
 	public boolean getBonusState(int indice) {
 		return bonus[indice];
 	}
 
+	/**
+	 * Retourne le timer du bonus
+	 * @param indice
+	 * @return
+	 */
 	public long getTimerBonus(int indice) {
 		return bonusTimer[indice];
 	}
 	
-	public void bonusTeteChercheuseMissile() {
-		
-	}
-	
+	/**
+	 * Méthode appelé lorsque le joueur se fait tirer dessus
+	 */
 	public void damage() {
 		health -= 1;
 	}
 	
+	/**
+	 * Méthode appelé lorsque le joueur se soigne
+	 */
 	public void heal() {
 		if(health <= 2)
 		health += 1;
 	}
 	
+	/**
+	 * Retourne la vie du joueur
+	 */
 	public int getHealth() {
 		return health;
 	}
-		
 	
-	public void bonusShield() {
-		
-	}
 	public int getId() {
 		return id;
 	}

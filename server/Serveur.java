@@ -74,13 +74,6 @@ public class Serveur extends Listener {
 	 */
 	@Override
 	public void connected(Connection c) {
-		/*PacketAddPlayer packet = new PacketAddPlayer();
-		packet.id = c.getID();
-
-		server.sendToAllExceptTCP(c.getID(), packet);
-
-		gestionnaireJoueur.addJoueur(c.getID());*/
-		
 		System.out.println("Connection received.");
 	}
 
