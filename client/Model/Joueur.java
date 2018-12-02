@@ -1,5 +1,6 @@
 package client.Model;
 
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
@@ -209,19 +210,30 @@ public class Joueur {
 
 			double angle = Math.toDegrees(Math.atan2(futurY - y, futurX - x));
 
+			int xTexture = (int) (map.getTileWidth() * (int)(futurX/map.getTileWidth()));
+			int yTexture = (int) (map.getTileHeight() * (int)(futurY/map.getTileHeight()));
+			Line2D.Float coteGauche = new Line2D.Float(xTexture, yTexture, xTexture, yTexture+tile.getHeight());
+			Line2D.Float coteDroit = new Line2D.Float(xTexture+tile.getWidth(), yTexture, xTexture+tile.getWidth(), yTexture+tile.getHeight());
+			Line2D.Float coteHaut = new Line2D.Float(xTexture, yTexture, xTexture+tile.getWidth(), yTexture);
+			Line2D.Float coteBas = new Line2D.Float(xTexture, yTexture+tile.getHeight(), xTexture+tile.getWidth(), yTexture+tile.getHeight());
 
-			//System.out.println(Math.cos(getRotation()) + " " + Math.sin(getRotation()));
-
-			accelerationX *= -1;
-			if (accelerationX < -2 || accelerationX > 2) {
-				accelerationX /= 1.5;
+			
+			Line2D.Float ligneJoueur = new Line2D.Float(futurX, futurY, x, y);
+			
+			if(coteGauche.intersectsLine(ligneJoueur) || coteDroit.intersectsLine(ligneJoueur)) {
+				accelerationX *= -1;
+				if (accelerationX < -2 || accelerationX > 2) {
+					accelerationX /= 1.5;
+				}
 			}
-
-			//accelerationY *= -1;
-			if (accelerationY < -2 || accelerationY > 2) {
-				accelerationY /= 1.5;
+			if(coteHaut.intersectsLine(ligneJoueur) || coteBas.intersectsLine(ligneJoueur)) {
+				accelerationY *= -1;
+				if (accelerationY < -2 || accelerationY > 2) {
+					accelerationY /= 1.5;
+				}
+				
+				
 			}
-
 		}
 	}
 
