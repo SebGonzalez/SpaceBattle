@@ -64,8 +64,6 @@ public class GestionnairePartie {
 		}
 
 		joueur.health = datagram.health;
-
-		gestionnaireMissile.removeMissileonCollide(gestionnaireAdversaire.getListeAdversaire());
 		
 	}
 	
@@ -81,6 +79,7 @@ public class GestionnairePartie {
 		if(options.getCollisions()) joueur.collidePlayer(gestionnaireAdversaire.getListeAdversaire());
 		gestionnaireAdversaire.update();
 		gestionnaireMissile.update(delta);
+		gestionnaireMissile.removeMissileonCollide(gestionnaireAdversaire.getListeAdversaire());
 		gestionnaireBonus.update();
 		
 		Game.connexionClient.sendInformationGame(joueur);

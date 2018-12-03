@@ -59,12 +59,12 @@ public class PartieCapture extends Partie {
 	public void checkCollisionFlag(int idJoueur) {
 		ServeurJoueur joueur = gestionnaireJoueur.getJoueur(idJoueur);
 
-		if (flag2.collisionBase(joueurFlag1.getX(), joueurFlag1.getY())) { //si le drapeau arrive à sa base on incrémente le score de la team et on le remet à sa place initiale
+		if (joueurFlag1 != null && flag2.collisionBase(joueurFlag1.getX(), joueurFlag1.getY())) { //si le drapeau arrive à sa base on incrémente le score de la team et on le remet à sa place initiale
 			scoreTeam2++;
 			joueurFlag1 = null;
 			flag1.resetPos();
 		}
-		if (flag1.collisionBase(joueurFlag2.getX(), joueurFlag2.getY())) {
+		if (joueurFlag2 != null && flag1.collisionBase(joueurFlag2.getX(), joueurFlag2.getY())) {
 			scoreTeam1++;
 			joueurFlag2 = null;
 			flag2.resetPos();
