@@ -139,10 +139,10 @@ public class ConnectionClient extends Listener {
 			System.out.println("PArtie pas encore re�u");
 	}
 
-	public void createGame() {
+	public void createGame(String pseudo) {
 		SegmentCreationPartie segment = new SegmentCreationPartie();
 		segment.optionsPartie = gestionnairePartie.getOptionsPartie();
-		segment.pseudo = "hôte";
+		segment.pseudo = pseudo;
 		System.out.println("Création partie : " + segment.optionsPartie);
 		client.sendTCP(segment);
 	}

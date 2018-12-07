@@ -46,6 +46,11 @@ public class Missile {
 	public void setY(float y) {
 		this.y = y;
 	}
+	
+	/**
+	 * Met à jour la position des missiles 
+	 * @author Amine Boudraa
+	 */
 
 	public void update(int delta, Joueur joueur) {
 		if(System.currentTimeMillis() - time >= 10000) {
@@ -66,16 +71,26 @@ public class Missile {
 		
 	}
 	
+	
+	/**
+	 * Détecte les collisions entre les missiles et un joueur	
+	 * @author Amine Boudraa
+	 */
 	public boolean collision(ServeurJoueur joueur) {
 		if(x > joueur.getX()-56 && x < joueur.getX()+56 && y > joueur.getY()-37 && y < joueur.getY()+37) return true;
 		return false;
 	}
 	
+	/**
+	 * Affiche le missile
+	 * @author Amine Boudraa
+	 */
 	public void render(Graphics g) {
 		g.pushTransform();
 		g.rotate(x, y, (float) -(Math.toDegrees(Math.atan2( (double)directionX, (double)directionY))));
 		WindowGame.missileJoueur.draw(x-6, y-18);
 		g.popTransform();
+	
 	}
 
 	public float getDirectionX() {

@@ -34,10 +34,12 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 	private int currentField;
 
 	private boolean optionsScreen = false;
+	
+	String hostname = "";
 
 	private GameOptions options;
 
-	private TextField passwordField, maxPlayersField;
+	private TextField passwordField, maxPlayersField,nameField	;
 
 	private int resX = Game.res.getX(), resY = Game.res.getY();
 
@@ -81,7 +83,12 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			maxPlayersField.setTextColor(Color.white);
 			maxPlayersField.setText(String.valueOf(options.getMaxPlayers()));
 			maxPlayersField.render(container, g);
-
+			
+			g.drawString("Veuillez entrer votre nom", resX / 2 - 200, resY/2 + 10);
+			nameField = new TextField(container, font, resX / 2 - 200, resY/2 + 30 , 400,20 );
+			nameField.setTextColor(Color.white);
+			nameField.render(container, g);
+			
 			g.drawString("Partie avec mot de passe", resX / 2 - 200, resY / 3 + 190);
 			GestionnaireImagesIHM.getRessource("buttonOui").draw(resX / 2 - 200, resY / 3 + 220);
 			GestionnaireImagesIHM.getRessource("buttonNon").draw(resX / 2 - 100, resY / 3 + 220);
@@ -199,6 +206,16 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 						temps = 0;
 						sbg.enterState(0);
 					}
+			
+			
+			if ((xpos > resX/2 - 200 && xpos < resX/2 + 200 )
+				 && (ypos < resY/3 + 90 && ypos > resY/3 + 60))
+					if(input.isMouseButtonDown(0))
+					{
+						currentField = 3;
+						System.out.println(currentField);
+					}
+					
 
 			// Bouton creer
 			if ((xpos > resX / 2 + 150 && xpos < resX / 2 + 250)
@@ -214,7 +231,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 
 					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie,Game.adresseipserveur,Game.portTCP,Game.portUDP);
 					Game.connexionClient.connect();
-					Game.connexionClient.createGame();
+					Game.connexionClient.createGame(hostname);
 					Game.gestionnairePartie.joueur.setNom("Hôte");
 					
 					if(options.getLobby() == false)
@@ -246,6 +263,9 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 				break;
 			case 2:
 				passwordField.setText(options.getPassword());
+				break;
+			case 3: 
+				nameField.setText(hostname);
 				break;
 
 			}
@@ -334,6 +354,16 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 				input = input.substring(0, input.length() - 1);
 
 			options.setPassword(input);
+		}
+		
+		if( currentField == 3) {
+			
+			
+			hostname+=c;
+			if (key == Input.KEY_BACK && hostname.length() > 0)
+				hostname = hostname.substring(0, hostname.length() - 1);
+			
+			System.out.println(hostname);
 		}
 	}
 
