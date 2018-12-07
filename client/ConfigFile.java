@@ -21,11 +21,18 @@ public class ConfigFile {
 	public ConfigFile() {
 		configFile = new File(configFilePath);
 	}
-	
+	/**
+	 * Vérifie que le fichier de configuration existe
+	 * @author Amine Boudraa
+	 */
 	public static boolean configFileExists() {
 		return configFile.isFile();
 	}
 	
+	/**
+	 * Initialise le fichier de configuration
+	 * @author Amine Boudraa
+	 */
 	public static void initConfigFile() {
 		try{
 			if(!configFileExists())

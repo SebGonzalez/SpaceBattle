@@ -38,13 +38,17 @@ public class ConnectionClient extends Listener {
 
 	GestionnairePartie gestionnairePartie;
 
-	String ip = "localhost";
-	final int portTCP = 18000;
-	final int portUDP = 19000;
+	String ip ;
+	int portTCP ;
+	int portUDP ;
 	Client client;
 
-	public ConnectionClient(GestionnairePartie gestionnairePartie) {
+	public ConnectionClient(GestionnairePartie gestionnairePartie, String adresse_ip_serveur, int portTCP,int portUDP) {
 		this.gestionnairePartie = gestionnairePartie;
+		this.ip = adresse_ip_serveur;
+		this.portTCP = portTCP;
+		this.portUDP = portUDP;
+		
 	}
 
 	public ConnectionClient(Joueur joueur, GestionnairePartie gestionnairePartie) {
@@ -56,7 +60,9 @@ public class ConnectionClient extends Listener {
 	}
 
 	/**
-	 * Connexion avec le serveur
+	 * Chargement de toute les classes utilisées pour la librairie réseau
+	 * Connexion au serveur
+	 * @author Amine Boudraa
 	 */
 	public void connect() {
 		Log.set(Log.LEVEL_DEBUG);
@@ -95,7 +101,10 @@ public class ConnectionClient extends Listener {
 
 		// sendInformation(joueur);
 	}
-
+	/**
+	 * Déconnexion du serveur
+	 * @author Amine Boudraa
+	 */
 	public void disconnect() {
 		client.close();
 		// client.discoverHost(18000, 5000);
@@ -106,10 +115,9 @@ public class ConnectionClient extends Listener {
 	}
 
 	/**
-	 * Création du datagram contenant les informations du joueur et envoie au
-	 * serveur
+	 * Création du datagram contenant les informations du joueur en parametre et envoie de ce dernier au serveur
 	 * 
-	 * @param joueur
+	 * @param Joueur
 	 */
 	public void sendInformationGame(Joueur joueur) {
 		if (gestionnairePartie.getIdPartie() != -1) {

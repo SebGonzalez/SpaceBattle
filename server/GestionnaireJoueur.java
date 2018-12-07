@@ -37,9 +37,10 @@ public class GestionnaireJoueur {
 	/**
 	 * Mets à jour les informations reçues du client et prépare la réponse
 	 * 
-	 * @param idJoueur
-	 * @param datagram
-	 * @return
+	 * @param idJoueur du joueur courant
+	 * @param datagram reçu du client
+	 * @return un datagram reponse qui sera envoyé au serveur
+	 * @author Amine Boudraa
 	 */
 	public DatagramUpdateServer updateJoueur(int idJoueur, DatagramUpdateClient datagram) {
 
@@ -81,9 +82,10 @@ public class GestionnaireJoueur {
 	}
 
 	/**
-	 * Méthode qui vérifie que les missile du client ne touche pas un autre joueur
-	 * @param listeMissile
-	 * @param idClient
+	 * Méthode détectant une collision entre un joueur et un missile
+	 * @param liste des missiles présents sur la carte 
+	 * @param id du client nous servant à parcourir la liste de joueur
+	 * @author Amine Boudraa
 	 */
 	public void checkCollision(ArrayList<Missile> listeMissile, int idC) {
 		
@@ -117,7 +119,8 @@ public class GestionnaireJoueur {
 	/**
 	 * Supprime un joueur de la liste
 	 * 
-	 * @param id
+	 * @param id du joueur que la méthode veut supprimer
+	 * @author Amine Boudraa
 	 */
 	public void removeJoueur(int id) {
 		for (Entry<Integer, ServeurJoueur> entry : listePlayers.entrySet()) {

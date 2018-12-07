@@ -24,6 +24,11 @@ public class GestionnaireAdversaire {
 		listeAdversaire = new ArrayList<>();
 	}
 
+	/**
+	 * Renvoie la liste des joueurs(adverses) reçues par le serveur
+	 * @return liste des adversaires
+	 * @author Amine Boudraa
+	 */
 	public ArrayList<ServeurJoueur> getListeAdversaire() {
 		return listeAdversaire;
 	}
@@ -54,9 +59,10 @@ public class GestionnaireAdversaire {
 	}
 	
 	/**
-	 * Affichage de tous les adversaire et de leur missile
-	 * Note : A optimiser (voir trello)
-	 * @param g
+	 * Affiche les différents adversaire à partir de la liste des joueurs localement
+	 * Affiche les nouvelles textures dues au dégats causés aux adversaires
+	 * Affiche la liste des missiles
+	 * @author Amine Boudraa
 	 */
 	public void render(Graphics g) {
 		

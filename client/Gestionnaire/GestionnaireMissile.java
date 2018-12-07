@@ -29,7 +29,12 @@ public class GestionnaireMissile {
 		
 		this.joueur = joueur;
 	}
-
+	
+	/**
+	 * Renvoie la liste de missile du client
+	 * @return listemissile du client
+	 * @author Amine Boudraa
+	 */
 	public ArrayList<Missile> getListeMissileClient() {
 		return listeMissileClient;
 	}
@@ -63,17 +68,18 @@ public class GestionnaireMissile {
 		}
 	}
 	
+	/**
+	 * Stocke dans une variable temporaire la liste des missiles reçues par le serveur
+	 * @author Amine Boudraa
+	 */
 	public void setReception(ArrayList<Missile> reception) {
 		this.reception = reception;
 	}
 
 	/**
-	 * Mets à jour les missiles
-	 * 	Client : déplacement du missile et suppression si le délai d'apparition est dépassé
-	 * 	Adversaire : 
-	 * @param delta
+	 * Détecte une collision joueur misisile pour supprimer le missile
+	 * @param liste des joueurs
 	 */
-	
 	public void removeMissileonCollide(ArrayList<ServeurJoueur> listeAdversaire) {
 		
 		for(ServeurJoueur joueur : listeAdversaire) {
@@ -82,6 +88,10 @@ public class GestionnaireMissile {
 			}
 		}
 	
+	/**
+	 * Met à jour les informations des missiles 
+	 * @author Amine Boudraa
+	 */
 	public void update(int delta) {
 	
 		for (Iterator<Missile> it = listeMissileClient.iterator(); it.hasNext();) {

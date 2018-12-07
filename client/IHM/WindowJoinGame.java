@@ -125,7 +125,7 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 				else
 					Game.gestionnairePartie = new GestionnairePartieCourse(new GameOptions()); //sprint
 				
-				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+				Game.connexionClient = new ConnectionClient(Game.gestionnairePartie,Game.adresseipserveur,Game.portTCP,Game.portUDP);
 				Game.connexionClient.connect();
 				Game.gestionnairePartie.setIdPartie(Integer.parseInt(gameID.getText()));
 				Game.connexionClient.joinGame(playerName.getText());

@@ -127,7 +127,7 @@ public class WindowGame extends BasicGameState {
 		
 		if(!loop) {
 			loop = true;
-			Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+			Game.connexionClient = new ConnectionClient(Game.gestionnairePartie,Game.adresseipserveur,Game.portTCP,Game.portUDP);
 			Game.connexionClient.connect();
 			sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
 			

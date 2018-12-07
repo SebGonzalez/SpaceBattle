@@ -278,7 +278,7 @@ public class WindowGameList extends BasicGameState {
 			else
 				Game.gestionnairePartie = new GestionnairePartieCourse(listeOptionsParties.get(selectedGame)); // sprint
 
-			Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+			Game.connexionClient = new ConnectionClient(Game.gestionnairePartie,Game.adresseipserveur,Game.portTCP,Game.portUDP);
 			Game.connexionClient.connect();
 			Game.gestionnairePartie.setIdPartie(listeIdParties.get(selectedGame));
 			Game.connexionClient.joinGame(nom.getText());

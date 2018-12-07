@@ -212,7 +212,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 					else
 						Game.gestionnairePartie = new GestionnairePartieCourse(options); // sprint
 
-					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie);
+					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie,Game.adresseipserveur,Game.portTCP,Game.portUDP);
 					Game.connexionClient.connect();
 					Game.connexionClient.createGame();
 					Game.gestionnairePartie.joueur.setNom("Hôte");

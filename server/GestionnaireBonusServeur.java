@@ -67,25 +67,28 @@ public class GestionnaireBonusServeur {
 					&& bonus.getY() + 30 > player.getY() - 37 && bonus.getY() + 30 < player.getY() + 37) {
 				switch (bonus.getType()) {
 
-				case TripleMissile:
+				case VitesseUp:
 					if (player.getBonusState(0) == false) {
 						player.enableBonus(0);
 						bonus.disappear();
+						//System.out.println("étoile ramassé");
 					}
-					break;
-
-				case VitesseUp:
-					if (player.getBonusState(1) == false) {
-						player.enableBonus(1);
-						bonus.disappear();
-					}
-
 					break;
 
 				case TeteChercheuse:
+					if (player.getBonusState(1) == false) {
+						player.enableBonus(1);
+						bonus.disappear();
+						System.out.println("éclair ramassé");
+					}
+
+					break;
+
+				case TripleMissile:
 					if (player.getBonusState(2) == false) {
 						player.enableBonus(2);
 						bonus.disappear();
+						
 					}
 
 					break;
@@ -94,6 +97,7 @@ public class GestionnaireBonusServeur {
 					if (player.getBonusState(3) == false) {
 						player.enableBonus(3);
 						bonus.disappear();
+						System.out.println("shield ramassé");
 					}
 
 					break;

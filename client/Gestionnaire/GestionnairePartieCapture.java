@@ -33,6 +33,12 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 		super(options);
 	}
 	
+	/**
+	 * @see gestionnairePartie.renderAll
+	 * Affiche le drapeau allié et le drapeau ennemi
+	 * Affiche le score de la partie
+	 * @author Amine Boudraa
+	 */
 	public void renderAll(Graphics g) {
 		super.renderAll(g);
 		if(flagTeam != null) {
@@ -50,6 +56,13 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 		
 	}
 	
+	/**
+	 * @see gestionnairepartie.setReception
+	 * Reçoit le champs flag1 du datagram venant du serveur et l'affecte localement
+	 * Reçoit le champs flag2 du datagram venant du serveur et l'affecte localement 
+	 * Egalement pour les scores
+	 * @author Amine Boudraa
+	 */
 	public void setReception(DatagramUpdateServer datagram) {
 		
 		super.setReception(datagram);
@@ -59,6 +72,10 @@ public class GestionnairePartieCapture extends GestionnairePartie {
 		scoreTeam2 = ((DatagramUpdateServerCapture)datagram).scoreTeam2;
 	}
 	
+	/**
+	 * Met à jour les informations reçues du serveur à propos des drapeaux
+	 * @author Amine Boudraa
+	 */
 	public void update(GameContainer container, int delta) {
 		super.update(container, delta);
 		if(flagEnemyReception != null) {
