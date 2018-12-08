@@ -112,10 +112,15 @@ public class Game extends StateBasedGame{
 	}
 	
 	public static void main(String[] args) {
-		if(Game.settingsFileExists())
+		if(Game.settingsFileExists("settings.cfg"))
 			Game.loadSettings();
 		else
-			Game.createSettingsFile();
+			Game.createSettingsFileParameters();
+		
+		if(Game.settingsFileExists("serveur.cfg"))
+			Game.loadSettingsServer();
+		else
+			Game.createSettingsFileServer();	
 		
 		
 		AppGameContainer appgc;
@@ -137,8 +142,6 @@ public class Game extends StateBasedGame{
 		String resolution, volume;
 		Properties settings = new Properties();
 		InputStream is = null;
-		String portudp;
-		String porttcp;
 		
 		try {
 			File f = new File("settings.cfg");
@@ -148,22 +151,15 @@ public class Game extends StateBasedGame{
 		}
 		try {
 			settings.load(is);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		resolution = settings.getProperty("resolution", "LOW");
 		volume = settings.getProperty("musicVolume", "0");
-		adresseipserveur = settings.getProperty("adresseIPserveur");
-		portudp = settings.getProperty("portUDP");
-		porttcp = settings.getProperty("portTCP");
-		
-		
-		
-		portUDP = Integer.parseInt(portudp);
-		portTCP = Integer.parseInt(porttcp);
-		
 		musicVolume = Float.parseFloat(volume);
+		
 		switch (resolution) {
 		case "LOW":
 			res = Resolution.LOW;
@@ -182,24 +178,61 @@ public class Game extends StateBasedGame{
 		System.out.println("Parametres chargés");
 	}
 	
+	
+	public static void loadSettingsServer() {
+	
+		Properties settings_serveur = new Properties();
+		
+		InputStream input_serveur = null;
+		String portudp;
+		String porttcp;
+		
+		try {
+			
+			File f2 = new File("serveur.cfg");
+			input_serveur = new FileInputStream(f2);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			settings_serveur.load(input_serveur);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		adresseipserveur = settings_serveur.getProperty("adresseIPserveur");
+		portudp = settings_serveur.getProperty("portUDP");
+		porttcp = settings_serveur.getProperty("portTCP");
+		
+		portUDP = Integer.parseInt(portudp);
+		portTCP = Integer.parseInt(porttcp);
+		
+		
+		System.out.println("Parametres serveur chargés");
+	}
+	
 	/**
 	 * Teste si le fichier settings.cfg existe 
 	 * @return vrai si existe sinon faux
 	 * @author Amine Boudraa
 	 */
-	public static boolean settingsFileExists() {
-		File f = new File("settings.cfg");
-		if(f.isFile())
+	public static boolean settingsFileExists(String file) {
+		File f = new File(file);
+		
+		if(f.isFile() )
 			return true;
 		else return false;
 	}
+	
+	
 	
 	/**
 	 * Sauvegarde les paramètres qui ont été chargés à partir du fichier config
 	 * @author Amine Boudraa
 	 */
 	public static void saveSettings() {
-		if(settingsFileExists()) {
+		if(settingsFileExists("settings.cfg")) {
 			Properties settings = new Properties();
 			settings.setProperty("musicVolume", String.valueOf(ambiance.getVolume()));
 
@@ -218,13 +251,11 @@ public class Game extends StateBasedGame{
 				break;
 			}
 			
-			settings.setProperty("adresseIPserveur",adresseipserveur);
-			settings.setProperty("portTCP", settings.getProperty("portTCP")); 
-			settings.setProperty("portUDP", settings.getProperty("portUDP"));
-		
 			File f = new File("settings.cfg");
+			
 			try {
 				OutputStream out = new FileOutputStream(f);
+				
 				try {
 					settings.store(out, "Parametres SpaceBattle");
 				} catch (IOException e) {
@@ -243,23 +274,54 @@ public class Game extends StateBasedGame{
 	 * Initialisation des champs du fichier de configuration avant chargement
 	 * @author Amine Boudraa
 	 */
-	public static void createSettingsFile() {
+	public static void createSettingsFileParameters() {
 		File f = new File("settings.cfg");
 		Properties settings = new Properties();
 		
+		
 		settings.setProperty("resolution", "LOW");
 		settings.setProperty("musicVolume", "0");
-		settings.setProperty("adresseIPserveur", "localhost");
-		settings.setProperty("portUDP", "19000");
-		settings.setProperty("portTCP", "18000");
 		
-		
-		try {
+	  try {
 			OutputStream out = new FileOutputStream(f);
+			
 			
 				try {
 					settings.store(out, "Parametres SpaceBattle");
-					System.out.println("Fichier parametres cr��");
+					System.out.println("Fichier parametres crées");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void createSettingsFileServer() {
+		
+		
+		File f2 = new File("serveur.cfg");
+		Properties settings2 = new Properties();
+		
+		
+		settings2.setProperty("adresseIPserveur", "localhost");
+		settings2.setProperty("portUDP", "19000");
+		settings2.setProperty("portTCP", "18000");
+		
+		adresseipserveur = "localhost";
+		portUDP = 19000;
+		portTCP = 18000;
+		
+		
+		try {
+			
+			OutputStream out2 = new FileOutputStream(f2);
+			
+				try {
+					
+					settings2.store(out2, "Parametres serveur SpaceBattle");
+					System.out.println("Fichier parametres serveur crée");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
