@@ -184,23 +184,45 @@ public class Game extends StateBasedGame{
 		Properties settings_serveur = new Properties();
 		
 		InputStream input_serveur = null;
+		OutputStream output_serveur = null;
 		String portudp;
 		String porttcp;
 		
 		try {
 			
-			File f2 = new File("serveur.cfg");
-			input_serveur = new FileInputStream(f2);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		try {
+		
+			File f1 = new File("serveur.cfg");
+			input_serveur = new FileInputStream(f1);
 			settings_serveur.load(input_serveur);
-		} catch (IOException e) {
+			
+			if ( settings_serveur.getProperty("adresseIPserveur") == null || settings_serveur.getProperty("portUDP") == null || settings_serveur.getProperty("portTCP") == null )
+			{
+				
+				output_serveur = new FileOutputStream(f1);
+			
+				if(settings_serveur.getProperty("adresseIPserveur") == null)
+					settings_serveur.setProperty("adresseIPserveur", "localhost");
+				if(settings_serveur.getProperty("portUDP") == null)
+					settings_serveur.setProperty("portUDP", "19000");
+				if(settings_serveur.getProperty("portTCP") == null)
+					settings_serveur.setProperty("portTCP", "18000");
+				
+				settings_serveur.store(output_serveur,"Parametres manquants crees");
+				
+			}
+		}
+			
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		
+	
+		
+		
+		
+		
+	
 		adresseipserveur = settings_serveur.getProperty("adresseIPserveur");
 		portudp = settings_serveur.getProperty("portUDP");
 		porttcp = settings_serveur.getProperty("portTCP");
@@ -279,7 +301,7 @@ public class Game extends StateBasedGame{
 		Properties settings = new Properties();
 		
 		
-		settings.setProperty("resolution", "LOW");
+		settings.setProperty("resolution", "HIGH");
 		settings.setProperty("musicVolume", "0");
 		
 	  try {
