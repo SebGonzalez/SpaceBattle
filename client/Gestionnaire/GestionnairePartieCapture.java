@@ -6,7 +6,6 @@ import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.tiled.TiledMap;
 
 import client.Game;
 import client.GameOptions;

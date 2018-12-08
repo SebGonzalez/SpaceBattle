@@ -1,7 +1,5 @@
 package client.Model;
 
-import java.util.Random;
-
 import org.newdawn.slick.Graphics;
 
 import client.IHM.WindowGame;
@@ -37,6 +35,8 @@ public class Bonus {
 		 //	break;
 	    case Bouclier:
 			WindowGame.bonusShield.draw(getX(), getY());
+			break;
+		default:
 			break;
 		}
 

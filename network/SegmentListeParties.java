@@ -2,7 +2,6 @@ package network;
 import java.util.ArrayList;
 
 import client.GameOptions;
-import server.Partie;
 
 /**
  * Segment permettant au serveur d'envoyer la liste des parties au client

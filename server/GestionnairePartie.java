@@ -3,7 +3,6 @@ package server;
 import java.util.ArrayList;
 
 import client.ModeJeu;
-import client.Model.Joueur;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
 import network.SegmentCreationPartie;

@@ -286,9 +286,6 @@ public class Joueur {
 		}
 
 		else {
-
-			double angle = Math.toDegrees(Math.atan2(futurY - y, futurX - x));
-
 			int xTexture = (int) (map.getTileWidth() * (int)(futurX/map.getTileWidth()));
 			int yTexture = (int) (map.getTileHeight() * (int)(futurY/map.getTileHeight()));
 			Line2D.Float coteGauche = new Line2D.Float(xTexture, yTexture, xTexture, yTexture+tile.getHeight());

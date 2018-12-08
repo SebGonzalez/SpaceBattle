@@ -1,13 +1,15 @@
 package client.IHM;
 
+import java.awt.Font;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -22,14 +24,8 @@ import client.Gestionnaire.GestionnairePartie;
 import client.Gestionnaire.GestionnairePartieCapture;
 import client.Gestionnaire.GestionnairePartieCourse;
 
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
-
-import java.awt.Font;
-
 public class WindowJoinGame extends BasicGameState implements KeyListener{
 
-	private GameContainer container;
 	private TextField gameID;
 	private TextField playerName;
 	private String input = "";
@@ -50,14 +46,13 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		resY = Game.res.getY();
 		
 		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
-		font.addAsciiGlyphs(); font.addGlyphs(400,600); font.getEffects().add(new ColorEffect(java.awt.Color.white));
+		font.addAsciiGlyphs(); font.addGlyphs(400,600); 
+		//font.getEffects().add(new ColorEffect(java.awt.Color.white));
 		try {
 			font.loadGlyphs();
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
-		this.container = container;
 
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadJoinGame();
@@ -141,11 +136,6 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 			if(input.isMouseButtonDown(0)) {
 				sbg.enterState(0, new EmptyTransition(), new FadeInTransition(Color.black));
 			}
-	}
-	
-	public void sendGameID() {
-		//TODO
-		System.out.println(input);
 	}
 
 	@Override

@@ -13,7 +13,6 @@ public class Flag {
 	private float y;
 	
 	private int numTeam;
-	private boolean pris = false;
 	
 	public Flag() {
 		

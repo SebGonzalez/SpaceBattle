@@ -8,12 +8,10 @@ import org.newdawn.slick.tiled.TiledMap;
 
 import client.Game;
 import client.GameOptions;
-import client.ModeJeu;
 import client.IHM.WindowGame;
 import client.Model.Joueur;
 import client.Model.Missile;
 import network.DatagramUpdateServer;
-import server.ServeurJoueur;
 
 public class GestionnairePartie {
 	

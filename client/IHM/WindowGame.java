@@ -1,31 +1,19 @@
 package client.IHM;
 
-import java.util.ArrayList;
-
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.tiled.TiledMap;
-import org.newdawn.slick.Music;
 
 import client.ConnectionClient;
 import client.Game;
-import client.Gestionnaire.GestionnaireAdversaire;
-import client.Gestionnaire.GestionnaireBonusClient;
-import client.Gestionnaire.GestionnaireMissile;
-import client.Gestionnaire.GestionnairePartie;
-import client.Model.Bonus;
-import client.Model.Joueur;
-import client.Model.Missile;
 
 public class WindowGame extends BasicGameState {
 

@@ -40,6 +40,7 @@ public class ConfigFile {
 			
 			BufferedWriter writer = new BufferedWriter(new FileWriter(configFile, true));
 			writer.write(emptyConfigFile);
+			writer.close();
 			
 		} catch(IOException e) {
 			e.printStackTrace();

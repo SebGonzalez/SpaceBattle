@@ -15,8 +15,6 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.esotericsoftware.minlog.Log;
-
 import client.Gestionnaire.GestionnairePartie;
 import client.IHM.WindowCreateGame;
 import client.IHM.WindowGame;
@@ -114,12 +112,14 @@ public class Game extends StateBasedGame{
 	}
 	
 	public static void main(String[] args) {
+		if(Game.settingsFileExists())
+			Game.loadSettings();
+		else
+			Game.createSettingsFile();
+		
+		
 		AppGameContainer appgc;
 		try {
-			if(Game.settingsFileExists())
-				Game.loadSettings();
-			else
-				Game.createSettingsFile();
 			appgc = new AppGameContainer(new Game());
 			appgc.setDisplayMode(res.getX(), res.getY(), false);
 			appgc.start();
@@ -159,6 +159,7 @@ public class Game extends StateBasedGame{
 		porttcp = settings.getProperty("portTCP");
 		
 		
+		
 		portUDP = Integer.parseInt(portudp);
 		portTCP = Integer.parseInt(porttcp);
 		
@@ -180,7 +181,6 @@ public class Game extends StateBasedGame{
 		
 		System.out.println("Parametres chargés");
 	}
-	
 	
 	/**
 	 * Teste si le fichier settings.cfg existe 
@@ -249,9 +249,9 @@ public class Game extends StateBasedGame{
 		
 		settings.setProperty("resolution", "LOW");
 		settings.setProperty("musicVolume", "0");
-		settings.setProperty("adresseIPserveur", "0");
-		settings.setProperty("portUDP", "0");
-		settings.setProperty("portTCP", "0");
+		settings.setProperty("adresseIPserveur", "localhost");
+		settings.setProperty("portUDP", "19000");
+		settings.setProperty("portTCP", "18000");
 		
 		
 		try {
@@ -261,11 +261,9 @@ public class Game extends StateBasedGame{
 					settings.store(out, "Parametres SpaceBattle");
 					System.out.println("Fichier parametres cr��");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

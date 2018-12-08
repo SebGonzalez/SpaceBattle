@@ -1,7 +1,6 @@
 package network;
 
 import client.GameOptions;
-import client.ModeJeu;
 
 /**
  * Segment permettant au client d'informer le serveur de la création d'une nouvelle partie

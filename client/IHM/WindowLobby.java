@@ -6,7 +6,6 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -17,11 +16,9 @@ import org.newdawn.slick.state.transition.FadeInTransition;
 import client.Game;
 import client.ModeJeu;
 import client.Gestionnaire.GestionnairePartieCourse;
-import client.Model.Joueur;
 
 public class WindowLobby extends BasicGameState{
 
-	private final int maxPlayer = 8;
 	private String hostName = "defaultName";
 	public static ArrayList<String> playersInLobby;
 	
@@ -109,12 +106,6 @@ public class WindowLobby extends BasicGameState{
 	@Override
 	public int getID() {
 		return 2;
-	}
-	
-	private void testAddPlayers(int n) {
-		for(int i =0; i<n; i++) {
-			playersInLobby.add("Joueur" + i);
-		}
 	}
 
 }

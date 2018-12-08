@@ -1,6 +1,5 @@
 package client.Gestionnaire;
 
-import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.Graphics;
 
 import client.Game;

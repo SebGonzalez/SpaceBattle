@@ -4,7 +4,6 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -16,7 +15,6 @@ import client.Game;
 
 public class WindowMainMenu extends BasicGameState {
 
-	private GameContainer container;
 	private int resX = Game.res.getX(), resY = Game.res.getY();
 
 	
@@ -39,8 +37,7 @@ public class WindowMainMenu extends BasicGameState {
 	}
 
 	@Override
-	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
-		this.container = container;		
+	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {	
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadMainMenu();
 		

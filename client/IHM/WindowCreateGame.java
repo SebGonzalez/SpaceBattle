@@ -2,8 +2,6 @@ package client.IHM;
 
 import java.awt.Font;
 
-import javax.jws.WebParam.Mode;
-
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -12,7 +10,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -34,12 +31,12 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 	private int currentField;
 
 	private boolean optionsScreen = false;
-	
+
 	String hostname = "";
 
 	private GameOptions options;
 
-	private TextField passwordField, maxPlayersField,nameField	;
+	private TextField passwordField, maxPlayersField, nameField;
 
 	private int resX = Game.res.getX(), resY = Game.res.getY();
 
@@ -56,7 +53,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
 		font.addAsciiGlyphs();
 		font.addGlyphs(400, 600);
-		font.getEffects().add(new ColorEffect(java.awt.Color.white));
+		//font.getEffects().add(new ColorEffect(java.awt.Color.white));
 
 		try {
 			font.loadGlyphs();
@@ -83,12 +80,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			maxPlayersField.setTextColor(Color.white);
 			maxPlayersField.setText(String.valueOf(options.getMaxPlayers()));
 			maxPlayersField.render(container, g);
-			
-			g.drawString("Veuillez entrer votre nom", resX / 2 - 200, resY/2 + 10);
-			nameField = new TextField(container, font, resX / 2 - 200, resY/2 + 30 , 400,20 );
+
+			g.drawString("Veuillez entrer votre nom", resX / 2 - 200, resY / 2 + 40);
+			nameField = new TextField(container, font, resX / 2 - 200, resY / 2 + 60, 400, 20);
+			nameField.setText(hostname);
 			nameField.setTextColor(Color.white);
 			nameField.render(container, g);
-			
+
 			g.drawString("Partie avec mot de passe", resX / 2 - 200, resY / 3 + 190);
 			GestionnaireImagesIHM.getRessource("buttonOui").draw(resX / 2 - 200, resY / 3 + 220);
 			GestionnaireImagesIHM.getRessource("buttonNon").draw(resX / 2 - 100, resY / 3 + 220);
@@ -160,8 +158,6 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			GestionnaireImagesIHM.getRessource("buttonBack").draw(resX / 2 + 300, resY / 3 + 275);
 		}
 
-		// System.out.println(selectedMode);
-
 	}
 
 	@Override
@@ -175,53 +171,42 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 		if (!optionsScreen) {
 
 			// MaxPlayers
-			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + 200)
-					&& (ypos > resY - (resY / 3 + 120) && ypos < resY - (resY / 3 + 100)))
+			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + 200) && (ypos > resY - (resY / 3 + 120) && ypos < resY - (resY / 3 + 100)))
 				if (input.isMouseButtonDown(0))
 					currentField = 1;
 
 			// Password: OUI
-			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + -125)
-					&& (ypos > resY - (resY / 3 + 265) && ypos < resY - (resY / 3 + 220)))
+			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + -125) && (ypos > resY - (resY / 3 + 265) && ypos < resY - (resY / 3 + 220)))
 				if (input.isMouseButtonDown(0))
 					options.setPrivateGame(true);
 
 			// Password: NON
-			if ((xpos > resX / 2 - 100 && xpos < resX / 2 + -25)
-					&& (ypos > resY - (resY / 3 + 265) && ypos < resY - (resY / 3 + 220)))
+			if ((xpos > resX / 2 - 100 && xpos < resX / 2 + -25) && (ypos > resY - (resY / 3 + 265) && ypos < resY - (resY / 3 + 220)))
 				if (input.isMouseButtonDown(0))
 					options.setPrivateGame(false);
 
 			// Password field
-			if ((xpos > resX / 2 && xpos < resX / 2 + 400)
-					&& (ypos > resY - (resY / 3 + 240) && ypos < resY - (resY / 3 + 220)))
+			if ((xpos > resX / 2 && xpos < resX / 2 + 400) && (ypos > resY - (resY / 3 + 240) && ypos < resY - (resY / 3 + 220)))
 				if (input.isMouseButtonDown(0))
 					currentField = 2;
 
 			// Bouton retour
-			if ((xpos > resX / 2 + 300 && xpos < resX / 2 + 400)
-					&& (ypos > resY - (resY / 3 + 320) && ypos < resY - (resY / 3 + 275)))
+			if ((xpos > resX / 2 + 300 && xpos < resX / 2 + 400) && (ypos > resY - (resY / 3 + 320) && ypos < resY - (resY / 3 + 275)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 100) {
 						temps = 0;
 						sbg.enterState(0);
 					}
-			
-			
-			if ((xpos > resX/2 - 200 && xpos < resX/2 + 200 )
-				 && (ypos < resY/3 + 90 && ypos > resY/3 + 60))
-					if(input.isMouseButtonDown(0))
-					{
-						currentField = 3;
-						System.out.println(currentField);
-					}
-					
+
+			// nameField
+			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + 200) && (ypos < resY - (resY / 2 + 60) && ypos > resY - (resY / 2 + 80)))
+				if (input.isMouseButtonDown(0)) {
+					currentField = 3;
+				}
 
 			// Bouton creer
-			if ((xpos > resX / 2 + 150 && xpos < resX / 2 + 250)
-					&& (ypos > resY - (resY / 3 + 320) && ypos < resY - (resY / 3 + 275)))
+			if ((xpos > resX / 2 + 150 && xpos < resX / 2 + 250) && (ypos > resY - (resY / 3 + 320) && ypos < resY - (resY / 3 + 275)))
 				if (input.isMouseButtonDown(0)) {
-					System.out.println("oui");
 					if (options.getModeJeu() == ModeJeu.DEATHMATCH)
 						Game.gestionnairePartie = new GestionnairePartie(options);
 					else if (options.getModeJeu() == ModeJeu.CAPTURE)
@@ -229,12 +214,12 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 					else
 						Game.gestionnairePartie = new GestionnairePartieCourse(options); // sprint
 
-					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie,Game.adresseipserveur,Game.portTCP,Game.portUDP);
+					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie, Game.adresseipserveur, Game.portTCP, Game.portUDP);
 					Game.connexionClient.connect();
 					Game.connexionClient.createGame(hostname);
 					Game.gestionnairePartie.joueur.setNom("Hôte");
-					
-					if(options.getLobby() == false)
+
+					if (options.getLobby() == false)
 						sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
 					else {
 						WindowLobby.playersInLobby.add(Game.gestionnairePartie.joueur.getNom());
@@ -244,16 +229,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 				}
 
 			// Boutons Modes
-			if ((xpos > resX / 2 - 300 && xpos < resX / 2 - 200)
-					&& (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
+			if ((xpos > resX / 2 - 300 && xpos < resX / 2 - 200) && (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
 				if (input.isMouseButtonDown(0))
 					options.setModeJeu(ModeJeu.DEATHMATCH);
-			if ((xpos > resX / 2 - 150 && xpos < resX / 2 - 50)
-					&& (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
+			if ((xpos > resX / 2 - 150 && xpos < resX / 2 - 50) && (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
 				if (input.isMouseButtonDown(0))
 					options.setModeJeu(ModeJeu.CAPTURE);
-			if ((xpos > resX / 2 && xpos < resX / 2 + 100)
-					&& (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
+			if ((xpos > resX / 2 && xpos < resX / 2 + 100) && (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
 				if (input.isMouseButtonDown(0))
 					options.setModeJeu(ModeJeu.COURSE);
 
@@ -264,22 +246,20 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			case 2:
 				passwordField.setText(options.getPassword());
 				break;
-			case 3: 
+			case 3:
 				nameField.setText(hostname);
 				break;
 
 			}
 			// Bouton options
-			if ((xpos > resX / 2 + 250 && xpos < resX / 2 + 350)
-					&& (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
+			if ((xpos > resX / 2 + 250 && xpos < resX / 2 + 350) && (ypos > resY - (resY / 4 + 75) && ypos < resY - (resY / 4 + 30)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 100) {
 						temps = 0;
 						optionsScreen = !optionsScreen;
 					}
 
-			if ((xpos > resX / 5 - 50 && xpos < resX / 5 + 25)
-					&& (ypos > resY - (resY / 2 + 85) && ypos < resY - (resY / 2 + 35)))
+			if ((xpos > resX / 5 - 50 && xpos < resX / 5 + 25) && (ypos > resY - (resY / 2 + 85) && ypos < resY - (resY / 2 + 35)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 300) {
 						temps = 0;
@@ -287,32 +267,28 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 					}
 		} else {
 			// Bouton retour
-			if ((xpos > resX / 2 + 300 && xpos < resX / 2 + 400)
-					&& (ypos > resY - (resY / 3 + 320) && ypos < resY - (resY / 3 + 275)))
+			if ((xpos > resX / 2 + 300 && xpos < resX / 2 + 400) && (ypos > resY - (resY / 3 + 320) && ypos < resY - (resY / 3 + 275)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 100) {
 						temps = 0;
 						optionsScreen = !optionsScreen;
 					}
 
-			if ((xpos > resX / 4 - 50 && xpos < resX / 4 + 25)
-					&& (ypos > resY - (resY / 4 + 50) && ypos < resY - (resY / 4)))
+			if ((xpos > resX / 4 - 50 && xpos < resX / 4 + 25) && (ypos > resY - (resY / 4 + 50) && ypos < resY - (resY / 4)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 300) {
 						temps = 0;
 						options.setReapparitions(!options.getReapparitions());
 					}
 
-			if ((xpos > resX / 4 + 200 && xpos < resX / 4 + 275)
-					&& (ypos > resY - (resY / 4 + 50) && ypos < resY - (resY / 4)))
+			if ((xpos > resX / 4 + 200 && xpos < resX / 4 + 275) && (ypos > resY - (resY / 4 + 50) && ypos < resY - (resY / 4)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 300) {
 						temps = 0;
 						options.setTir(!options.getTir());
 					}
 
-			if ((xpos > resX / 4 + 450 && xpos < resX / 4 + 525)
-					&& (ypos > resY - (resY / 4 + 50) && ypos < resY - (resY / 4)))
+			if ((xpos > resX / 4 + 450 && xpos < resX / 4 + 525) && (ypos > resY - (resY / 4 + 50) && ypos < resY - (resY / 4)))
 				if (input.isMouseButtonDown(0))
 					if (temps > 300) {
 						temps = 0;
@@ -355,15 +331,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 
 			options.setPassword(input);
 		}
-		
-		if( currentField == 3) {
-			
-			
-			hostname+=c;
+
+		if (currentField == 3) {
+
 			if (key == Input.KEY_BACK && hostname.length() > 0)
 				hostname = hostname.substring(0, hostname.length() - 1);
-			
-			System.out.println(hostname);
+			else
+				hostname += c;
 		}
 	}
 

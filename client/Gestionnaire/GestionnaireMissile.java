@@ -17,14 +17,11 @@ import server.ServeurJoueur;
 public class GestionnaireMissile {
 
 	private ArrayList<Missile> listeMissileClient;
-	private ArrayList<Missile> reception;
-	public ArrayList<ServeurJoueur> listeAdversaire;
 	private Joueur joueur;
 	private long lastTir;
 	
 	public GestionnaireMissile(Joueur joueur) {
 		listeMissileClient = new ArrayList<>();
-		listeAdversaire = new ArrayList<>();
 		lastTir = System.currentTimeMillis();
 		
 		this.joueur = joueur;
@@ -66,14 +63,6 @@ public class GestionnaireMissile {
 		for (Missile m : listeMissileClient) {
 			m.render(g);
 		}
-	}
-	
-	/**
-	 * Stocke dans une variable temporaire la liste des missiles reçues par le serveur
-	 * @author Amine Boudraa
-	 */
-	public void setReception(ArrayList<Missile> reception) {
-		this.reception = reception;
 	}
 
 	/**

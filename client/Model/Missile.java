@@ -1,6 +1,5 @@
 package client.Model;
 
-import org.lwjgl.Sys;
 import org.newdawn.slick.Graphics;
 
 import client.IHM.WindowGame;

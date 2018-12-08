@@ -5,7 +5,6 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -60,7 +59,7 @@ public class WindowOptions extends BasicGameState{
 		int ypos = Mouse.getY();
 		AppGameContainer gc = (AppGameContainer) container;
 		
-		t += delta; // Pour ne pas qu'un click incrémente le volume trop vite
+		t += delta; // Pour ne pas qu'un click incrï¿½mente le volume trop vite
 		
 		//LOWRES
 		if((xpos > resX/12 + 25 && xpos < resX/12 +125) && (ypos > resY - (resY/12 + 25) -45 && ypos < resY - (resY/12 + 25)))
@@ -129,7 +128,6 @@ public class WindowOptions extends BasicGameState{
 	
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return 3;
 	}
 

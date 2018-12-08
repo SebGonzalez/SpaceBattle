@@ -1,7 +1,6 @@
 package server;
 
 import client.GameOptions;
-import client.ModeJeu;
 import client.Model.Flag;
 import network.DatagramUpdateClient;
 import network.DatagramUpdateServer;
