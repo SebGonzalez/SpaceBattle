@@ -288,7 +288,7 @@ public class Game extends StateBasedGame{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Parametres sauvegard�s");
+			System.out.println("Parametres sauvegardés");
 		}
 	}
 	

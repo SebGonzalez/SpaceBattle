@@ -2,7 +2,7 @@ package client.Model;
 
 import org.newdawn.slick.Graphics;
 
-import client.IHM.WindowGame;
+import client.IHM.GestionnaireImagesIHM;
 
 public class Flag {
 	
@@ -56,12 +56,12 @@ public class Flag {
 	 */
 	public void render(Graphics g, int teamJoueur) {
 		if(numTeam == teamJoueur) {
-			WindowGame.baseFlag1.draw(xBase-64, yBase);
-			WindowGame.flag1.draw(x-32, y-32);
+			GestionnaireImagesIHM.getRessource("baseFlag1").draw(xBase-64, yBase);
+			GestionnaireImagesIHM.getRessource("flag1").draw(x-32, y-32);
 		}
 		else {
-			WindowGame.baseFlag2.draw(xBase-64, yBase);
-			WindowGame.flag2.draw(x-32, y-32);
+			GestionnaireImagesIHM.getRessource("baseFlag2").draw(xBase-64, yBase);
+			GestionnaireImagesIHM.getRessource("flag2").draw(x-32, y-32);
 		}
 	}
 	

@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import client.Game;
 import client.GameOptions;
 import client.ModeJeu;
+import client.IHM.GestionnaireImagesIHM;
 import client.IHM.WindowGame;
 
 public class GestionnairePartieCourse extends GestionnairePartie {
@@ -34,11 +35,11 @@ public class GestionnairePartieCourse extends GestionnairePartie {
 		
 		if(System.currentTimeMillis() - debutPartie < 6000) {
 			if(System.currentTimeMillis() - debutPartie < 3000)
-				WindowGame.feuRouge.draw(Game.res.getX()/2 - 128, Game.res.getY()/2 - 256);
+				GestionnaireImagesIHM.getRessource("feuRouge").draw(Game.res.getX()/2 - 128, Game.res.getY()/2 - 256);
 			else if(System.currentTimeMillis() - debutPartie < 4000)
-				WindowGame.feuJaune.draw(Game.res.getX()/2 - 128, Game.res.getY()/2 - 256);
+				GestionnaireImagesIHM.getRessource("feuJaune").draw(Game.res.getX()/2 - 128, Game.res.getY()/2 - 256);
 			else
-				WindowGame.feuVert.draw(Game.res.getX()/2 - 128, Game.res.getY()/2 - 256);
+				GestionnaireImagesIHM.getRessource("feuVert").draw(Game.res.getX()/2 - 128, Game.res.getY()/2 - 256);
 		}
 	}
 	

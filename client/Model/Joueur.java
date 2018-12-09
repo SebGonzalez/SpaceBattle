@@ -8,7 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.tiled.TiledMap;
 
-import client.IHM.WindowGame;
+import client.IHM.GestionnaireImagesIHM;
 import server.ServeurJoueur;
 
 public class Joueur {
@@ -196,9 +196,9 @@ public class Joueur {
 		this.rotation -= (float) delta / 250;
 		setdirectionX();
 		setdirectionY();
-		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
-		WindowGame.damage2Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
-		WindowGame.damage3Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		GestionnaireImagesIHM.getRessource("shipJoueur").setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		GestionnaireImagesIHM.getRessource("damage2Joueur").setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		GestionnaireImagesIHM.getRessource("damage3Joueur").setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
 	/**
@@ -210,9 +210,9 @@ public class Joueur {
 		this.rotation += (float) delta / 250;
 		setdirectionX();
 		setdirectionY();
-		WindowGame.shipJoueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
-		WindowGame.damage2Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
-		WindowGame.damage3Joueur.setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		GestionnaireImagesIHM.getRessource("shipJoueur").setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		GestionnaireImagesIHM.getRessource("damage2Joueur").setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
+		GestionnaireImagesIHM.getRessource("damage3Joueur").setRotation((float) -(Math.toDegrees(Math.atan2(Math.cos(getRotation()), Math.sin(getRotation())))));
 	}
 	
 	
@@ -224,21 +224,21 @@ public class Joueur {
 	 */
 	public void render(Graphics g) {
 
-		WindowGame.shipJoueur.draw(getX() - 56, getY() - 37);
+		GestionnaireImagesIHM.getRessource("shipJoueur").draw(getX() - 56, getY() - 37);
 
 		if (health == 2)
-			WindowGame.damage2Joueur.draw(x - 56, y - 37);
+			GestionnaireImagesIHM.getRessource("damage2Joueur").draw(x - 56, y - 37);
 		if (health == 1)
-			WindowGame.damage3Joueur.draw(x - 56, y - 37);
+			GestionnaireImagesIHM.getRessource("damage3Joueur").draw(x - 56, y - 37);
 
 		if (bonus[0])
-			WindowGame.bonusVitesse.draw(x + 30, y + 50, 20, 20);
+			GestionnaireImagesIHM.getRessource("bonusVitesse").draw(x + 30, y + 50, 20, 20);
 		//if (bonus[1])
 			//WindowGame.bonusTeteChercheuse.draw(x - 50, y + 50, 20, 20);
 		if (bonus[2])
-			WindowGame.bonusTripleMissile.draw(x + 30, y - 60, 20, 20);
+			GestionnaireImagesIHM.getRessource("bonusTripleMissile").draw(x + 30, y - 60, 20, 20);
 		if (bonus[3])
-			WindowGame.bonusShield.draw(x - 50, y - 60, 20, 20);
+			GestionnaireImagesIHM.getRessource("bonusShield").draw(x - 50, y - 60, 20, 20);
 	}
 
 	/**

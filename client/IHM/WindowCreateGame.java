@@ -84,8 +84,8 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			maxPlayersField.setText(String.valueOf(options.getMaxPlayers()));
 			maxPlayersField.render(container, g);
 
-			g.drawString("Veuillez entrer votre nom", resX / 2 - 200, resY / 2 + 15);
-			nameField = new TextField(container, font, resX / 2 - 200, resY / 2 + 40, 400, 20);
+			g.drawString("Veuillez entrer votre nom", resX / 2 - 200, resY / 3 + 130);
+			nameField = new TextField(container, font, resX / 2 - 200, resY / 3 + 160, 400, 20);
 			nameField.setText(hostname);
 			nameField.setTextColor(Color.white);
 			nameField.render(container, g);

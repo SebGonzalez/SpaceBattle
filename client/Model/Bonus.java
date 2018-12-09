@@ -2,7 +2,7 @@ package client.Model;
 
 import org.newdawn.slick.Graphics;
 
-import client.IHM.WindowGame;
+import client.IHM.GestionnaireImagesIHM;
 
 public class Bonus {
 
@@ -26,15 +26,15 @@ public class Bonus {
 	public void render(Graphics g) {
 		switch (type) {
 		case TripleMissile:
-			WindowGame.bonusTripleMissile.draw(getX(), getY());
+			GestionnaireImagesIHM.getRessource("bonusTripleMissile").draw(getX(), getY());
 			break;
 		case VitesseUp:
-			WindowGame.bonusVitesse.draw(getX(), getY());
+			GestionnaireImagesIHM.getRessource("bonusVitesse").draw(getX(), getY());
 			break;
 		// case TeteChercheuse : WindowGame.bonusTeteChercheuse.draw(getX(), getY());
 		 //	break;
 	    case Bouclier:
-			WindowGame.bonusShield.draw(getX(), getY());
+	    	GestionnaireImagesIHM.getRessource("bonusShield").draw(getX(), getY());
 			break;
 		default:
 			break;

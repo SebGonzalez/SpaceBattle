@@ -2,7 +2,7 @@ package client.Model;
 
 import org.newdawn.slick.Graphics;
 
-import client.IHM.WindowGame;
+import client.IHM.GestionnaireImagesIHM;
 import server.ServeurJoueur;
 
 public class Missile {
@@ -87,7 +87,7 @@ public class Missile {
 	public void render(Graphics g) {
 		g.pushTransform();
 		g.rotate(x, y, (float) -(Math.toDegrees(Math.atan2( (double)directionX, (double)directionY))));
-		WindowGame.missileJoueur.draw(x-6, y-18);
+		GestionnaireImagesIHM.getRessource("missileJoueur").draw(x-6, y-18);
 		g.popTransform();
 	
 	}
