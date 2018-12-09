@@ -327,4 +327,11 @@ public class Joueur {
 			}
 		}
 	}
+
+	public void respawn() {
+		x = (int) ((Math.random() * ((2500 - 1050) + 1)) + 1050); 
+		y = (int) ((Math.random() * ((2300 - 650) + 1)) + 650);
+		accelerationX = 0;
+		accelerationY = 0;
+	}
 }

@@ -185,9 +185,15 @@ public class ConnectionClient extends Listener {
 					+ " et appartient à la team : " + ((SegmentNouveauJoueur) o).team);
 		} else if (o instanceof String) {
 			if (o.equals("ko")) {
+				if(Game.gestionnairePartie.getOptionsPartie().getReapparitions()) {
+					gestionnairePartie.joueur.respawn();
+				}
+				else {
+					client.close();
+					WindowGame.loop = false;
+				}
 				System.out.println("Je suis touché");
-				client.close();
-				WindowGame.loop = false;
+				
 			}
 		} else if (o instanceof SegmentLobby) {
 			WindowLobby.playersInLobby = ((SegmentLobby) o).listeJoueurLobby;
