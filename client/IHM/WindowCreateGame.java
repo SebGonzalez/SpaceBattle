@@ -204,7 +204,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 					}
 
 			// nameField
-			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + 200) && (ypos < resY - (resY / 2 + 40) && ypos > resY - (resY / 2 + 60)))
+			if ((xpos > resX / 2 - 200 && xpos < resX / 2 + 200) && (ypos < resY - (resY / 3 + 160) && ypos > resY - (resY / 3 + 180)))
 				if (input.isMouseButtonDown(0)) {
 					currentField = 3;
 				}
@@ -337,7 +337,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 		if (currentField == 2) {
 			input = options.getPassword();
 
-			if (input.length() < 64)
+			if (input.length() < 64 && (Character.isAlphabetic(c) || Character.isDigit(c)))
 				input += c;
 
 			if (key == Input.KEY_BACK && input.length() > 0)
@@ -350,7 +350,7 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			
 			if (key == Input.KEY_BACK && hostname.length() > 0)
 				hostname = hostname.substring(0, hostname.length() - 1);
-			else if (key != Input.KEY_BACK)
+			else if (Character.isAlphabetic(c) || Character.isDigit(c))
 				hostname += c;
 			
 		}

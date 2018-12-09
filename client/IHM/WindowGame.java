@@ -80,8 +80,10 @@ public class WindowGame extends BasicGameState {
 			Game.gestionnairePartie.joueur.keys_pressed[1] = false;
 		if (key == Input.KEY_RIGHT || key == Input.KEY_D)
 			Game.gestionnairePartie.joueur.keys_pressed[2] = false;
-		if (key == Input.KEY_ESCAPE)
-			container.exit();
+		if (key == Input.KEY_ESCAPE) {
+			WindowGame.loop = false;
+			Game.connexionClient.disconnect();
+		}
 	}
 
 	public void keyPressed(int key, char c) {
