@@ -17,7 +17,7 @@ public class GestionnaireBonusClient {
 	}
 	/**
 	 * Affiche les différents bonus présents sur la carte
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void render(Graphics g) {
 		for (Bonus a : listeBonus) {
@@ -26,7 +26,7 @@ public class GestionnaireBonusClient {
 	}
 	/**
 	 * Stocke dans une variable temporaire le tableau de bonus reçu par le serveur avant de le stocker localement
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setReception(ArrayList<Bonus> reception) {
 		this.reception = reception;
@@ -34,7 +34,7 @@ public class GestionnaireBonusClient {
 	
 	/**
 	 * Mise à jour de la liste de bonus reçue par le serveur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void update() {
 		if (reception != null) {

@@ -21,7 +21,7 @@ public class Bonus {
 	
 	/**
 	 * Affiche les différents bonus 
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void render(Graphics g) {
 		switch (type) {
@@ -44,7 +44,7 @@ public class Bonus {
 	
 	/**
 	 * Renvoie la coordonnée x de l'objet Bonus
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public int getX() {
 		return x;
@@ -52,7 +52,7 @@ public class Bonus {
 	
 	/**
 	 * Renvoie la coordonnée y de l'objet Bonus
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public int getY() {
 		return y;
@@ -60,7 +60,7 @@ public class Bonus {
 	
 	/**
 	 * Renvoie le type de l'objet Bonus
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public TypeBonus getType() {
 		return type;
@@ -72,7 +72,7 @@ public class Bonus {
 	
 	/**
 	 * Modifie au hasard les coordonnées et le type du Bonus
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void disappear() {
 		this.type = TypeBonus.randomValue();

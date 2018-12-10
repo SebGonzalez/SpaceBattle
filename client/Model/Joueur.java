@@ -57,7 +57,7 @@ public class Joueur {
 
 	/**
 	 * Renvoie la position X du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public float getX() {
 		return x;
@@ -69,7 +69,7 @@ public class Joueur {
 	
 	/**
 	 * Renvoie la position Y du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public float getY() {
 		return y;
@@ -81,7 +81,7 @@ public class Joueur {
 	
 	/**
 	 * Renvoie la composante x courante de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public float getaccelerationX() {
 		return accelerationX;
@@ -89,7 +89,7 @@ public class Joueur {
 	
 	/**
 	 * Renvoie la composante y courante de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public float getaccelerationY() {
 		return accelerationY;
@@ -97,7 +97,7 @@ public class Joueur {
 
 	/**
 	 * Renvoie la composante x de la direction vers laquelle se dirige le joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public float getdirectionX() {
 		return directionX;
@@ -105,7 +105,7 @@ public class Joueur {
 
 	/**
 	 * Renvoie la composante y de la direction vers laquelle se dirige le joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public float getdirectionY() {
 		return directionY;
@@ -122,7 +122,7 @@ public class Joueur {
 	
 	/**
 	 * Augmente la composante de x de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void addaccelerationX(float value) {
 		accelerationX += value;
@@ -130,7 +130,7 @@ public class Joueur {
 	
 	/**
 	 * Modifie la composante de x de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setaccelerationX(float value) {
 		accelerationX = value;
@@ -138,7 +138,7 @@ public class Joueur {
 	
 	/**
 	 * Modifie la composante de x de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setaccelerationY(float value) {
 		accelerationY = value;
@@ -146,7 +146,7 @@ public class Joueur {
 	
 	/**
 	 * Augmente la composante de y de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void addaccelerationY(float value) {
 		accelerationY += value;
@@ -154,7 +154,7 @@ public class Joueur {
 	
 	/**
 	 * Renvoie le numéro de l'équipe dans laquelle se trouve le joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public int getTeam() {
 		return team;
@@ -162,7 +162,7 @@ public class Joueur {
 	
 	/**
 	 * Affecte le joueur à une équipe
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setTeam(int team) {
 		this.team = team;
@@ -171,7 +171,7 @@ public class Joueur {
 
 	/**
 	 * Augmente les composantes x et y de l'acceleration du joueur en la bornant 
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void accelerate(int delta) {
 
@@ -190,7 +190,7 @@ public class Joueur {
 	/**
 	 * Effectue une rotation gauche du joueur
 	 * Et par conséquent modifie la direction et l'affichage du joueur et des textures de dégats si elles sont affichées
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void rotationGauche(int delta) {
 		this.rotation -= (float) delta / 250;
@@ -204,7 +204,7 @@ public class Joueur {
 	/**
 	 * Effectue une rotation droite du joueur
 	 * Et par conséquent modifie la direction et l'affichage du joueur et des textures de dégats si elles sont affichées
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void rotationDroite(int delta) {
 		this.rotation += (float) delta / 250;
@@ -220,7 +220,7 @@ public class Joueur {
 	 * Affiche le joueur en fonction de ses déplacement
 	 * Affiche les textures de dégats en fonctions des points de vies du joueur
 	 * Affiche les différents bonus ramassés 
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void render(Graphics g) {
 
@@ -246,7 +246,7 @@ public class Joueur {
 	 * Teste si le bonus de vitesse est activé 
 	 * Effectue les rotations en fonction des touches pressées
 	 * Met à jour la position en fonction de l'acceleration du joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void update(GameContainer container, int delta, TiledMap map) {
 
@@ -273,7 +273,7 @@ public class Joueur {
 
 	/**
 	 * Parcourt toute les tiles de la map(particules SOLID) et teste la collision entre le joueur et ces dernières
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void collide(float futurX, float futurY, TiledMap map) {
 
@@ -315,7 +315,7 @@ public class Joueur {
 
 	/**
 	 * Détecte les collisions entre chaques joueurs 
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void collidePlayer(ArrayList<ServeurJoueur> listeAdversaire) {
 

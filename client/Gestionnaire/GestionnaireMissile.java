@@ -11,7 +11,7 @@ import server.ServeurJoueur;
 
 /**
  * Classe qui gere les missiles (client et adversaire)
- * @author Sebastien Gonzalez
+ * 
  *
  */
 public class GestionnaireMissile {
@@ -30,7 +30,7 @@ public class GestionnaireMissile {
 	/**
 	 * Renvoie la liste de missile du client
 	 * @return listemissile du client
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public ArrayList<Missile> getListeMissileClient() {
 		return listeMissileClient;
@@ -79,7 +79,7 @@ public class GestionnaireMissile {
 	
 	/**
 	 * Met à jour les informations des missiles 
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void update(int delta) {
 	

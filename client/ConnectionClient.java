@@ -31,7 +31,7 @@ import server.ServeurJoueur;
 /**
  * Classe qui gère la connexion et les échanges avec le serveur
  * 
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class ConnectionClient extends Listener {
@@ -62,7 +62,7 @@ public class ConnectionClient extends Listener {
 	/**
 	 * Chargement de toute les classes utilisées pour la librairie réseau
 	 * Connexion au serveur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void connect() {
 		Log.set(Log.LEVEL_DEBUG);
@@ -103,7 +103,7 @@ public class ConnectionClient extends Listener {
 	}
 	/**
 	 * Déconnexion du serveur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void disconnect() {
 		client.close();

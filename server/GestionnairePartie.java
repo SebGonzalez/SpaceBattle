@@ -12,7 +12,7 @@ import network.SegmentRejoindrePartie;
 
 /**
  * Classe qui gère le déroulement de l'ensemble des parties du serveur
- * @author gonzo
+ * 
  *
  */
 public class GestionnairePartie {

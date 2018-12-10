@@ -13,7 +13,7 @@ import network.DatagramUpdateServer;
 /**
  * Classe de gestion des joueurs par le serveur
  * 
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class GestionnaireJoueur {
@@ -41,7 +41,7 @@ public class GestionnaireJoueur {
 	 * @param datagram
 	 *            reçu du client
 	 * @return un datagram reponse qui sera envoyé au serveur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public DatagramUpdateServer updateJoueur(int idJoueur, DatagramUpdateClient datagram) {
 
@@ -89,7 +89,7 @@ public class GestionnaireJoueur {
 	 *            des missiles présents sur la carte
 	 * @param id
 	 *            du client nous servant à parcourir la liste de joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void checkCollision(ArrayList<Missile> listeMissile, int idC) {
 
@@ -126,7 +126,7 @@ public class GestionnaireJoueur {
 	 * 
 	 * @param id
 	 *            du joueur que la méthode veut supprimer
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void removeJoueur(int id) {
 		for (Entry<Integer, ServeurJoueur> entry : listePlayers.entrySet()) {

@@ -6,7 +6,7 @@ import client.Model.Missile;
 
 /**
  * Instance d'un joueur niveau serveur
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class ServeurJoueur {

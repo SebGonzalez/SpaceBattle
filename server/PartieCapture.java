@@ -9,7 +9,7 @@ import network.DatagramUpdateServerCapture;
 /**
  * Partie qui gère le mode capture de drapeau
  * 
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class PartieCapture extends Partie {

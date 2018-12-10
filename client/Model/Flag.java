@@ -52,7 +52,7 @@ public class Flag {
 	}
 	/**
 	 * Affiche le drapeau en fonction de ses déplacements
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void render(Graphics g, int teamJoueur) {
 		if(numTeam == teamJoueur) {
@@ -67,7 +67,7 @@ public class Flag {
 	
 	/**
 	 * Détecte la collision entre joueur et flag
-	 * @author Amine Boudraa
+	 * 
 	 * @return vrai si collision faux si non
 	 */
 	public boolean collision(double d, double e) {
@@ -78,7 +78,7 @@ public class Flag {
 	/**
 	 * Détecte collision entre flag et une base
 	 * @return vrai si oui faux si non
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public boolean collisionBase(double xJoueur, double yJoueur) {
 		if(xBase > xJoueur-56 && xBase < xJoueur+56 && yBase+64 > yJoueur-37 && yBase < yJoueur+37) return true;
@@ -87,7 +87,7 @@ public class Flag {
 	
 	/**
 	 * Remet le flag à sa position initiale(celle de sa base)
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void resetPos() {
 		x = xBase;

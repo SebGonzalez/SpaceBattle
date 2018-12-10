@@ -11,7 +11,7 @@ import client.IHM.GestionnaireImagesIHM;
 
 /**
  * Classe qui g�re les adversaires
- * @author gonzo
+ * 
  *
  */
 public class GestionnaireAdversaire {
@@ -27,7 +27,7 @@ public class GestionnaireAdversaire {
 	/**
 	 * Renvoie la liste des joueurs(adverses) reçues par le serveur
 	 * @return liste des adversaires
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public ArrayList<ServeurJoueur> getListeAdversaire() {
 		return listeAdversaire;
@@ -62,7 +62,7 @@ public class GestionnaireAdversaire {
 	 * Affiche les différents adversaire à partir de la liste des joueurs localement
 	 * Affiche les nouvelles textures dues au dégats causés aux adversaires
 	 * Affiche la liste des missiles
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void render(Graphics g) {
 		

@@ -36,7 +36,7 @@ public class GestionnairePartie {
 
 	/**
 	 * Renvoie la liste de missile du gestionnaireMissile
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public ArrayList<Missile> getListeMissileClient() {
 		return gestionnaireMissile.getListeMissileClient();
@@ -44,14 +44,14 @@ public class GestionnairePartie {
 	
 	/**
 	 * Renvoie l'id de la partie courante
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public int getIdPartie() { return idPartie; }
 	
 	/**
 	 * Modifie l'id de la partie
 	 * @param id id que l'on veut pour la partie
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setIdPartie(int idPartie) {
 		this.idPartie = idPartie;
@@ -59,7 +59,7 @@ public class GestionnairePartie {
 	
 	/**
 	 * Renvoie les options de la partie
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public GameOptions getOptionsPartie() {
 		return options;
@@ -68,7 +68,7 @@ public class GestionnairePartie {
 	/**
 	 * Attribue à un joueur une équipe
 	 * @param team numéro de l'équipe que l'on veut pour le joueur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setTeamJoueur(int team) {
 		joueur.setTeam(team);
@@ -81,7 +81,7 @@ public class GestionnairePartie {
 	 * Envoie au joueurs localement la liste des bonus 
 	 * Envoie au joueurs localement leurs points de vie
 	 * @param datagram datagram reçu du serveur
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void setReception(DatagramUpdateServer datagram) {
 		
@@ -102,7 +102,7 @@ public class GestionnairePartie {
 	 * Afficher les adversaires
 	 * Afficher les bonus
 	 * Afficher le joueur courant
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void renderAll(Graphics g) {
 		gestionnaireMissile.render(g);
@@ -119,7 +119,7 @@ public class GestionnairePartie {
 	 * gestionnaireBonus
 	 * 
 	 * Teste les collisions joueur/missile
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void update(GameContainer container, int delta) {
 		joueur.update(container, delta, map);
@@ -134,7 +134,7 @@ public class GestionnairePartie {
 
 	/**
 	 * Initialisation des différents gestionnaires
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void nouvellePartie() {
 		joueur = new Joueur();
@@ -145,7 +145,7 @@ public class GestionnairePartie {
 	
 	/**
 	 * Ajoute un missile à la liste de missile après un tir
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void tirer() {
 		if(options.getTir())
@@ -159,7 +159,7 @@ public class GestionnairePartie {
 
 	/**
 	 * Autorise le déplacement via la touche "haut"
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void avancer() {
 		joueur.keys_pressed[0] = true;

@@ -6,7 +6,7 @@ import client.Model.Flag;
  * Datagram permettant aux serveur d'envoyer les informations de chaque joueurs aux clients (hérité de DatagramUpdateServer)
  * Envoie des informations des drapeaux et des scores de la partie
  * Utilisé pour le mode de jeu Capture de drapeau
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class DatagramUpdateServerCapture extends DatagramUpdateServer {

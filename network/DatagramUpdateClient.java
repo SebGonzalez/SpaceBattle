@@ -6,7 +6,7 @@ import client.Model.Missile;
 
 /**
  * Datagram permettant au client d'envoyer ses informations au serveur
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class DatagramUpdateClient {

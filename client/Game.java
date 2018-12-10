@@ -55,7 +55,7 @@ public class Game extends StateBasedGame{
 	/**
 	 * Modifie la résolution
 	 * @param r résolution voulue 
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void setResolution(Resolution r) {
 		res = r;
@@ -63,7 +63,7 @@ public class Game extends StateBasedGame{
 	
 	/**
 	 * Lance la musique du jeu stockée dans les ressources
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void playMusic() throws SlickException {
 		ambiance = new Music ("ressources/sounds/ambiance.ogg");
@@ -73,7 +73,7 @@ public class Game extends StateBasedGame{
 	/**
 	 * Retourne le volume 
 	 * @return volume courant
-	 * @author Amine Boudraa
+	 * 
 	 */
 	
 	public static int getMusicVolume() {
@@ -82,7 +82,7 @@ public class Game extends StateBasedGame{
 
 	/**
 	 * Augmente le volume
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void UPVolume() {
 		ambiance.setVolume(ambiance.getVolume() + 0.01f);
@@ -90,7 +90,7 @@ public class Game extends StateBasedGame{
 	
 	/**
 	 * Diminue le volume
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void DOWNVolume() {
 		ambiance.setVolume(ambiance.getVolume() - 0.01f);
@@ -99,7 +99,7 @@ public class Game extends StateBasedGame{
 	@Override
 	/**
 	 * Initialise la table des états du jeu (IHM)
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void initStatesList(GameContainer container) throws SlickException {
 		this.addState(new WindowMainMenu(menu));
@@ -136,7 +136,7 @@ public class Game extends StateBasedGame{
 	
 	/**
 	 * Charge les paramètres qui sont dans le fichiers settings.cfg
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void loadSettings() {
 		String resolution, volume;
@@ -237,7 +237,7 @@ public class Game extends StateBasedGame{
 	/**
 	 * Teste si le fichier settings.cfg existe 
 	 * @return vrai si existe sinon faux
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static boolean settingsFileExists(String file) {
 		File f = new File(file);
@@ -251,7 +251,7 @@ public class Game extends StateBasedGame{
 	
 	/**
 	 * Sauvegarde les paramètres qui ont été chargés à partir du fichier config
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void saveSettings() {
 		if(settingsFileExists("settings.cfg")) {
@@ -294,7 +294,7 @@ public class Game extends StateBasedGame{
 	
 	/**
 	 * Initialisation des champs du fichier de configuration avant chargement
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void createSettingsFileParameters() {
 		File f = new File("settings.cfg");

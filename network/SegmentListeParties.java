@@ -6,7 +6,7 @@ import client.GameOptions;
 /**
  * Segment permettant au serveur d'envoyer la liste des parties au client
  * Contient une liste pour les id des parties et une autre pour les options
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class SegmentListeParties {

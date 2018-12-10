@@ -10,7 +10,7 @@ import network.SegmentLobby;
 /**
  * Classe qui gère le déroulement d'une partie
  * Pour créer un nouveau mode de jeu qui bénéficie de comportement particulier (par exemple capture de drapeau) créer une nouvelle classe qui hérite de celle-ci
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class Partie {

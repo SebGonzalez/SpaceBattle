@@ -26,7 +26,7 @@ import network.SegmentStartPartie;
 
 /**
  * Classe principale du serveur
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class Serveur extends Listener {

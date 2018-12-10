@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Segment permettant au serveur d'envoyer la liste des joueur présent dans le lobby
- * @author Sébastien Gonzalez
+ * 
  *
  */
 public class SegmentLobby {

@@ -23,7 +23,7 @@ public class ConfigFile {
 	}
 	/**
 	 * Vérifie que le fichier de configuration existe
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static boolean configFileExists() {
 		return configFile.isFile();
@@ -31,7 +31,7 @@ public class ConfigFile {
 	
 	/**
 	 * Initialise le fichier de configuration
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public static void initConfigFile() {
 		try{

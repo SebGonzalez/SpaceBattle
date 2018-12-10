@@ -48,7 +48,7 @@ public class Missile {
 	
 	/**
 	 * Met à jour la position des missiles 
-	 * @author Amine Boudraa
+	 * 
 	 */
 
 	public void update(int delta, Joueur joueur) {
@@ -73,7 +73,7 @@ public class Missile {
 	
 	/**
 	 * Détecte les collisions entre les missiles et un joueur	
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public boolean collision(ServeurJoueur joueur) {
 		if(x > joueur.getX()-56 && x < joueur.getX()+56 && y > joueur.getY()-37 && y < joueur.getY()+37) return true;
@@ -82,7 +82,7 @@ public class Missile {
 	
 	/**
 	 * Affiche le missile
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void render(Graphics g) {
 		g.pushTransform();

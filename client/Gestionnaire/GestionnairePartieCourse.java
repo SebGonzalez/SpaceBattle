@@ -26,7 +26,7 @@ public class GestionnairePartieCourse extends GestionnairePartie {
 	/**
 	 * @see gestionnairePartie.renderAll()
 	 * Affiche le système de feu rouge pour avertir du début de la course
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void renderAll(Graphics g) {
 		super.renderAll(g);
@@ -53,7 +53,7 @@ public class GestionnairePartieCourse extends GestionnairePartie {
 	
 	/**
 	 * @see gestionnairePartie.avancer()
-	 * @author Amine Boudraa
+	 * 
 	 */
 	public void avancer() {
 		if(System.currentTimeMillis() - debutPartie > 4000)
