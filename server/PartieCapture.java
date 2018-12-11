@@ -34,9 +34,13 @@ public class PartieCapture extends Partie {
 	 * Méthode appelé lorsque l'on reçoit un paquet du client
 	 */
 	public DatagramUpdateServer updateClient(int idJoueur, DatagramUpdateClient datagram) {
+		ServeurJoueur joueur = gestionnaireJoueur.getJoueur(idJoueur);
+		
+		updateFlag(joueur, datagram.x, datagram.y);
+		
 		DatagramUpdateServer datagramReponse = super.updateClient(idJoueur, datagram);
 
-		checkCollisionFlag(idJoueur);
+		checkCollisionFlag(joueur);
 
 		DatagramUpdateServerCapture datagramReponse2 = new DatagramUpdateServerCapture();
 		datagramReponse2.listeAdversaire = datagramReponse.listeAdversaire;
@@ -50,13 +54,32 @@ public class PartieCapture extends Partie {
 		return datagramReponse2;
 	}
 
+	private void updateFlag(ServeurJoueur joueur, float newX, float newY) {
+		if(joueur.equals(joueurFlag1)) {
+			if(Math.abs(joueur.getX()-newX) > 20 || Math.abs(joueur.getY()-newY) > 20) {
+				joueurFlag1 = null;
+				return;
+			}
+			flag1.setX(joueurFlag1.getX());
+			flag1.setY(joueurFlag1.getY());
+		}
+		if(joueur.equals(joueurFlag2)) {
+			if(Math.abs(joueur.getX()-newX) > 20 || Math.abs(joueur.getY()-newY) > 20) {
+				joueurFlag2 = null;
+				return;
+			}
+			flag2.setX(joueurFlag2.getX());
+			flag2.setY(joueurFlag2.getY());
+		}
+	}
+
 	/**
 	 * Méthode qui vérifie la collision avec les drapeaux du joueur passé en paramètre
 	 * 
-	 * @param idJoueur
+	 * @param instance du joueur
 	 */
-	public void checkCollisionFlag(int idJoueur) {
-		ServeurJoueur joueur = gestionnaireJoueur.getJoueur(idJoueur);
+	public void checkCollisionFlag(ServeurJoueur joueur) {
+	
 
 		if (joueurFlag1 != null && flag2.collisionBase(joueurFlag1.getX(), joueurFlag1.getY())) { //si le drapeau arrive à sa base on incrémente le score de la team et on le remet à sa place initiale
 			scoreTeam2++;
@@ -75,10 +98,7 @@ public class PartieCapture extends Partie {
 				if (flag2.collision(joueur.getX(), joueur.getY())) { //si personne porte le drapeau et que le joueur arrive dessus on lui attribue le drapeau
 					joueurFlag2 = joueur;
 				}
-			} else {
-				flag2.setX(joueurFlag2.getX()); //sinon si le drapeau est porté par qq1 on modifie les coordonnées
-				flag2.setY(joueurFlag2.getY());
-			}
+			} 
 
 			if (flag1.getX() != flag1.getxBase() || flag1.getY() != flag1.getyBase()) { //si le drapeau allié n'est pas à sa base
 				if (flag1.collision(joueur.getX(), joueur.getY())) { //si le joueur est dessus on le remet à sa place
@@ -91,10 +111,7 @@ public class PartieCapture extends Partie {
 				if (flag1.collision(joueur.getX(), joueur.getY())) {
 					joueurFlag1 = joueur;
 				}
-			} else {
-				flag1.setX(joueurFlag1.getX());
-				flag1.setY(joueurFlag1.getY());
-			}
+			} 
 
 			if (flag2.getX() != flag2.getxBase() || flag2.getY() != flag2.getyBase()) {
 				if (flag2.collision(joueur.getX(), joueur.getY())) {

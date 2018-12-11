@@ -226,13 +226,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 					Game.connexionClient = new ConnectionClient(Game.gestionnairePartie, Game.adresseipserveur, Game.portTCP, Game.portUDP);
 					Game.connexionClient.connect();
 					Game.connexionClient.createGame(hostname);
-					Game.gestionnairePartie.joueur.setNom("Hôte");
+					Game.gestionnairePartie.joueur.setNom(nameField.getText());
 
 					if (options.getLobby() == false)
 						sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
 					
 					else {
-						
+						WindowLobby.playersInLobby.clear();
 						WindowLobby.playersInLobby.add(Game.gestionnairePartie.joueur.getNom());
 						WindowLobby.hote = true;
 						sbg.enterState(Game.lobby, new EmptyTransition(), new FadeInTransition(Color.pink));
@@ -325,13 +325,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			Game.connexionClient = new ConnectionClient(Game.gestionnairePartie, Game.adresseipserveur, Game.portTCP, Game.portUDP);
 			Game.connexionClient.connect();
 			Game.connexionClient.createGame(hostname);
-			Game.gestionnairePartie.joueur.setNom("Hôte");
+			Game.gestionnairePartie.joueur.setNom(nameField.getText());
 
 			if (options.getLobby() == false)
 				sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
 			
 			else {
-				
+				WindowLobby.playersInLobby.clear();
 				WindowLobby.playersInLobby.add(Game.gestionnairePartie.joueur.getNom());
 				WindowLobby.hote = true;
 				sbg.enterState(Game.lobby, new EmptyTransition(), new FadeInTransition(Color.pink));

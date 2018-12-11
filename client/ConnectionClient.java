@@ -135,8 +135,7 @@ public class ConnectionClient extends Listener {
 			// gestionnaireMissile.getListeMissileClient().size());
 
 			client.sendUDP(datagram);
-		} else
-			System.out.println("PArtie pas encore re�u");
+		}
 	}
 
 	public void createGame(String pseudo) {
