@@ -30,25 +30,23 @@ EN: Extract the archive, then copy the "lib" and "native" folders in the project
 
 FR: Extraire l'archive, puis copier les dossiers "lib" et "native" dans le répertoire du projet.
 
-EN: Open the project with Eclipse. Right click -> Properties -> Java Build Path -> Add External JARs
+EN: Open the project with Eclipse. Right click -> Properties -> Java Build Path -> Libraries -> Add External JARs
     Select all the JARs in the "lib" folder.
 
-FR: Ouvrir le projet avec Eclipse. Clic droit -> Properties -> Java Build Path -> Add External JARs
+FR: Ouvrir le projet avec Eclipse. Clic droit -> Properties -> Java Build Path -> Libraries -> Add External JARs
     Sélectionnez tout les JARs contenus dans le dossier "lib".
     
 ![capture d ecran 21](https://user-images.githubusercontent.com/43208062/47381708-f24e7500-d700-11e8-887a-da26980828c0.png)
 
 ![capture d ecran 22](https://user-images.githubusercontent.com/43208062/47382211-0777d380-d702-11e8-9bf0-e155288a9cd7.png)
 
-EN: Open the Run Configurations menu, Arguments tab, then copy the line below in VM Arguments:
+EN: In the same window, go to the Source tab, unfold SpaceBattle/src, and click on the "Native library location" line, then on the Edit button.
+    Specify the location of the natives folder
 
-FR: Ouvrir le menu Run Configurations, onglet Arguments, puis copier le code ci-dessous dans VM Arguments:
+FR: Dans la même fenêtre, allez dans l'onglet Source, développez SpaceBattle/src, et cliquez sur la ligne "Native library location, puis sur le bouton Edit
+    Spécifiez l'emplacement du dossier natives
 
-`-Djava.library.path=C:\User\YourName\...\SpaceBattle-master\native`
-
-![capture d ecran 23](https://user-images.githubusercontent.com/43208062/47382281-39893580-d702-11e8-9f33-5a079f6c342c.png)
-
-![capture d ecran 24](https://user-images.githubusercontent.com/43208062/47382349-63daf300-d702-11e8-9b69-4882ea40b7c1.png)
+![eclipse_2018-12-11_23-38-05](https://user-images.githubusercontent.com/25391036/49835433-763aea00-fd9f-11e8-8058-ad8d8419bd6a.png)
 
 ## Running / Fonctionnement
 
