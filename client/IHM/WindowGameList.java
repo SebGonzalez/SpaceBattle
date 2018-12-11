@@ -150,7 +150,8 @@ public class WindowGameList extends BasicGameState {
 		
 		if(enterKeyPressed) {
 			enterKeyPressed = false;
-			join(sbg);
+			if(selectedGame >= 0)
+				join(sbg);
 		}
 
 		// Bouton quitter

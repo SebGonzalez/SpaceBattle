@@ -49,6 +49,8 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 		options = new GameOptions();
 	}
 
+	private boolean enterKeyPressed = false;
+	
 	@Override
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		GestionnaireImagesIHM.loadCreateGame();
@@ -308,12 +310,48 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 						temps = 0;
 						options.setCollisions(!options.getCollisions());
 					}
+			}
+		
+		if(enterKeyPressed) {
+			permit = true;
+			if ( !(hostname.length() == 0 ) ) {
+			if (options.getModeJeu() == ModeJeu.DEATHMATCH)
+				Game.gestionnairePartie = new GestionnairePartie(options);
+			else if (options.getModeJeu() == ModeJeu.CAPTURE)
+				Game.gestionnairePartie = new GestionnairePartieCapture(options);
+			else
+				Game.gestionnairePartie = new GestionnairePartieCourse(options); // sprint
+
+			Game.connexionClient = new ConnectionClient(Game.gestionnairePartie, Game.adresseipserveur, Game.portTCP, Game.portUDP);
+			Game.connexionClient.connect();
+			Game.connexionClient.createGame(hostname);
+			Game.gestionnairePartie.joueur.setNom("Hôte");
+
+			if (options.getLobby() == false)
+				sbg.enterState(Game.jeu, new EmptyTransition(), new FadeInTransition(Color.black));
+			
+			else {
+				
+				WindowLobby.playersInLobby.add(Game.gestionnairePartie.joueur.getNom());
+				WindowLobby.hote = true;
+				sbg.enterState(Game.lobby, new EmptyTransition(), new FadeInTransition(Color.pink));
+				
+				}
+			}
+			
+			else permit = false;
+			
+			enterKeyPressed = false;
 		}
 
 	}
 
 	public void keyReleased(int key, char c) {
 		String input;
+		
+		if (key == Input.KEY_ENTER) {
+			enterKeyPressed = true;
+		}
 
 		if (currentField == 1) {
 			input = String.valueOf(options.getMaxPlayers());

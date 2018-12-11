@@ -15,8 +15,8 @@ public class GameOptions {
 	private boolean isStart;
 
 	public GameOptions() {
-		collisions = reapparitions = tir = privateGame = isStart = true;
-		lobby = false;
+		collisions = reapparitions = tir = isStart = true;
+		lobby = privateGame = false;
 		password = "";
 		maxPlayers = 8;
 		modeJeu = ModeJeu.DEATHMATCH;
