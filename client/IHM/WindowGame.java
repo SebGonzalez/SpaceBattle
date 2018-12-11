@@ -16,8 +16,6 @@ import client.Game;
 
 public class WindowGame extends BasicGameState {
 
-	private GameContainer container;
-
 	public static boolean loop = true;
 	
 	public static TiledMap map1;
@@ -27,7 +25,6 @@ public class WindowGame extends BasicGameState {
 	}
 
 	public void init(GameContainer container, StateBasedGame sgb) throws SlickException {
-		this.container = container;
 		container.setAlwaysRender(true);
 		map1 = new TiledMap("ressources/map/SpaceBattle.tmx");
 		map2 = new TiledMap("ressources/map/Race.tmx");

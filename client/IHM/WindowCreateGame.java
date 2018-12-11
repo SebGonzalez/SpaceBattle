@@ -1,7 +1,5 @@
 package client.IHM;
 
-import java.awt.Font;
-
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -10,7 +8,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -55,17 +52,6 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		GestionnaireImagesIHM.loadCreateGame();
 
-		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
-		font.addAsciiGlyphs();
-		font.addGlyphs(400, 600);
-		font.getEffects().add(new ColorEffect(java.awt.Color.white));
-
-		try {
-			font.loadGlyphs();
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
-
 		container.setAlwaysRender(true);
 	}
 
@@ -81,13 +67,13 @@ public class WindowCreateGame extends BasicGameState implements KeyListener {
 			g.drawString("Mode de jeu: ", resX / 2 - 200, resY / 4);
 
 			g.drawString("Nombre maximum de joueurs (2-64): ", resX / 2 - 200, resY / 3 + 70);
-			maxPlayersField = new TextField(container, font, resX / 2 - 200, resY / 3 + 100, 400, 20);
+			maxPlayersField = new TextField(container, container.getDefaultFont(), resX / 2 - 200, resY / 3 + 100, 400, 20);
 			maxPlayersField.setTextColor(Color.white);
 			maxPlayersField.setText(String.valueOf(options.getMaxPlayers()));
 			maxPlayersField.render(container, g);
 
 			g.drawString("Veuillez entrer votre nom", resX / 2 - 200, resY / 3 + 130);
-			nameField = new TextField(container, font, resX / 2 - 200, resY / 3 + 160, 400, 20);
+			nameField = new TextField(container, container.getDefaultFont(), resX / 2 - 200, resY / 3 + 160, 400, 20);
 			nameField.setText(hostname);
 			nameField.setTextColor(Color.white);
 			nameField.render(container, g);

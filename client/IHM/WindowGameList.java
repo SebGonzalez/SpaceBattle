@@ -1,6 +1,5 @@
 package client.IHM;
 
-import java.awt.Font;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
@@ -9,8 +8,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -32,7 +29,6 @@ public class WindowGameList extends BasicGameState {
 	int selectedGame = -1;
 	private static ArrayList<Integer> listeIdParties;
 	private static ArrayList<GameOptions> listeOptionsParties;
-	private UnicodeFont font;
 	private String input = "";
 
 	private int resX = Game.res.getX(), resY = Game.res.getY();
@@ -54,19 +50,8 @@ public class WindowGameList extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException {
 		this.container = container;
 		container.setAlwaysRender(true);
-		// test();
 
-		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
-		font.addAsciiGlyphs();
-		font.addGlyphs(400, 600);
-		font.getEffects().add(new ColorEffect(java.awt.Color.white));
-		try {
-			font.loadGlyphs();
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
-
-		nom = new TextField(container, font, 50, 65, 300, 20);
+		nom = new TextField(container, container.getDefaultFont(), 50, 65, 300, 20);
 		nom.setTextColor(Color.white);
 		nom.setText(input);
 	}

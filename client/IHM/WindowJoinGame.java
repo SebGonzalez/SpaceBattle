@@ -1,7 +1,5 @@
 package client.IHM;
 
-import java.awt.Font;
-
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -9,8 +7,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.KeyListener;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -31,7 +27,6 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 	private TextField playerName;
 	private String input = "";
 	private String input2 = "";
-	private UnicodeFont font;
 	private int resX = Game.res.getX(), resY = Game.res.getY();
 	
 	boolean nameUse = true;
@@ -45,23 +40,14 @@ public class WindowJoinGame extends BasicGameState implements KeyListener{
 		
 		resX = Game.res.getX();
 		resY = Game.res.getY();
-		
-		font = new UnicodeFont(new Font("Arial", Font.PLAIN, 20));
-		font.addAsciiGlyphs(); font.addGlyphs(400,600); 
-		font.getEffects().add(new ColorEffect(java.awt.Color.white));
-		try {
-			font.loadGlyphs();
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
 
 		container.setAlwaysRender(true);
 		GestionnaireImagesIHM.loadJoinGame();
 		
-		gameID = new TextField(container, font, resX/2 - 200, resY/2 - 10, 400, 20);
+		gameID = new TextField(container, container.getDefaultFont(), resX/2 - 200, resY/2 - 10, 400, 20);
 		gameID.setTextColor(Color.white);
 		
-		playerName = new TextField(container, font, resX/2 - 200, resY/3 - 10, 400, 20);
+		playerName = new TextField(container, container.getDefaultFont(), resX/2 - 200, resY/3 - 10, 400, 20);
 		playerName.setTextColor(Color.white);
 		playerName.setText(input2);
 	}
