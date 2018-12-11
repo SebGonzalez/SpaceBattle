@@ -24,7 +24,7 @@ EN: Download archives of libraries and natives.
 
 FR: Télécharger les archives des libraires et natifs.
 
-`https://drive.google.com/drive/folders/1YlZhWHl1QhlsS_YWsUspA4tUGqO3X6YC?usp=sharing`
+`https://drive.google.com/drive/folders/1B6r9rlw-1isVJJF9cq5zlvwJhc3gsrnH?usp=sharing`
 
 EN: Extract the archive, then copy the "lib" and "native" folders in the project's location.
 
