@@ -66,7 +66,7 @@ public class GestionnaireAdversaire {
 	 */
 	public void render(Graphics g) {
 		
-
+//test
 		for(ServeurJoueur adversaire : listeAdversaire) {
 			
 			g.fillOval((float)adversaire.getX() - 16, (float)adversaire.getY() - 8, 32, 16);
